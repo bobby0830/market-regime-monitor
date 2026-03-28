@@ -40,6 +40,63 @@ ETF_MAP = {
 }
 
 SECTOR_ETFS = ['XLE', 'XLK', 'XLF', 'XLV', 'XLI', 'XLY', 'XLP', 'XLU', 'XLB', 'XLC', 'XLRE']
+SECTOR_META = {
+    'XLE': {
+        'name': '能源',
+        'english_name': 'Energy',
+        'description': '涵蓋石油、天然氣與能源設備公司，常受油價與景氣循環影響。',
+    },
+    'XLK': {
+        'name': '科技',
+        'english_name': 'Technology',
+        'description': '涵蓋大型軟體、半導體與硬體公司，對成長預期與利率敏感。',
+    },
+    'XLF': {
+        'name': '金融',
+        'english_name': 'Financials',
+        'description': '涵蓋銀行、保險與資本市場公司，受信用循環與殖利率曲線影響。',
+    },
+    'XLV': {
+        'name': '醫療保健',
+        'english_name': 'Health Care',
+        'description': '涵蓋藥廠、醫療設備與醫療服務公司，通常較具防禦性。',
+    },
+    'XLI': {
+        'name': '工業',
+        'english_name': 'Industrials',
+        'description': '涵蓋運輸、製造與資本財公司，常反映景氣與投資循環。',
+    },
+    'XLY': {
+        'name': '非必需消費',
+        'english_name': 'Consumer Discretionary',
+        'description': '涵蓋零售、汽車與可選消費品牌，對消費信心與成長預期敏感。',
+    },
+    'XLP': {
+        'name': '必需消費',
+        'english_name': 'Consumer Staples',
+        'description': '涵蓋食品、飲料與日用品公司，通常屬防禦型板塊。',
+    },
+    'XLU': {
+        'name': '公用事業',
+        'english_name': 'Utilities',
+        'description': '涵蓋電力與公用服務公司，收益穩定但常受利率影響。',
+    },
+    'XLB': {
+        'name': '原物料',
+        'english_name': 'Materials',
+        'description': '涵蓋化工、金屬與建材公司，受全球製造與商品週期影響。',
+    },
+    'XLC': {
+        'name': '通訊服務',
+        'english_name': 'Communication Services',
+        'description': '涵蓋媒體、互聯網平台與電信公司，兼具成長與廣告週期特徵。',
+    },
+    'XLRE': {
+        'name': '房地產',
+        'english_name': 'Real Estate',
+        'description': '涵蓋 REITs 與房地產營運公司，對利率與融資條件敏感。',
+    },
+}
 
 REDDIT_FEEDS = [
     ('wallstreetbets', 'https://www.reddit.com/r/wallstreetbets/new/.rss'),
@@ -297,59 +354,109 @@ def build_liquidity_module() -> Tuple[List[Dict[str, object]], List[Dict[str, ob
     return module_rows.to_dict(orient='records'), summary, snapshot
 
 
-def build_sector_module() -> Tuple[List[Dict[str, object]], Snapshot]:
+def build_sector_module() -> Tuple[List[Dict[str, object]], List[Dict[str, object]], Dict[str, object], Snapshot]:
     close = fetch_yf_prices(SECTOR_ETFS, period='1y')
     vol = yf.download(SECTOR_ETFS, period='1y', auto_adjust=True, progress=False, group_by='ticker', threads=False)
     results = []
+    history_rows = []
+
     for t in SECTOR_ETFS:
         s = close[t].dropna()
         if s.empty:
             continue
-        rsi = compute_rsi(s, 14).iloc[-1]
-        dist_high = (s.iloc[-1] / s.rolling(252, min_periods=20).max().iloc[-1] - 1) * 100
+
+        meta = SECTOR_META.get(t, {
+            'name': t,
+            'english_name': t,
+            'description': 'Sector ETF',
+        })
         if isinstance(vol.columns, pd.MultiIndex):
             v = vol[t]['Volume'].dropna()
         else:
             v = vol['Volume'].dropna()
-        volume_z = zscore(v.tail(60)).iloc[-1] if len(v.tail(60)) > 10 else 0
-        momentum_3m = s.pct_change(63).iloc[-1] * 100
+        v = v.reindex(s.index).ffill()
+
+        rsi_series = compute_rsi(s, 14)
+        high_52w = s.rolling(252, min_periods=20).max()
+        dist_high_series = (s / high_52w - 1) * 100
+        volume_mean = v.rolling(60, min_periods=20).mean()
+        volume_std = v.rolling(60, min_periods=20).std(ddof=0).replace(0, np.nan)
+        volume_z_series = ((v - volume_mean) / volume_std).replace([np.inf, -np.inf], np.nan).fillna(0)
+        momentum_3m_series = s.pct_change(63) * 100
+
         info = yf.Ticker(t).info
-        short_pct = None
         try:
             short_pct = (info.get('sharesShort') or 0) / (info.get('floatShares') or np.nan) * 100
         except Exception:
             short_pct = np.nan
-        tech_score = np.nanmean([
-            100 if rsi > 70 else max(0, min(100, rsi / 70 * 100)),
-            max(0, min(100, 100 + dist_high * 5)),
-            max(0, min(100, 50 + volume_z * 20)),
-        ])
+
+        rsi_component = pd.Series(np.where(rsi_series > 70, 100, np.clip(rsi_series / 70 * 100, 0, 100)), index=s.index)
+        dist_component = dist_high_series.apply(lambda x: max(0, min(100, 100 + x * 5)) if pd.notna(x) else np.nan)
+        volume_component = volume_z_series.apply(lambda x: max(0, min(100, 50 + x * 20)) if pd.notna(x) else np.nan)
+        tech_score_series = pd.concat([rsi_component, dist_component, volume_component], axis=1).mean(axis=1, skipna=True)
         short_score = 50 if pd.isna(short_pct) else max(0, min(100, short_pct * 8))
-        momentum_score = max(0, min(100, 50 + momentum_3m * 2.5))
-        crowded_score = 0.5 * tech_score + 0.25 * short_score + 0.25 * momentum_score
+        momentum_score_series = momentum_3m_series.apply(lambda x: max(0, min(100, 50 + x * 2.5)) if pd.notna(x) else np.nan)
+        crowded_series = (0.5 * tech_score_series + 0.25 * short_score + 0.25 * momentum_score_series).clip(lower=0, upper=100).dropna()
+
+        if crowded_series.empty:
+            continue
+
+        latest_date = crowded_series.index[-1]
+        rsi = rsi_series.loc[latest_date]
+        dist_high = dist_high_series.loc[latest_date]
+        volume_z = volume_z_series.loc[latest_date]
+        momentum_3m = momentum_3m_series.loc[latest_date]
+        crowded_score = crowded_series.loc[latest_date]
+        change_5d = crowded_score - crowded_series.iloc[-6] if len(crowded_series) > 5 else np.nan
+        change_20d = crowded_score - crowded_series.iloc[-21] if len(crowded_series) > 20 else np.nan
+
         results.append({
             'ticker': t,
+            'name': meta['name'],
+            'english_name': meta['english_name'],
+            'description': meta['description'],
             'rsi14': round(float(rsi), 2),
             'distance_to_52w_high_pct': round(float(dist_high), 2),
             'volume_zscore_60d': round(float(volume_z), 2),
             'momentum_3m_pct': round(float(momentum_3m), 2),
             'short_interest_pct': None if pd.isna(short_pct) else round(float(short_pct), 2),
             'crowded_score': round(float(crowded_score), 1),
+            'crowded_change_5d': None if pd.isna(change_5d) else round(float(change_5d), 1),
+            'crowded_change_20d': None if pd.isna(change_20d) else round(float(change_20d), 1),
         })
+
+        for dt, val in crowded_series.tail(90).items():
+            history_rows.append({
+                'date': dt.strftime('%Y-%m-%d'),
+                'ticker': t,
+                'name': meta['name'],
+                'crowded_score': round(float(val), 1),
+            })
+
     results = sorted(results, key=lambda x: x['crowded_score'], reverse=True)
-    top = results[0] if results else {'ticker': 'N/A', 'crowded_score': 50}
+    for idx, row in enumerate(results, start=1):
+        row['current_rank'] = idx
+
+    top = results[0] if results else {'ticker': 'N/A', 'name': 'N/A', 'crowded_score': 50}
+    update_policy = {
+        'last_refresh': UTC_NOW.strftime('%Y-%m-%d %H:%M UTC'),
+        'cadence': '資料在重新執行擷取腳本並重新發佈網站時更新；ETF 價格與成交量可日更，AAII 為週更，低頻風險指標依來源月更或季更。',
+        'delivery_mode': '目前網站為靜態版本，頁面不會自行即時重抓資料；需要重新生成資料檔與重新發佈。',
+        'analysis_flow': '先看資料來源與最新刷新時間，再看分數與歷史變化，最後再讀取右側摘要結論。',
+    }
     snapshot = Snapshot(
         label='板塊擁擠度領先者',
         value=float(top['crowded_score']),
         unit='/100',
-        status=top['ticker'],
+        status=f"{top['name']} ({top['ticker']})",
         description='以技術、成交量、短線動能與可得 short interest proxy 建立的簡化板塊擁擠度分數。',
         source='https://finance.yahoo.com/',
         frequency='daily',
-        methodology='針對 11 個 SPDR Sector ETF 計算 RSI、52 週高點距離、60 日成交量 z-score、3 個月動能與 short interest proxy。',
+        methodology='針對 11 個 SPDR Sector ETF 計算 RSI、52 週高點距離、60 日成交量 z-score、3 個月動能與 short interest proxy，並輸出近 90 個交易日走勢。',
         as_of=UTC_NOW.strftime('%Y-%m-%d'),
     )
-    return results, snapshot
+    history_rows = sorted(history_rows, key=lambda x: (x['date'], x['ticker']))
+    return results, history_rows, update_policy, snapshot
 
 
 def compute_rsi(series: pd.Series, length: int = 14) -> pd.Series:
@@ -408,7 +515,7 @@ def main() -> None:
     reddit_snapshot, reddit_posts = fetch_reddit_sentiment()
     liquidity_history, liquidity_summary, liquidity_snapshot = build_liquidity_module()
     corr_summary, corr_matrix, corr_meta = build_correlation_module()
-    sector_scores, sector_snapshot = build_sector_module()
+    sector_scores, sector_history, update_policy, sector_snapshot = build_sector_module()
     low_freq = build_manual_low_freq_module()
     dgs10_series = build_treasury_yield_series()
 
@@ -432,6 +539,8 @@ def main() -> None:
         'correlation_matrix': corr_matrix,
         'correlation_meta': corr_meta,
         'sector_scores': sector_scores,
+        'sector_history': sector_history,
+        'update_policy': update_policy,
         'social_posts': reddit_posts,
         'low_frequency_indicators': low_freq,
         'us10y_series': dgs10_series,
@@ -455,6 +564,11 @@ def main() -> None:
                 'module': '社群情緒指標',
                 'description': '以多個 Reddit 股票社群 RSS 標題做正負詞打分，形成 0-100 proxy 指標。',
                 'limitations': '這是公開 proxy，不等於完整 Vanda/Stocktwits 商業資料。',
+            },
+            {
+                'module': '板塊擁擠度',
+                'description': '以 11 個 SPDR Sector ETF 的價格、成交量、3 個月動能與 short interest proxy 計算每日擁擠度分數，並保留近 90 個交易日歷史。',
+                'limitations': 'short interest 取自公開可得欄位，屬 proxy；若要更精準可再接入更完整的持倉或期權資料。',
             },
             {
                 'module': 'BofA / 私人信用',

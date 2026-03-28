@@ -86,12 +86,32 @@ type AaiiRow = {
 
 type SectorRow = {
   ticker: string;
+  name: string;
+  english_name: string;
+  description: string;
   rsi14: number;
   distance_to_52w_high_pct: number;
   volume_zscore_60d: number;
   momentum_3m_pct: number;
   short_interest_pct: number | null;
   crowded_score: number;
+  crowded_change_5d: number | null;
+  crowded_change_20d: number | null;
+  current_rank: number;
+};
+
+type SectorHistoryRow = {
+  date: string;
+  ticker: string;
+  name: string;
+  crowded_score: number;
+};
+
+type UpdatePolicy = {
+  last_refresh: string;
+  cadence: string;
+  delivery_mode: string;
+  analysis_flow: string;
 };
 
 type SocialRow = {
@@ -131,6 +151,8 @@ const data = marketData as {
   correlation_matrix: MatrixRow[];
   correlation_meta: Record<string, string>;
   sector_scores: SectorRow[];
+  sector_history: SectorHistoryRow[];
+  update_policy: UpdatePolicy;
   social_posts: SocialRow[];
   low_frequency_indicators: LowFreqRow[];
   us10y_series: { date: string; value: number }[];
@@ -179,6 +201,19 @@ function correlationClass(value: number | null) {
   const tone = correlationTone(value);
   if (tone === "positive") return "bg-emerald-500/18 text-emerald-200 border-emerald-500/35";
   if (tone === "negative") return "bg-red-500/15 text-red-200 border-red-500/35";
+  return "bg-white/5 text-stone-200 border-white/10";
+}
+
+function formatSigned(value: number | null, digits = 1, suffix = "") {
+  if (value === null || Number.isNaN(value)) return "—";
+  const sign = value > 0 ? "+" : value < 0 ? "−" : "";
+  return `${sign}${formatNumber(Math.abs(value), digits)}${suffix}`;
+}
+
+function crowdedDeltaClass(value: number | null) {
+  if (value === null || Number.isNaN(value)) return "bg-white/5 text-stone-200 border-white/10";
+  if (value > 0) return "bg-red-500/15 text-red-200 border-red-500/35";
+  if (value < 0) return "bg-emerald-500/18 text-emerald-200 border-emerald-500/35";
   return "bg-white/5 text-stone-200 border-white/10";
 }
 
@@ -236,11 +271,37 @@ function InsightStrip({ text }: { text: string }) {
 
 export default function Home() {
   const [selectedWindow, setSelectedWindow] = useState<"20d" | "60d" | "120d">("20d");
+  const [selectedSectorTicker, setSelectedSectorTicker] = useState<string>(data.sector_scores[0]?.ticker ?? "XLE");
 
   const snapshots = data.snapshots;
   const liquidityChart = data.liquidity_history.slice(-52);
   const aaiiHistory = [...data.aaii_history].reverse();
   const topPosts = data.social_posts.slice(0, 10);
+  const sectorRanking = useMemo(
+    () => data.sector_scores.map((item) => ({ ...item, display_name: `${item.name} (${item.ticker})` })),
+    [],
+  );
+  const selectedSector = useMemo(
+    () => data.sector_scores.find((item) => item.ticker === selectedSectorTicker) ?? data.sector_scores[0],
+    [selectedSectorTicker],
+  );
+  const selectedSectorHistory = useMemo(
+    () => data.sector_history.filter((item) => item.ticker === selectedSectorTicker),
+    [selectedSectorTicker],
+  );
+  const selectedSectorConclusion = useMemo(() => {
+    if (!selectedSector) return "—";
+    if ((selectedSector.crowded_score ?? 0) >= 75 && (selectedSector.crowded_change_5d ?? 0) > 0) {
+      return "這個板塊不只分數高，近一週擁擠度還在升溫，代表交易共識正在快速集中，後續更要留意 squeeze 後的反轉風險。";
+    }
+    if ((selectedSector.crowded_score ?? 0) >= 75 && (selectedSector.crowded_change_5d ?? 0) <= 0) {
+      return "這個板塊仍處在高擁擠區，但短期升溫速度已放緩，表示部位雖然集中，卻未必還在持續加速擁擠。";
+    }
+    if ((selectedSector.crowded_change_5d ?? 0) > 0) {
+      return "這個板塊目前不算最極端，但短期分數正在抬升，適合提早觀察是否會進入更擁擠的交易狀態。";
+    }
+    return "這個板塊目前擁擠度較溫和或正在降溫，可視為與熱門板塊對照的參考組。";
+  }, [selectedSector]);
   const latestCorrelation = useMemo(
     () => data.correlation_summary.find((item) => item.window === selectedWindow) ?? data.correlation_summary[0],
     [selectedWindow],
@@ -269,21 +330,21 @@ export default function Home() {
 
       <main className="relative z-10">
         <section className="border-b border-white/10">
-          <div className="container py-10 lg:py-14">
-            <div className="grid gap-8 lg:grid-cols-[170px_minmax(0,1fr)] lg:gap-10">
-              <aside className="space-y-10 lg:sticky lg:top-8 lg:h-fit">
+          <div className="container py-8 lg:py-12">
+            <div className="grid gap-5 lg:grid-cols-[118px_minmax(0,1fr)] lg:gap-6">
+              <aside className="space-y-8 lg:sticky lg:top-8 lg:h-fit">
                 <div>
                   <p className="eyebrow">Research Monitor</p>
-                  <h1 className="mt-4 max-w-[9ch] font-serif-display text-4xl leading-[0.94] tracking-tight text-stone-50 sm:text-[3.3rem] lg:text-[3.7rem]">
+                  <h1 className="mt-2.5 max-w-[7.5ch] font-serif-display text-[2.22rem] leading-[0.94] tracking-tight text-stone-50 sm:text-[2.55rem] lg:text-[2.72rem]">
                     {data.hero_summary.title}
                   </h1>
                 </div>
 
-                <div className="space-y-4 border-t border-white/10 pt-5 text-sm leading-7 text-stone-300">
+                <div className="space-y-3 border-t border-white/10 pt-4 text-[0.84rem] leading-6 text-stone-300">
                   <p>{data.hero_summary.subtitle}</p>
-                  <div className="flex items-start gap-3 rounded-none border border-white/10 bg-white/[0.035] px-4 py-4">
-                    <BookOpen className="mt-1 h-4 w-4 shrink-0 text-[#8fc1b7]" />
-                    <p>設計語言採用瑞士編輯式研究桌面：強調密度、秩序、文字層級與判讀速度，而不是行銷式大字報。</p>
+                  <div className="flex items-start gap-2.5 rounded-none border border-white/10 bg-white/[0.025] px-3 py-3">
+                    <BookOpen className="mt-1 h-3.5 w-3.5 shrink-0 text-[#8fc1b7]" />
+                    <p>瑞士編輯式研究桌面：先找資料，再看變化，最後下結論。</p>
                   </div>
                 </div>
 
@@ -304,29 +365,41 @@ export default function Home() {
               </aside>
 
               <div className="space-y-8">
-                <div className="grid gap-4 xl:grid-cols-[minmax(0,1.44fr)_252px]">
-                  <article className="hero-panel overflow-hidden py-5 lg:py-6">
-                    <div className="hero-grid lg:grid-cols-[minmax(0,1.02fr)_minmax(0,0.98fr)]">
+                <div className="grid gap-4 xl:grid-cols-[minmax(0,1.42fr)_212px]">
+                  <article className="hero-panel overflow-hidden py-4 lg:py-5">
+                    <div className="hero-grid items-start gap-4 lg:grid-cols-[minmax(0,0.82fr)_minmax(0,1.18fr)]">
                       <div>
                         <p className="eyebrow">Regime Thesis</p>
-                        <h2 className="mt-4 max-w-[17ch] font-serif-display text-[1.62rem] leading-[1.06] tracking-[-0.03em] text-stone-50 sm:text-[1.86rem] lg:max-w-[18ch] lg:text-[2.08rem]">
+                        <h2 className="mt-2.5 max-w-[13ch] font-serif-display text-[1.26rem] leading-[1.06] tracking-[-0.02em] text-stone-50 sm:text-[1.42rem] lg:max-w-[14ch] lg:text-[1.58rem]">
                           <span className="block">把悲觀、流動性與風格分化</span>
                           <span className="block">放進同一張研究桌面</span>
                         </h2>
                       </div>
 
-                      <div className="max-w-[29rem] space-y-3 text-[0.86rem] leading-[1.95] text-stone-300/90">
+                      <div className="max-w-[32rem] space-y-3 text-[0.78rem] leading-[1.7] text-stone-300/90">
                         <p>
-                          這個版本已把你要求的新模組納入系統邏輯：包括 <strong>AAII 看跌比例</strong>、<strong>Vanda / BofA / 私人信用</strong>
-                          的低頻風險框架、<strong>M2 / RRP / 準備金 / TGA</strong> 的流動性面板，以及 <strong>SPY ETF、標普 500 指數、十年期美債與 XMAG</strong> 的短期相關性分析。
+                          這個版本把 <strong>AAII 看跌比例</strong>、<strong>M2 / RRP / 準備金 / TGA</strong>、<strong>SPY / SPX / 10Y / XMAG 相關性</strong>，以及 <strong>社群情緒 proxy</strong> 放進同一套研究框架。
                         </p>
-                        <p>
-                          社群情緒部分則先以公開可重現的方式建立 proxy，讓系統即使在沒有商業訂閱的情況下，也能持續監察網上交流平台的風險溫度與討論方向。
-                        </p>
+                        <div className="grid gap-2.5 border border-white/10 bg-white/[0.025] px-3.5 py-3">
+                          <div className="grid gap-2 text-[0.68rem] uppercase tracking-[0.14em] text-stone-500 sm:grid-cols-3">
+                            <span>01 找資料</span>
+                            <span>02 看變化</span>
+                            <span>03 下結論</span>
+                          </div>
+                          <div className="grid gap-3 sm:grid-cols-[minmax(0,1fr)_auto] sm:items-center">
+                            <p>
+                              從板塊擁擠度開始，點進去看單一板塊的 <strong>5 日 / 20 日變化</strong> 與 <strong>近 90 日歷史走勢</strong>，再配合右側解讀做判讀。
+                            </p>
+                            <a href="#crowdedness-drilldown" className="inline-flex items-center justify-center gap-2 border border-[#8fc1b7]/50 bg-[#122126] px-3.5 py-2.5 text-[0.7rem] uppercase tracking-[0.16em] text-stone-100 transition-colors hover:bg-[#173038]">
+                              由此開始
+                              <ArrowDownRight className="h-3.5 w-3.5" />
+                            </a>
+                          </div>
+                        </div>
                       </div>
                     </div>
 
-                    <div className="mt-8 grid gap-4 md:grid-cols-3">
+                    <div className="mt-5 grid gap-3 md:grid-cols-3">
                       <div className="inline-stat">
                         <span className="inline-stat-label">AAII Bearish</span>
                         <span className="inline-stat-value">{formatNumber(data.aaii_history[0]?.bearish ?? null)}%</span>
@@ -342,18 +415,18 @@ export default function Home() {
                     </div>
                   </article>
 
-                  <aside className="research-panel flex flex-col gap-8">
+                  <aside className="research-panel flex flex-col gap-4.5">
                     <div>
                       <p className="eyebrow">Interpretation</p>
-                      <h3 className="mt-4 max-w-[11ch] text-[1.42rem] font-semibold leading-snug tracking-tight text-stone-50">目前偏向「悲觀但未全面崩壞」的 regime</h3>
+                      <h3 className="mt-2 max-w-[9ch] text-[1.08rem] font-semibold leading-snug tracking-tight text-stone-50">目前偏向「悲觀但未全面崩壞」的 regime</h3>
                     </div>
 
-                    <div className="space-y-4 text-[0.92rem] leading-7 text-stone-300">
+                    <div className="space-y-2.5 text-[0.82rem] leading-6 text-stone-300">
                       <p>
-                        高 AAII 看跌與中性社群情緒並存，代表主觀悲觀仍高，但網上討論尚未出現一致性恐慌。這通常比單純價格下跌更值得觀察。
+                        高 AAII 看跌與中性社群情緒並存，代表主觀悲觀仍高，但網上討論尚未出現一致性恐慌。
                       </p>
-                      <div className="flex items-start gap-3 border-l border-[#8fc1b7]/60 pl-4 text-stone-200">
-                        <CircleAlert className="mt-1 h-4 w-4 shrink-0 text-[#8fc1b7]" />
+                      <div className="flex items-start gap-3 border-l border-[#8fc1b7]/60 pl-3.5 text-stone-200">
+                        <CircleAlert className="mt-1 h-3.5 w-3.5 shrink-0 text-[#8fc1b7]" />
                         <p>{latestCorrelation?.interpretation}</p>
                       </div>
                     </div>
@@ -612,8 +685,8 @@ export default function Home() {
           </div>
         </section>
 
-        <section className="border-y border-white/10 bg-[#0d1318]">
-          <div className="container grid gap-8 py-10 lg:grid-cols-[minmax(0,1.15fr)_370px] lg:py-14">
+        <section id="crowdedness-drilldown" className="border-y border-white/10 bg-[#0d1318]">
+          <div className="container grid gap-8 py-10 lg:grid-cols-[minmax(0,1.2fr)_390px] lg:py-14">
             <article className="research-panel">
               <div className="section-heading">
                 <div>
@@ -623,18 +696,51 @@ export default function Home() {
               </div>
 
               <p className="mt-5 text-sm leading-7 text-stone-300">
-                這一塊延續你原本的 sector crowdedness 系統，並把目前最擁擠的板塊放在主畫面上。現階段簡化分數綜合了 <strong>RSI</strong>、<strong>距離 52 週高點</strong>、<strong>成交量 z-score</strong>、<strong>3 個月動能</strong> 與可取得的 <strong>short interest proxy</strong>。
+                我已把原本只顯示代碼的方式改成 <strong>板塊全名 + ticker</strong>。例如 <strong>XLY = 非必需消費</strong>、<strong>XLF = 金融</strong>、<strong>XLK = 科技</strong>。下方每一列都可以點擊，右側面板會同步切換到該板塊，讓你直接看 <strong>擁擠度變化</strong>、<strong>近 90 日走勢</strong> 與 <strong>分析結論</strong>。
               </p>
 
-              <div className="mt-8 h-[25rem] w-full">
+              <div className="mt-6 grid gap-4 border border-white/10 bg-white/[0.03] p-4 lg:grid-cols-[1.1fr_0.9fr]">
+                <div>
+                  <p className="eyebrow">How To Read</p>
+                  <p className="mt-3 text-sm leading-7 text-stone-300">先看排名與分數，再點進去看 5 日與 20 日變化，最後用右側歷史走勢確認擁擠是在升溫、鈍化，還是正在退潮。</p>
+                </div>
+                <div className="grid gap-3 text-sm text-stone-300 sm:grid-cols-3 lg:grid-cols-1">
+                  <div className="border border-white/10 px-3 py-3">
+                    <div className="text-[0.68rem] uppercase tracking-[0.16em] text-stone-500">Find Data</div>
+                    <div className="mt-2 text-stone-100">板塊全名、來源、刷新時間</div>
+                  </div>
+                  <div className="border border-white/10 px-3 py-3">
+                    <div className="text-[0.68rem] uppercase tracking-[0.16em] text-stone-500">Read Signal</div>
+                    <div className="mt-2 text-stone-100">即時分數、5 日變化、20 日變化</div>
+                  </div>
+                  <div className="border border-white/10 px-3 py-3">
+                    <div className="text-[0.68rem] uppercase tracking-[0.16em] text-stone-500">Make Conclusion</div>
+                    <div className="mt-2 text-stone-100">結合走勢與說明做判讀</div>
+                  </div>
+                </div>
+              </div>
+
+              <div className="mt-5 grid gap-2 border border-[#8fc1b7]/18 bg-[#0f171b] px-4 py-2.5 text-sm text-stone-300 md:grid-cols-[minmax(0,1fr)_minmax(250px,0.82fr)] md:items-center">
+                <div>
+                  <div className="text-[0.62rem] uppercase tracking-[0.16em] text-stone-500">Step 1 · 目前選中的板塊</div>
+                  <div className="mt-1 flex flex-wrap items-center gap-2 text-stone-100">
+                    <span>{selectedSector?.name ?? "—"} ({selectedSector?.ticker ?? "—"})</span>
+                    <span className="border border-[#8fc1b7]/35 bg-[#122126] px-2 py-0.5 text-[0.62rem] uppercase tracking-[0.16em] text-[#b6d9d2]">已同步到右側</span>
+                  </div>
+                </div>
+                <div className="border-l-0 border-white/10 pt-0 text-[0.72rem] leading-5 text-stone-400 md:border-l md:pl-4">
+                  先確認目前選中的板塊，再往下切換清單；右側詳情與近 90 日走勢會同步更新。
+                </div>
+              </div>
+
+              <div className="mt-6 h-[23rem] w-full">
                 <ResponsiveContainer>
-                  <BarChart data={[...data.sector_scores].reverse()} layout="vertical" margin={{ left: 12, right: 12 }}>
+                  <BarChart data={[...sectorRanking].reverse()} layout="vertical" margin={{ left: 12, right: 12 }}>
                     <CartesianGrid stroke="rgba(255,255,255,0.08)" horizontal={false} />
                     <XAxis type="number" tick={{ fill: "rgba(231,229,228,0.7)", fontSize: 12 }} tickLine={false} axisLine={false} />
-                    <YAxis dataKey="ticker" type="category" tick={{ fill: "rgba(245,245,244,0.86)", fontSize: 12 }} tickLine={false} axisLine={false} width={50} />
-                    <Tooltip contentStyle={{ backgroundColor: "#11181d", border: "1px solid rgba(255,255,255,0.1)", borderRadius: 0 }} />
+                    <YAxis dataKey="name" type="category" tick={{ fill: "rgba(245,245,244,0.86)", fontSize: 12 }} tickLine={false} axisLine={false} width={88} />
                     <Bar dataKey="crowded_score" radius={0}>
-                      {data.sector_scores
+                      {sectorRanking
                         .slice()
                         .reverse()
                         .map((entry) => (
@@ -644,29 +750,151 @@ export default function Home() {
                   </BarChart>
                 </ResponsiveContainer>
               </div>
-            </article>
 
-            <aside className="research-panel">
-              <p className="eyebrow">Top Sector</p>
-              <h2 className="mt-4 text-4xl font-semibold tracking-tight text-stone-50">{data.sector_scores[0]?.ticker ?? "—"}</h2>
-              <p className="mt-4 text-sm leading-7 text-stone-300">
-                目前該板塊在價格延續、成交量與短線動能上最接近「交易擁擠」狀態，因此值得搭配相關性與流動性一起觀察，以辨識是否出現 squeeze 或反轉風險。
-              </p>
-
-              <div className="mt-8 space-y-4 border-t border-white/10 pt-5 text-sm text-stone-300">
-                <div className="metric-row">
-                  <span>RSI 14</span>
-                  <strong>{formatNumber(data.sector_scores[0]?.rsi14 ?? null, 1)}</strong>
+              <div className="mt-4 grid gap-2 border border-white/10 bg-white/[0.02] px-4 py-2 text-sm text-stone-400 md:grid-cols-[minmax(0,1fr)_minmax(250px,0.82fr)] md:items-center">
+                <div>
+                  <div className="text-[0.62rem] uppercase tracking-[0.16em] text-stone-500">Step 2 · 選擇你要分析的板塊</div>
+                  <div className="mt-1 text-stone-200">上方柱圖看整體排名；下方可點擊清單負責切換右側詳情。</div>
                 </div>
-                <div className="metric-row">
-                  <span>距離 52 週高點</span>
-                  <strong>{formatNumber(data.sector_scores[0]?.distance_to_52w_high_pct ?? null, 1)}%</strong>
-                </div>
-                <div className="metric-row">
-                  <span>3 個月動能</span>
-                  <strong>{formatNumber(data.sector_scores[0]?.momentum_3m_pct ?? null, 1)}%</strong>
+                <div className="text-[0.72rem] leading-5 text-stone-500">
+                  建議先挑 <strong className="text-stone-300">分數最高</strong> 或 <strong className="text-stone-300">5 日 / 20 日變化最大</strong> 的板塊，再去右側讀變化與結論。
                 </div>
               </div>
+
+              <div className="mt-4 space-y-1.5">
+                {sectorRanking.map((sector) => (
+                  <button
+                    key={sector.ticker}
+                    type="button"
+                    onClick={() => setSelectedSectorTicker(sector.ticker)}
+                    className={`grid w-full gap-3 border px-4 py-3.5 text-left transition-all md:grid-cols-[68px_minmax(0,1fr)_88px_88px_88px] ${
+                      selectedSectorTicker === sector.ticker
+                        ? "border-[#8fc1b7] bg-[#101a1c] shadow-[inset_3px_0_0_0_rgba(143,193,183,0.95),inset_0_0_0_1px_rgba(143,193,183,0.22),0_0_0_1px_rgba(143,193,183,0.16)]"
+                        : "border-white/10 bg-white/[0.02] hover:bg-white/[0.05]"
+                    }`}
+                  >
+                    <div>
+                      <div className="text-[0.68rem] uppercase tracking-[0.16em] text-stone-500">Rank</div>
+                      <div className="mt-1 flex items-center gap-2 text-lg font-semibold text-stone-100">
+                        <span>#{sector.current_rank}</span>
+                        {selectedSectorTicker === sector.ticker ? <span className="h-2 w-2 rounded-full bg-[#8fc1b7]" /> : null}
+                      </div>
+                    </div>
+                    <div>
+                      <div className="flex flex-wrap items-center gap-2">
+                        <div className="text-sm font-semibold text-stone-100">{sector.name} ({sector.ticker})</div>
+                        {selectedSectorTicker === sector.ticker ? <span className="border border-[#8fc1b7]/40 bg-[#122126] px-2 py-0.5 text-[0.62rem] uppercase tracking-[0.16em] text-[#b6d9d2]">目前查看中</span> : null}
+                      </div>
+                      <div className="mt-1 text-sm text-stone-400">{sector.english_name}</div>
+                    </div>
+                    <div>
+                      <div className="text-[0.68rem] uppercase tracking-[0.16em] text-stone-500">Score</div>
+                      <div className="mt-1 text-sm font-semibold text-stone-100">{formatNumber(sector.crowded_score, 1)}</div>
+                    </div>
+                    <div>
+                      <div className="text-[0.68rem] uppercase tracking-[0.16em] text-stone-500">5 日變化</div>
+                      <div className={`mt-1 inline-flex min-w-[4.8rem] justify-center border px-2.5 py-1 text-sm ${crowdedDeltaClass(sector.crowded_change_5d)}`}>
+                        {formatSigned(sector.crowded_change_5d, 1)}
+                      </div>
+                    </div>
+                    <div>
+                      <div className="text-[0.68rem] uppercase tracking-[0.16em] text-stone-500">20 日變化</div>
+                      <div className={`mt-1 inline-flex min-w-[4.8rem] justify-center border px-2.5 py-1 text-sm ${crowdedDeltaClass(sector.crowded_change_20d)}`}>
+                        {formatSigned(sector.crowded_change_20d, 1)}
+                      </div>
+                    </div>
+                  </button>
+                ))}
+              </div>
+            </article>
+
+            <aside className="space-y-5">
+              <article className="research-panel">
+                <p className="eyebrow">Step 3 · Selected Sector Drill-down</p>
+                <div className="mt-4 flex flex-wrap items-start justify-between gap-4">
+                  <div>
+                    <h2 className="text-3xl font-semibold tracking-tight text-stone-50">{selectedSector?.name ?? "—"} <span className="text-stone-400">({selectedSector?.ticker ?? "—"})</span></h2>
+                    <p className="mt-2 text-sm text-stone-400">{selectedSector?.english_name} · Rank #{selectedSector?.current_rank ?? "—"}</p>
+                  </div>
+                  <div className="border border-[#8fc1b7]/35 bg-[#122126] px-3 py-2 text-[0.68rem] uppercase tracking-[0.16em] text-[#b6d9d2]">點擊左側清單即可切換</div>
+                </div>
+                <p className="mt-4 text-sm leading-7 text-stone-300">{selectedSector?.description}</p>
+
+                <div className="mt-6 grid gap-3 sm:grid-cols-3">
+                  <div className="border border-white/10 px-3 py-3">
+                    <div className="text-[0.68rem] uppercase tracking-[0.16em] text-stone-500">Current Score</div>
+                    <div className="mt-2 text-2xl font-semibold text-stone-100">{formatNumber(selectedSector?.crowded_score ?? null, 1)}</div>
+                  </div>
+                  <div className="border border-white/10 px-3 py-3">
+                    <div className="text-[0.68rem] uppercase tracking-[0.16em] text-stone-500">5 日</div>
+                    <div className={`mt-2 inline-flex min-w-[5rem] justify-center border px-2.5 py-1.5 text-sm ${crowdedDeltaClass(selectedSector?.crowded_change_5d ?? null)}`}>{formatSigned(selectedSector?.crowded_change_5d ?? null, 1)}</div>
+                  </div>
+                  <div className="border border-white/10 px-3 py-3">
+                    <div className="text-[0.68rem] uppercase tracking-[0.16em] text-stone-500">20 日</div>
+                    <div className={`mt-2 inline-flex min-w-[5rem] justify-center border px-2.5 py-1.5 text-sm ${crowdedDeltaClass(selectedSector?.crowded_change_20d ?? null)}`}>{formatSigned(selectedSector?.crowded_change_20d ?? null, 1)}</div>
+                  </div>
+                </div>
+
+                <div className="mt-8 border border-[#8fc1b7]/18 bg-white/[0.025] px-3 py-2 text-[0.7rem] uppercase tracking-[0.14em] text-stone-500">近 90 日擁擠度走勢 · 切換左側板塊時同步更新</div>
+
+                <div className="mt-3 h-[16rem] w-full border border-white/10 bg-white/[0.02] p-3">
+                  <ResponsiveContainer>
+                    <LineChart data={selectedSectorHistory}>
+                      <CartesianGrid stroke="rgba(255,255,255,0.08)" vertical={false} />
+                      <XAxis dataKey="date" tick={{ fill: "rgba(231,229,228,0.7)", fontSize: 11 }} tickLine={false} axisLine={false} minTickGap={24} />
+                      <YAxis domain={[0, 100]} tick={{ fill: "rgba(231,229,228,0.7)", fontSize: 11 }} tickLine={false} axisLine={false} />
+                      <Tooltip
+                        contentStyle={{ backgroundColor: "#11181d", border: "1px solid rgba(255,255,255,0.1)", borderRadius: 0 }}
+                        formatter={(value: number) => [`${formatNumber(value, 1)} /100`, "擁擠度"]}
+                        labelFormatter={(label) => `${selectedSector?.name ?? "板塊"} · ${label}`}
+                      />
+                      <Line type="monotone" dataKey="crowded_score" stroke="#8fc1b7" strokeWidth={2.1} dot={false} />
+                    </LineChart>
+                  </ResponsiveContainer>
+                </div>
+
+                <div className="mt-6 border-t border-white/10 pt-5 text-sm leading-7 text-stone-300">
+                  <p>{selectedSectorConclusion}</p>
+                </div>
+
+                <div className="mt-6 space-y-4 border-t border-white/10 pt-5 text-sm text-stone-300">
+                  <div className="metric-row">
+                    <span>RSI 14</span>
+                    <strong>{formatNumber(selectedSector?.rsi14 ?? null, 1)}</strong>
+                  </div>
+                  <div className="metric-row">
+                    <span>距離 52 週高點</span>
+                    <strong>{formatNumber(selectedSector?.distance_to_52w_high_pct ?? null, 1)}%</strong>
+                  </div>
+                  <div className="metric-row">
+                    <span>60 日成交量 z-score</span>
+                    <strong>{formatNumber(selectedSector?.volume_zscore_60d ?? null, 2)}</strong>
+                  </div>
+                  <div className="metric-row">
+                    <span>3 個月動能</span>
+                    <strong>{formatNumber(selectedSector?.momentum_3m_pct ?? null, 1)}%</strong>
+                  </div>
+                </div>
+              </article>
+
+              <article className="research-panel">
+                <p className="eyebrow">Update Policy</p>
+                <h3 className="mt-4 text-xl font-semibold tracking-tight text-stone-50">資料會持續更新嗎？</h3>
+                <div className="mt-4 space-y-4 text-sm leading-7 text-stone-300">
+                  <p><strong className="text-stone-100">目前答案是：</strong> 這是靜態網站版本，因此頁面本身不會自動即時重抓資料；資料會在重新執行擷取腳本並重新發佈之後更新。</p>
+                  <p>{data.update_policy.cadence}</p>
+                  <p>{data.update_policy.delivery_mode}</p>
+                </div>
+                <div className="mt-6 border-t border-white/10 pt-5 text-sm text-stone-300">
+                  <div className="metric-row">
+                    <span>最近刷新</span>
+                    <strong>{data.update_policy.last_refresh}</strong>
+                  </div>
+                  <div className="mt-4 rounded-none border border-white/10 bg-white/[0.03] px-4 py-4 leading-7">
+                    <strong className="text-stone-100">最佳使用流程：</strong> {data.update_policy.analysis_flow}
+                  </div>
+                </div>
+              </article>
             </aside>
           </div>
         </section>
