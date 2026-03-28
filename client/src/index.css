@@ -1,3 +1,11 @@
+/*
+Design reminder for this file:
+- Swiss editorial research desk with terminal undertones.
+- Use sharp geometry, restrained accents, deep contrast, and disciplined spacing.
+- Avoid generic rounded-dashboard aesthetics and keep the interface analytical.
+*/
+
+@import url("https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Manrope:wght@400;500;600;700;800&display=swap");
 @import "tailwindcss";
 @import "tw-animate-css";
 
@@ -40,86 +48,81 @@
   --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-ring: var(--sidebar-ring);
+  --font-sans: "Manrope", ui-sans-serif, system-ui, sans-serif;
 }
 
 :root {
-  --primary: var(--color-blue-700);
-  --primary-foreground: var(--color-blue-50);
-  --sidebar-primary: var(--color-blue-600);
-  --sidebar-primary-foreground: var(--color-blue-50);
-  --chart-1: var(--color-blue-300);
-  --chart-2: var(--color-blue-500);
-  --chart-3: var(--color-blue-600);
-  --chart-4: var(--color-blue-700);
-  --chart-5: var(--color-blue-800);
-  --radius: 0.65rem;
-  --background: oklch(1 0 0);
-  --foreground: oklch(0.235 0.015 65);
-  --card: oklch(1 0 0);
-  --card-foreground: oklch(0.235 0.015 65);
-  --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.235 0.015 65);
-  --secondary: oklch(0.98 0.001 286.375);
-  --secondary-foreground: oklch(0.4 0.015 65);
-  --muted: oklch(0.967 0.001 286.375);
-  --muted-foreground: oklch(0.552 0.016 285.938);
-  --accent: oklch(0.967 0.001 286.375);
-  --accent-foreground: oklch(0.141 0.005 285.823);
-  --destructive: oklch(0.577 0.245 27.325);
-  --destructive-foreground: oklch(0.985 0 0);
-  --border: oklch(0.92 0.004 286.32);
-  --input: oklch(0.92 0.004 286.32);
-  --ring: oklch(0.623 0.214 259.815);
-  --sidebar: oklch(0.985 0 0);
-  --sidebar-foreground: oklch(0.235 0.015 65);
-  --sidebar-accent: oklch(0.967 0.001 286.375);
-  --sidebar-accent-foreground: oklch(0.141 0.005 285.823);
-  --sidebar-border: oklch(0.92 0.004 286.32);
-  --sidebar-ring: oklch(0.623 0.214 259.815);
+  --radius: 0rem;
+  --background: oklch(0.13 0.01 240);
+  --foreground: oklch(0.95 0.01 80);
+  --card: oklch(0.165 0.012 240);
+  --card-foreground: oklch(0.95 0.01 80);
+  --popover: oklch(0.18 0.012 240);
+  --popover-foreground: oklch(0.95 0.01 80);
+  --primary: oklch(0.75 0.08 170);
+  --primary-foreground: oklch(0.16 0.01 240);
+  --secondary: oklch(0.21 0.012 240);
+  --secondary-foreground: oklch(0.87 0.01 80);
+  --muted: oklch(0.2 0.008 240);
+  --muted-foreground: oklch(0.72 0.01 80);
+  --accent: oklch(0.26 0.02 195);
+  --accent-foreground: oklch(0.95 0.01 80);
+  --destructive: oklch(0.66 0.19 26);
+  --destructive-foreground: oklch(0.98 0.01 70);
+  --border: oklch(1 0 0 / 11%);
+  --input: oklch(1 0 0 / 12%);
+  --ring: oklch(0.75 0.08 170);
+  --chart-1: oklch(0.75 0.08 170);
+  --chart-2: oklch(0.72 0.08 75);
+  --chart-3: oklch(0.67 0.14 35);
+  --chart-4: oklch(0.69 0.08 255);
+  --chart-5: oklch(0.82 0.05 110);
+  --sidebar: oklch(0.15 0.012 240);
+  --sidebar-foreground: oklch(0.95 0.01 80);
+  --sidebar-primary: oklch(0.75 0.08 170);
+  --sidebar-primary-foreground: oklch(0.14 0.01 240);
+  --sidebar-accent: oklch(0.24 0.012 240);
+  --sidebar-accent-foreground: oklch(0.95 0.01 80);
+  --sidebar-border: oklch(1 0 0 / 11%);
+  --sidebar-ring: oklch(0.75 0.08 170);
 }
 
 .dark {
-  --primary: var(--color-blue-700);
-  --primary-foreground: var(--color-blue-50);
-  --sidebar-primary: var(--color-blue-500);
-  --sidebar-primary-foreground: var(--color-blue-50);
-  --background: oklch(0.141 0.005 285.823);
-  --foreground: oklch(0.85 0.005 65);
-  --card: oklch(0.21 0.006 285.885);
-  --card-foreground: oklch(0.85 0.005 65);
-  --popover: oklch(0.21 0.006 285.885);
-  --popover-foreground: oklch(0.85 0.005 65);
-  --secondary: oklch(0.24 0.006 286.033);
-  --secondary-foreground: oklch(0.7 0.005 65);
-  --muted: oklch(0.274 0.006 286.033);
-  --muted-foreground: oklch(0.705 0.015 286.067);
-  --accent: oklch(0.274 0.006 286.033);
-  --accent-foreground:  oklch(0.92 0.005 65);
-  --destructive: oklch(0.704 0.191 22.216);
-  --destructive-foreground: oklch(0.985 0 0);
-  --border: oklch(1 0 0 / 10%);
-  --input: oklch(1 0 0 / 15%);
-  --ring: oklch(0.488 0.243 264.376);
-  --chart-1: var(--color-blue-300);
-  --chart-2: var(--color-blue-500);
-  --chart-3: var(--color-blue-600);
-  --chart-4: var(--color-blue-700);
-  --chart-5: var(--color-blue-800);
-  --sidebar: oklch(0.21 0.006 285.885);
-  --sidebar-foreground: oklch(0.85 0.005 65);
-  --sidebar-accent: oklch(0.274 0.006 286.033);
-  --sidebar-accent-foreground:  oklch(0.985 0 0);
-  --sidebar-border: oklch(1 0 0 / 10%);
-  --sidebar-ring: oklch(0.488 0.243 264.376);
+  --background: oklch(0.13 0.01 240);
+  --foreground: oklch(0.95 0.01 80);
+  --card: oklch(0.165 0.012 240);
+  --card-foreground: oklch(0.95 0.01 80);
+  --popover: oklch(0.18 0.012 240);
+  --popover-foreground: oklch(0.95 0.01 80);
+  --secondary: oklch(0.21 0.012 240);
+  --secondary-foreground: oklch(0.87 0.01 80);
+  --muted: oklch(0.2 0.008 240);
+  --muted-foreground: oklch(0.72 0.01 80);
+  --accent: oklch(0.26 0.02 195);
+  --accent-foreground: oklch(0.95 0.01 80);
+  --border: oklch(1 0 0 / 11%);
+  --input: oklch(1 0 0 / 12%);
 }
 
 @layer base {
   * {
     @apply border-border outline-ring/50;
   }
-  body {
-    @apply bg-background text-foreground;
+
+  html {
+    scroll-behavior: smooth;
   }
+
+  body {
+    @apply bg-background text-foreground font-sans antialiased;
+    background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0.015), rgba(255, 255, 255, 0));
+  }
+
+  ::selection {
+    background: rgba(143, 193, 183, 0.35);
+    color: #f5f5f4;
+  }
+
   button:not(:disabled),
   [role="button"]:not([aria-disabled="true"]),
   [type="button"]:not(:disabled),
@@ -128,31 +131,17 @@
   a[href],
   select:not(:disabled),
   input[type="checkbox"]:not(:disabled),
-  input[type="radio"]:not(:disabled) {
+  input[type="radio"]:not(:disabled),
+  summary {
     @apply cursor-pointer;
   }
 }
 
 @layer components {
-  /**
-   * Custom container utility that centers content and adds responsive padding.
-   *
-   * This overrides Tailwind's default container behavior to:
-   * - Auto-center content (mx-auto)
-   * - Add responsive horizontal padding
-   * - Set max-width for large screens
-   *
-   * Usage: <div className="container">...</div>
-   *
-   * For custom widths, use max-w-* utilities directly:
-   * <div className="max-w-6xl mx-auto px-4">...</div>
-   */
   .container {
     width: 100%;
-    margin-left: auto;
-    margin-right: auto;
-    padding-left: 1rem; /* 16px - mobile padding */
-    padding-right: 1rem;
+    margin-inline: auto;
+    padding-inline: 1rem;
   }
 
   .flex {
@@ -160,18 +149,285 @@
     min-width: 0;
   }
 
+  .font-serif-display {
+    font-family: "Instrument Serif", Georgia, serif;
+    font-weight: 400;
+  }
+
+  .grain-overlay {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    opacity: 0.07;
+    background-image: radial-gradient(circle at 1px 1px, rgba(255,255,255,0.16) 1px, transparent 0);
+    background-size: 22px 22px;
+    mask-image: linear-gradient(to bottom, black 20%, transparent 100%);
+  }
+
+  .hero-panel {
+    position: relative;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    background:
+      linear-gradient(135deg, rgba(143, 193, 183, 0.08), transparent 35%),
+      linear-gradient(180deg, rgba(255, 255, 255, 0.04), rgba(255, 255, 255, 0.015));
+    padding: 1.5rem;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.28);
+    overflow: hidden;
+  }
+
+  .hero-panel::after {
+    content: "";
+    position: absolute;
+    inset: auto -3rem -3rem auto;
+    width: 12rem;
+    height: 12rem;
+    background: radial-gradient(circle, rgba(214, 179, 141, 0.18), transparent 68%);
+    filter: blur(18px);
+  }
+
+  .hero-grid {
+    display: grid;
+    gap: 2.5rem;
+  }
+
+  .research-panel {
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.045), rgba(255, 255, 255, 0.02));
+    padding: 1.35rem;
+    box-shadow: 0 14px 36px rgba(0, 0, 0, 0.22);
+    backdrop-filter: blur(12px);
+  }
+
+  .eyebrow {
+    font-size: 0.72rem;
+    line-height: 1;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: rgba(214, 211, 209, 0.62);
+  }
+
+  .icon-chip {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.25rem;
+    height: 2.25rem;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    color: #8fc1b7;
+    background: rgba(255, 255, 255, 0.04);
+  }
+
+  .metric-value {
+    display: flex;
+    align-items: baseline;
+    gap: 0.45rem;
+    font-size: clamp(2.2rem, 5vw, 3.6rem);
+    line-height: 0.95;
+    font-weight: 700;
+    letter-spacing: -0.06em;
+    color: #fafaf9;
+  }
+
+  .metric-unit {
+    font-size: 0.95rem;
+    line-height: 1;
+    letter-spacing: 0;
+    font-weight: 500;
+    color: rgba(214, 211, 209, 0.75);
+  }
+
+  .status-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    padding: 0.35rem 0.55rem;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+
+  .status-chip-positive {
+    color: #c8efe6;
+    background: rgba(143, 193, 183, 0.11);
+  }
+
+  .status-chip-muted {
+    color: #e7e5e4;
+    background: rgba(255, 255, 255, 0.04);
+  }
+
+  .inline-stat {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+    border-top: 1px solid rgba(255,255,255,0.12);
+    padding-top: 0.85rem;
+  }
+
+  .inline-stat-label {
+    font-size: 0.74rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: rgba(214, 211, 209, 0.62);
+  }
+
+  .inline-stat-value {
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: #fafaf9;
+  }
+
+  .section-heading {
+    display: flex;
+    align-items: end;
+    justify-content: space-between;
+    gap: 1rem;
+  }
+
+  .section-heading h2 {
+    margin-top: 0.8rem;
+    font-size: 1.65rem;
+    line-height: 1.1;
+    letter-spacing: -0.04em;
+    font-weight: 650;
+    color: #fafaf9;
+  }
+
+  .legend-note {
+    font-size: 0.75rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: rgba(214, 211, 209, 0.58);
+  }
+
+  .metric-row {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 1rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    padding-top: 0.9rem;
+  }
+
+  .metric-row:first-child {
+    border-top: 0;
+    padding-top: 0;
+  }
+
+  .metric-row span {
+    color: rgba(214, 211, 209, 0.78);
+  }
+
+  .metric-row strong {
+    color: #fafaf9;
+    font-weight: 650;
+  }
+
+  .segmented-control {
+    display: inline-flex;
+    flex-wrap: wrap;
+    gap: 0.35rem;
+    border: 1px solid rgba(255,255,255,0.1);
+    background: rgba(255,255,255,0.03);
+    padding: 0.25rem;
+  }
+
+  .segment-active,
+  .segment-inactive {
+    border: 0;
+    padding: 0.45rem 0.72rem;
+    font-size: 0.8rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    transition: background-color 180ms ease, color 180ms ease;
+  }
+
+  .segment-active {
+    background: rgba(143, 193, 183, 0.15);
+    color: #f5f5f4;
+  }
+
+  .segment-inactive {
+    background: transparent;
+    color: rgba(214, 211, 209, 0.68);
+  }
+
+  .corr-pill {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+    border: 1px solid rgba(255,255,255,0.1);
+    padding: 0.85rem 0.95rem;
+  }
+
+  .corr-pill span {
+    font-size: 0.72rem;
+    line-height: 1.3;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+  }
+
+  .corr-pill strong {
+    font-size: 1.35rem;
+    line-height: 1;
+    font-weight: 700;
+  }
+
+  .methodology-item {
+    border: 1px solid rgba(255,255,255,0.1);
+    background: rgba(255,255,255,0.02);
+    padding: 1rem;
+  }
+
+  .methodology-item summary {
+    display: flex;
+    list-style: none;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    color: #fafaf9;
+    font-weight: 600;
+  }
+
+  .methodology-item summary::-webkit-details-marker {
+    display: none;
+  }
+
   @media (min-width: 640px) {
     .container {
-      padding-left: 1.5rem; /* 24px - tablet padding */
-      padding-right: 1.5rem;
+      padding-inline: 1.5rem;
+    }
+
+    .hero-panel,
+    .research-panel {
+      padding: 1.6rem;
     }
   }
 
   @media (min-width: 1024px) {
     .container {
-      padding-left: 2rem; /* 32px - desktop padding */
-      padding-right: 2rem;
-      max-width: 1280px; /* Standard content width */
+      padding-inline: 2rem;
+      max-width: 1320px;
     }
+
+    .hero-panel {
+      padding: 2rem;
+    }
+
+    .research-panel {
+      padding: 1.5rem;
+    }
+
+    .hero-grid {
+      grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+      align-items: start;
+    }
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
   }
 }
