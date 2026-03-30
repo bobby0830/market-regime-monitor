@@ -397,6 +397,8 @@ def build_sector_module() -> Tuple[List[Dict[str, object]], List[Dict[str, objec
         short_score = 50 if pd.isna(short_pct) else max(0, min(100, short_pct * 8))
         momentum_score_series = momentum_3m_series.apply(lambda x: max(0, min(100, 50 + x * 2.5)) if pd.notna(x) else np.nan)
         crowded_series = (0.5 * tech_score_series + 0.25 * short_score + 0.25 * momentum_score_series).clip(lower=0, upper=100).dropna()
+        crowded_change_5d_series = crowded_series.diff(5)
+        crowded_change_20d_series = crowded_series.diff(20)
 
         if crowded_series.empty:
             continue
@@ -425,12 +427,16 @@ def build_sector_module() -> Tuple[List[Dict[str, object]], List[Dict[str, objec
             'crowded_change_20d': None if pd.isna(change_20d) else round(float(change_20d), 1),
         })
 
-        for dt, val in crowded_series.tail(90).items():
+        for dt, val in crowded_series.tail(252).items():
+            change_5d_value = crowded_change_5d_series.loc[dt]
+            change_20d_value = crowded_change_20d_series.loc[dt]
             history_rows.append({
                 'date': dt.strftime('%Y-%m-%d'),
                 'ticker': t,
                 'name': meta['name'],
                 'crowded_score': round(float(val), 1),
+                'crowded_change_5d': None if pd.isna(change_5d_value) else round(float(change_5d_value), 1),
+                'crowded_change_20d': None if pd.isna(change_20d_value) else round(float(change_20d_value), 1),
             })
 
     results = sorted(results, key=lambda x: x['crowded_score'], reverse=True)
@@ -440,9 +446,12 @@ def build_sector_module() -> Tuple[List[Dict[str, object]], List[Dict[str, objec
     top = results[0] if results else {'ticker': 'N/A', 'name': 'N/A', 'crowded_score': 50}
     update_policy = {
         'last_refresh': UTC_NOW.strftime('%Y-%m-%d %H:%M UTC'),
-        'cadence': '資料在重新執行擷取腳本並重新發佈網站時更新；ETF 價格與成交量可日更，AAII 為週更，低頻風險指標依來源月更或季更。',
-        'delivery_mode': '目前網站為靜態版本，頁面不會自行即時重抓資料；需要重新生成資料檔與重新發佈。',
-        'analysis_flow': '先看資料來源與最新刷新時間，再看分數與歷史變化，最後再讀取右側摘要結論。',
+        'cadence': 'ETF 價格、成交量、相關性與 Reddit proxy 可用日更流程重建；AAII 為週更；BofA、Vanda 與私人信用等低頻模組仍需按月或按季補錄。',
+        'delivery_mode': '目前網站仍是靜態發佈模式：頁面可展示最新資料檔，但公開站若要持續更新，仍需要定時重建資料並重新發佈，或升級為含後端的自動抓取架構。',
+        'analysis_flow': '先看最近刷新與資料頻率，再點擊板塊切換歷史圖，把 Current Score、5 日、20 日三種視角交叉比對，最後再讀右側自動結論。',
+        'automation_status': '可較自動化：FRED、Yahoo 價格/成交量、Reddit RSS。半自動：AAII 頁面擷取。低頻人工整理：BofA、Vanda 商業資料替代欄位、私人信用違約率。',
+        'published_site_note': '若只停留在靜態站，瀏覽器不會替你向來源重新運算整套研究資料；最穩妥做法是建立排程刷新，並在新資料生成後重新發佈。',
+        'recommended_next_step': '若你要真正做到「持續更新」，下一步應把網站升級為含後端版本，將資料抓取與快取搬到伺服器排程。',
     }
     snapshot = Snapshot(
         label='板塊擁擠度領先者',
@@ -452,7 +461,7 @@ def build_sector_module() -> Tuple[List[Dict[str, object]], List[Dict[str, objec
         description='以技術、成交量、短線動能與可得 short interest proxy 建立的簡化板塊擁擠度分數。',
         source='https://finance.yahoo.com/',
         frequency='daily',
-        methodology='針對 11 個 SPDR Sector ETF 計算 RSI、52 週高點距離、60 日成交量 z-score、3 個月動能與 short interest proxy，並輸出近 90 個交易日走勢。',
+        methodology='針對 11 個 SPDR Sector ETF 計算 RSI、52 週高點距離、60 日成交量 z-score、3 個月動能與 short interest proxy，並輸出近 1 年歷史分數，以及 5 日 / 20 日變化序列。',
         as_of=UTC_NOW.strftime('%Y-%m-%d'),
     )
     history_rows = sorted(history_rows, key=lambda x: (x['date'], x['ticker']))
@@ -477,8 +486,8 @@ def build_manual_low_freq_module() -> List[Dict[str, object]]:
             'as_of': '2026-03',
             'update_frequency': 'monthly survey proxy',
             'status': 'defensive uptick',
-            'source': 'https://www.investing.com/news/stock-market-news/bofa-fund-manager-survey-shows-no-signs-of-equity-capitulation-yet-4565163',
-            'note': '公開新聞摘要顯示 2026 年 3 月現金配置約回升至 4.2%–4.3%，屬機構風險偏好偏保守訊號。',
+            'source': 'https://business.bofa.com/en-us/content/market-strategies-insights/weekly-market-recap-report.html',
+            'note': 'BofA 官方 2026 年 3 月市場回顧摘要提到 cash levels surge to 4.3 percent，代表機構現金配置明顯回升，風險偏好轉向保守。',
         },
         {
             'series': 'Vanda 零售流向 / chatter',
@@ -492,13 +501,13 @@ def build_manual_low_freq_module() -> List[Dict[str, object]]:
         },
         {
             'series': '私人信用違約率',
-            'latest_value': 5.8,
+            'latest_value': 5.4,
             'unit': '%',
-            'as_of': '2026-01 / 2025 full-year references',
+            'as_of': '2026-02 TTM',
             'update_frequency': 'monthly / quarterly, source-dependent',
-            'status': 'elevated',
-            'source': 'https://finance.yahoo.com/news/private-credit-great-divide-imminent-153338827.html',
-            'note': '公開摘要顯示 Fitch 的一組口徑在 2026 年初約 5.8%，另有 2025 全年歷史高位 9.2% 的報導；應視為低頻結構性信用壓力指標。',
+            'status': 'elevated but easing',
+            'source': 'https://www.fitchratings.com/research/corporate-finance/us-private-credit-defaults-ease-to-5-4-in-february-2026-18-03-2026',
+            'note': 'Fitch 官方最新口徑顯示 U.S. Private Credit Default Rate 在 2026 年 2 月的 trailing-12-month 讀數降至 5.4%，低於 1 月的 5.8%；若引用 PMR 或全年口徑，需另行標示不可混用。',
         },
     ]
 
@@ -567,7 +576,7 @@ def main() -> None:
             },
             {
                 'module': '板塊擁擠度',
-                'description': '以 11 個 SPDR Sector ETF 的價格、成交量、3 個月動能與 short interest proxy 計算每日擁擠度分數，並保留近 90 個交易日歷史。',
+                'description': '以 11 個 SPDR Sector ETF 的價格、成交量、3 個月動能與 short interest proxy 計算每日擁擠度分數，並保留近 1 年歷史與 5 日 / 20 日變化軌跡。',
                 'limitations': 'short interest 取自公開可得欄位，屬 proxy；若要更精準可再接入更完整的持倉或期權資料。',
             },
             {

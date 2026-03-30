@@ -105,6 +105,8 @@ type SectorHistoryRow = {
   ticker: string;
   name: string;
   crowded_score: number;
+  crowded_change_5d: number | null;
+  crowded_change_20d: number | null;
 };
 
 type UpdatePolicy = {
@@ -112,6 +114,9 @@ type UpdatePolicy = {
   cadence: string;
   delivery_mode: string;
   analysis_flow: string;
+  automation_status: string;
+  published_site_note: string;
+  recommended_next_step: string;
 };
 
 type SocialRow = {
@@ -164,6 +169,12 @@ const windowLabels: Record<string, string> = {
   "60d": "60 日",
   "120d": "120 日",
 };
+
+const crowdedHistoryViewLabels = {
+  score: "擁擠度分數",
+  change5d: "5 日變化軌跡",
+  change20d: "20 日變化軌跡",
+} as const;
 
 const assetOrder = ["spy_etf", "spx_index", "us10y_price_proxy", "xmag"];
 
@@ -272,6 +283,7 @@ function InsightStrip({ text }: { text: string }) {
 export default function Home() {
   const [selectedWindow, setSelectedWindow] = useState<"20d" | "60d" | "120d">("20d");
   const [selectedSectorTicker, setSelectedSectorTicker] = useState<string>(data.sector_scores[0]?.ticker ?? "XLE");
+  const [selectedCrowdedHistoryView, setSelectedCrowdedHistoryView] = useState<keyof typeof crowdedHistoryViewLabels>("score");
 
   const snapshots = data.snapshots;
   const liquidityChart = data.liquidity_history.slice(-52);
@@ -289,19 +301,76 @@ export default function Home() {
     () => data.sector_history.filter((item) => item.ticker === selectedSectorTicker),
     [selectedSectorTicker],
   );
+  const selectedSectorHistoryConfig = useMemo(() => {
+    if (selectedCrowdedHistoryView === "change5d") {
+      return {
+        dataKey: "crowded_change_5d" as const,
+        title: "近 1 年 · 5 日變化軌跡",
+        description: "把每天相對 5 個交易日前的變化量畫出來，適合看短線升溫是否正在加速。",
+        stroke: "#d16f5a",
+        domain: [-20, 20] as [number, number],
+        formatter: (value: number) => `${formatSigned(value, 1)} pt`,
+      };
+    }
+
+    if (selectedCrowdedHistoryView === "change20d") {
+      return {
+        dataKey: "crowded_change_20d" as const,
+        title: "近 1 年 · 20 日變化軌跡",
+        description: "把每天相對 20 個交易日前的變化量畫出來，適合判斷中期擁擠是在延續還是回落。",
+        stroke: "#d6b38d",
+        domain: [-30, 30] as [number, number],
+        formatter: (value: number) => `${formatSigned(value, 1)} pt`,
+      };
+    }
+
+    return {
+      dataKey: "crowded_score" as const,
+      title: "近 1 年 · 擁擠度分數",
+      description: "直接查看板塊擁擠度本身的歷史分數，適合辨認當前位置是否處於高位區。",
+      stroke: "#8fc1b7",
+      domain: [0, 100] as [number, number],
+      formatter: (value: number) => `${formatNumber(value, 1)} /100`,
+    };
+  }, [selectedCrowdedHistoryView]);
   const selectedSectorConclusion = useMemo(() => {
-    if (!selectedSector) return "—";
-    if ((selectedSector.crowded_score ?? 0) >= 75 && (selectedSector.crowded_change_5d ?? 0) > 0) {
-      return "這個板塊不只分數高，近一週擁擠度還在升溫，代表交易共識正在快速集中，後續更要留意 squeeze 後的反轉風險。";
+    if (!selectedSector) {
+      return {
+        label: "—",
+        toneClass: "bg-white/5 text-stone-200 border-white/10",
+        sentence: "目前沒有可用的板塊資料。",
+      };
     }
-    if ((selectedSector.crowded_score ?? 0) >= 75 && (selectedSector.crowded_change_5d ?? 0) <= 0) {
-      return "這個板塊仍處在高擁擠區，但短期升溫速度已放緩，表示部位雖然集中，卻未必還在持續加速擁擠。";
+
+    const score = selectedSector.crowded_score ?? 0;
+    const change5d = selectedSector.crowded_change_5d ?? 0;
+    const change20d = selectedSector.crowded_change_20d ?? 0;
+    const latest = selectedSectorHistory.at(-1)?.crowded_score ?? score;
+    const fiveDaysAgo = selectedSectorHistory.at(-6)?.crowded_score ?? latest - change5d;
+    const localSlope = latest - fiveDaysAgo;
+
+    if ((change5d >= 3 && change20d >= 0) || (score >= 65 && change5d > 0 && localSlope > 0)) {
+      return {
+        label: "升溫",
+        toneClass: "bg-red-500/15 text-red-200 border-red-500/35",
+        sentence: `${selectedSector.name} 的擁擠度正在升溫，5 日與短線斜率同步走高，代表資金與交易共識正重新往這個板塊集中。`,
+      };
     }
-    if ((selectedSector.crowded_change_5d ?? 0) > 0) {
-      return "這個板塊目前不算最極端，但短期分數正在抬升，適合提早觀察是否會進入更擁擠的交易狀態。";
+
+    if ((change5d > 0 && change20d < 0) || (Math.abs(change5d) < 3 && score >= 45)) {
+      return {
+        label: "鈍化",
+        toneClass: "bg-amber-500/15 text-amber-200 border-amber-500/35",
+        sentence: `${selectedSector.name} 的擁擠度仍在中高區間，但短線彈升尚未扭轉中期降溫，表示原本的熱門交易正在鈍化而非重新全面加速。`,
+      };
     }
-    return "這個板塊目前擁擠度較溫和或正在降溫，可視為與熱門板塊對照的參考組。";
-  }, [selectedSector]);
+
+    return {
+      label: "退潮",
+      toneClass: "bg-emerald-500/18 text-emerald-200 border-emerald-500/35",
+      sentence: `${selectedSector.name} 的擁擠度處於退潮階段，5 日與 20 日變化大致偏弱，代表前期集中部位正在鬆動，較適合拿來對照熱門板塊的資金撤出節奏。`,
+    };
+  }, [selectedSector, selectedSectorHistory]);
   const latestCorrelation = useMemo(
     () => data.correlation_summary.find((item) => item.window === selectedWindow) ?? data.correlation_summary[0],
     [selectedWindow],
@@ -386,14 +455,14 @@ export default function Home() {
                             <span>02 看變化</span>
                             <span>03 下結論</span>
                           </div>
-                          <div className="grid gap-3 sm:grid-cols-[minmax(0,1fr)_auto] sm:items-center">
+                          <div className="grid gap-3">
                             <p>
                               從板塊擁擠度開始，點進去看單一板塊的 <strong>5 日 / 20 日變化</strong> 與 <strong>近 90 日歷史走勢</strong>，再配合右側解讀做判讀。
                             </p>
-                            <a href="#crowdedness-drilldown" className="inline-flex items-center justify-center gap-2 border border-[#8fc1b7]/50 bg-[#122126] px-3.5 py-2.5 text-[0.7rem] uppercase tracking-[0.16em] text-stone-100 transition-colors hover:bg-[#173038]">
-                              由此開始
-                              <ArrowDownRight className="h-3.5 w-3.5" />
-                            </a>
+                            <div className="inline-flex w-fit items-center gap-2 border border-[#8fc1b7]/22 bg-[#0f171b] px-3 py-2 text-[0.68rem] uppercase tracking-[0.14em] text-stone-300">
+                              <span className="text-stone-500">建議起點</span>
+                              <span className="text-stone-100">先看板塊排名，再切到右側歷史視角</span>
+                            </div>
                           </div>
                         </div>
                       </div>
@@ -695,32 +764,33 @@ export default function Home() {
                 </div>
               </div>
 
-              <p className="mt-5 text-sm leading-7 text-stone-300">
-                我已把原本只顯示代碼的方式改成 <strong>板塊全名 + ticker</strong>。例如 <strong>XLY = 非必需消費</strong>、<strong>XLF = 金融</strong>、<strong>XLK = 科技</strong>。下方每一列都可以點擊，右側面板會同步切換到該板塊，讓你直接看 <strong>擁擠度變化</strong>、<strong>近 90 日走勢</strong> 與 <strong>分析結論</strong>。
-              </p>
+                <p className="mt-5 text-sm leading-7 text-stone-300">
+                  我已把原本只顯示代碼的方式改成 <strong>板塊全名 + ticker</strong>。例如 <strong>XLY = 非必需消費</strong>、<strong>XLF = 金融</strong>、<strong>XLK = 科技</strong>。下方每一列都可以點擊，右側面板會同步切換到該板塊，讓你直接看 <strong>擁擠度分數</strong>、<strong>5 日 / 20 日變化歷史軌跡</strong> 與 <strong>分析結論</strong>。
+                </p>
 
-              <div className="mt-6 grid gap-4 border border-white/10 bg-white/[0.03] p-4 lg:grid-cols-[1.1fr_0.9fr]">
+
+              <div className="mt-6 grid gap-3 border border-white/10 bg-white/[0.03] p-3.5 lg:grid-cols-[minmax(0,0.95fr)_minmax(0,1.05fr)] lg:items-start">
                 <div>
                   <p className="eyebrow">How To Read</p>
-                  <p className="mt-3 text-sm leading-7 text-stone-300">先看排名與分數，再點進去看 5 日與 20 日變化，最後用右側歷史走勢確認擁擠是在升溫、鈍化，還是正在退潮。</p>
+                  <p className="mt-2.5 text-sm leading-6.5 text-stone-300">先看排名與分數，再點進去看 5 日與 20 日變化，最後用右側歷史走勢確認擁擠是在升溫、鈍化，還是正在退潮。</p>
                 </div>
-                <div className="grid gap-3 text-sm text-stone-300 sm:grid-cols-3 lg:grid-cols-1">
-                  <div className="border border-white/10 px-3 py-3">
+                <div className="grid gap-2.5 text-sm text-stone-300 sm:grid-cols-3">
+                  <div className="border border-white/10 px-3 py-2.5">
                     <div className="text-[0.68rem] uppercase tracking-[0.16em] text-stone-500">Find Data</div>
-                    <div className="mt-2 text-stone-100">板塊全名、來源、刷新時間</div>
+                    <div className="mt-1.5 text-stone-100">板塊全名、來源、刷新時間</div>
                   </div>
-                  <div className="border border-white/10 px-3 py-3">
+                  <div className="border border-white/10 px-3 py-2.5">
                     <div className="text-[0.68rem] uppercase tracking-[0.16em] text-stone-500">Read Signal</div>
-                    <div className="mt-2 text-stone-100">即時分數、5 日變化、20 日變化</div>
+                    <div className="mt-1.5 text-stone-100">即時分數、5 日變化、20 日變化</div>
                   </div>
-                  <div className="border border-white/10 px-3 py-3">
+                  <div className="border border-white/10 px-3 py-2.5">
                     <div className="text-[0.68rem] uppercase tracking-[0.16em] text-stone-500">Make Conclusion</div>
-                    <div className="mt-2 text-stone-100">結合走勢與說明做判讀</div>
+                    <div className="mt-1.5 text-stone-100">結合走勢與說明做判讀</div>
                   </div>
                 </div>
               </div>
 
-              <div className="mt-5 grid gap-2 border border-[#8fc1b7]/18 bg-[#0f171b] px-4 py-2.5 text-sm text-stone-300 md:grid-cols-[minmax(0,1fr)_minmax(250px,0.82fr)] md:items-center">
+              <div className="mt-4 grid gap-2 border border-[#8fc1b7]/18 bg-[#0f171b] px-3.5 py-2 text-sm text-stone-300 md:grid-cols-[minmax(0,1fr)_minmax(230px,0.82fr)] md:items-center">
                 <div>
                   <div className="text-[0.62rem] uppercase tracking-[0.16em] text-stone-500">Step 1 · 目前選中的板塊</div>
                   <div className="mt-1 flex flex-wrap items-center gap-2 text-stone-100">
@@ -728,8 +798,8 @@ export default function Home() {
                     <span className="border border-[#8fc1b7]/35 bg-[#122126] px-2 py-0.5 text-[0.62rem] uppercase tracking-[0.16em] text-[#b6d9d2]">已同步到右側</span>
                   </div>
                 </div>
-                <div className="border-l-0 border-white/10 pt-0 text-[0.72rem] leading-5 text-stone-400 md:border-l md:pl-4">
-                  先確認目前選中的板塊，再往下切換清單；右側詳情與近 90 日走勢會同步更新。
+                <div className="border-l-0 border-white/10 pt-0 text-[0.7rem] leading-5 text-stone-400 md:border-l md:pl-3.5">
+                  先確認目前選中的板塊，再往下切換清單；右側詳情與近 1 年歷史視角會同步更新。
                 </div>
               </div>
 
@@ -751,55 +821,55 @@ export default function Home() {
                 </ResponsiveContainer>
               </div>
 
-              <div className="mt-4 grid gap-2 border border-white/10 bg-white/[0.02] px-4 py-2 text-sm text-stone-400 md:grid-cols-[minmax(0,1fr)_minmax(250px,0.82fr)] md:items-center">
+              <div className="mt-[0.12rem] grid gap-0 border border-white/10 bg-white/[0.02] px-[0.66rem] py-[0.05rem] text-sm text-stone-400 md:grid-cols-[minmax(0,1fr)_minmax(108px,0.42fr)] md:items-center">
                 <div>
-                  <div className="text-[0.62rem] uppercase tracking-[0.16em] text-stone-500">Step 2 · 選擇你要分析的板塊</div>
-                  <div className="mt-1 text-stone-200">上方柱圖看整體排名；下方可點擊清單負責切換右側詳情。</div>
+                  <div className="text-[0.54rem] uppercase tracking-[0.14em] text-stone-500">Step 2 · 選擇你要分析的板塊</div>
+                  <div className="mt-0 text-[0.46rem] leading-[0.52rem] text-stone-200">上方柱圖看整體排名；下方清單切換右側詳情。</div>
                 </div>
-                <div className="text-[0.72rem] leading-5 text-stone-500">
+                <div className="text-[0.37rem] leading-[0.44rem] text-stone-500 md:text-right">
                   建議先挑 <strong className="text-stone-300">分數最高</strong> 或 <strong className="text-stone-300">5 日 / 20 日變化最大</strong> 的板塊，再去右側讀變化與結論。
                 </div>
               </div>
 
-              <div className="mt-4 space-y-1.5">
+              <div className="mt-[0.02rem] space-y-[0.02rem]">
                 {sectorRanking.map((sector) => (
                   <button
                     key={sector.ticker}
                     type="button"
                     onClick={() => setSelectedSectorTicker(sector.ticker)}
-                    className={`grid w-full gap-3 border px-4 py-3.5 text-left transition-all md:grid-cols-[68px_minmax(0,1fr)_88px_88px_88px] ${
+                    className={`grid w-full gap-[0.03rem] border px-[0.66rem] py-[0.26rem] text-left transition-all md:grid-cols-[28px_minmax(0,1fr)_40px_40px_40px] ${
                       selectedSectorTicker === sector.ticker
-                        ? "border-[#8fc1b7] bg-[#101a1c] shadow-[inset_3px_0_0_0_rgba(143,193,183,0.95),inset_0_0_0_1px_rgba(143,193,183,0.22),0_0_0_1px_rgba(143,193,183,0.16)]"
+                        ? "border-[#93d0c4] bg-[#0b1517] shadow-[inset_5px_0_0_0_rgba(147,208,196,1),inset_0_0_0_1px_rgba(147,208,196,0.34),0_0_0_1px_rgba(147,208,196,0.22)]"
                         : "border-white/10 bg-white/[0.02] hover:bg-white/[0.05]"
                     }`}
                   >
                     <div>
-                      <div className="text-[0.68rem] uppercase tracking-[0.16em] text-stone-500">Rank</div>
-                      <div className="mt-1 flex items-center gap-2 text-lg font-semibold text-stone-100">
+                      <div className="text-[0.43rem] uppercase tracking-[0.11em] text-stone-500">Rank</div>
+                      <div className="mt-0 flex items-center gap-[0.16rem] text-[0.55rem] font-semibold text-stone-100">
                         <span>#{sector.current_rank}</span>
                         {selectedSectorTicker === sector.ticker ? <span className="h-2 w-2 rounded-full bg-[#8fc1b7]" /> : null}
                       </div>
                     </div>
                     <div>
-                      <div className="flex flex-wrap items-center gap-2">
-                        <div className="text-sm font-semibold text-stone-100">{sector.name} ({sector.ticker})</div>
-                        {selectedSectorTicker === sector.ticker ? <span className="border border-[#8fc1b7]/40 bg-[#122126] px-2 py-0.5 text-[0.62rem] uppercase tracking-[0.16em] text-[#b6d9d2]">目前查看中</span> : null}
+                      <div className="flex flex-wrap items-center gap-1">
+                        <div className="text-[0.55rem] font-semibold text-stone-100">{sector.name} ({sector.ticker})</div>
+                        {selectedSectorTicker === sector.ticker ? <span className="border border-[#9fe1d4]/80 bg-[#11272a] px-[0.14rem] py-[0.04rem] text-[0.3rem] font-semibold uppercase tracking-[0.07em] text-[#e7fbf6]">目前查看中</span> : null}
                       </div>
-                      <div className="mt-1 text-sm text-stone-400">{sector.english_name}</div>
+                      <div className="mt-0 text-[0.37rem] leading-[0.4rem] text-stone-400">{sector.english_name}</div>
                     </div>
                     <div>
-                      <div className="text-[0.68rem] uppercase tracking-[0.16em] text-stone-500">Score</div>
-                      <div className="mt-1 text-sm font-semibold text-stone-100">{formatNumber(sector.crowded_score, 1)}</div>
+                      <div className="text-[0.43rem] uppercase tracking-[0.11em] text-stone-500">Score</div>
+                      <div className="mt-0 text-[0.53rem] font-semibold text-stone-100">{formatNumber(sector.crowded_score, 1)}</div>
                     </div>
                     <div>
-                      <div className="text-[0.68rem] uppercase tracking-[0.16em] text-stone-500">5 日變化</div>
-                      <div className={`mt-1 inline-flex min-w-[4.8rem] justify-center border px-2.5 py-1 text-sm ${crowdedDeltaClass(sector.crowded_change_5d)}`}>
+                      <div className="text-[0.43rem] uppercase tracking-[0.11em] text-stone-500">5 日變化</div>
+                      <div className={`mt-0 inline-flex min-w-[1.78rem] justify-center border px-[0.32rem] py-[0.06rem] text-[0.42rem] ${crowdedDeltaClass(sector.crowded_change_5d)}`}>
                         {formatSigned(sector.crowded_change_5d, 1)}
                       </div>
                     </div>
                     <div>
-                      <div className="text-[0.68rem] uppercase tracking-[0.16em] text-stone-500">20 日變化</div>
-                      <div className={`mt-1 inline-flex min-w-[4.8rem] justify-center border px-2.5 py-1 text-sm ${crowdedDeltaClass(sector.crowded_change_20d)}`}>
+                      <div className="text-[0.43rem] uppercase tracking-[0.11em] text-stone-500">20 日變化</div>
+                      <div className={`mt-0 inline-flex min-w-[1.78rem] justify-center border px-[0.32rem] py-[0.06rem] text-[0.42rem] ${crowdedDeltaClass(sector.crowded_change_20d)}`}>
                         {formatSigned(sector.crowded_change_20d, 1)}
                       </div>
                     </div>
@@ -835,26 +905,52 @@ export default function Home() {
                   </div>
                 </div>
 
-                <div className="mt-8 border border-[#8fc1b7]/18 bg-white/[0.025] px-3 py-2 text-[0.7rem] uppercase tracking-[0.14em] text-stone-500">近 90 日擁擠度走勢 · 切換左側板塊時同步更新</div>
+                <div className="mt-7 border border-white/10 bg-white/[0.035] px-3.5 py-3">
+                  <div className="flex flex-wrap items-center gap-2.5">
+                    <span className={`inline-flex border px-2.5 py-1 text-[0.68rem] font-semibold uppercase tracking-[0.16em] ${selectedSectorConclusion.toneClass}`}>
+                      {selectedSectorConclusion.label}
+                    </span>
+                    <span className="text-[0.68rem] uppercase tracking-[0.14em] text-stone-500">Auto Conclusion</span>
+                  </div>
+                  <p className="mt-2.5 text-[0.94rem] leading-6 text-stone-100">{selectedSectorConclusion.sentence}</p>
+                </div>
+
+                <div className="mt-3 border border-[#8fc1b7]/18 bg-white/[0.025] px-3 py-3">
+                  <div className="flex flex-wrap items-center justify-between gap-3">
+                    <div>
+                      <div className="text-[0.7rem] uppercase tracking-[0.14em] text-stone-500">Historical View</div>
+                      <div className="mt-1 text-sm text-stone-200">{selectedSectorHistoryConfig.title}</div>
+                    </div>
+                    <div className="flex flex-wrap gap-2">
+                      {(Object.entries(crowdedHistoryViewLabels) as [keyof typeof crowdedHistoryViewLabels, string][]).map(([viewKey, label]) => (
+                        <button
+                          key={viewKey}
+                          type="button"
+                          onClick={() => setSelectedCrowdedHistoryView(viewKey)}
+                          className={selectedCrowdedHistoryView === viewKey ? "segment-active" : "segment-inactive"}
+                        >
+                          {label}
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+                  <p className="mt-3 text-sm leading-6 text-stone-400">{selectedSectorHistoryConfig.description}</p>
+                </div>
 
                 <div className="mt-3 h-[16rem] w-full border border-white/10 bg-white/[0.02] p-3">
                   <ResponsiveContainer>
                     <LineChart data={selectedSectorHistory}>
                       <CartesianGrid stroke="rgba(255,255,255,0.08)" vertical={false} />
                       <XAxis dataKey="date" tick={{ fill: "rgba(231,229,228,0.7)", fontSize: 11 }} tickLine={false} axisLine={false} minTickGap={24} />
-                      <YAxis domain={[0, 100]} tick={{ fill: "rgba(231,229,228,0.7)", fontSize: 11 }} tickLine={false} axisLine={false} />
+                      <YAxis domain={selectedSectorHistoryConfig.domain} tick={{ fill: "rgba(231,229,228,0.7)", fontSize: 11 }} tickLine={false} axisLine={false} />
                       <Tooltip
                         contentStyle={{ backgroundColor: "#11181d", border: "1px solid rgba(255,255,255,0.1)", borderRadius: 0 }}
-                        formatter={(value: number) => [`${formatNumber(value, 1)} /100`, "擁擠度"]}
+                        formatter={(value: number) => [selectedSectorHistoryConfig.formatter(value), crowdedHistoryViewLabels[selectedCrowdedHistoryView]]}
                         labelFormatter={(label) => `${selectedSector?.name ?? "板塊"} · ${label}`}
                       />
-                      <Line type="monotone" dataKey="crowded_score" stroke="#8fc1b7" strokeWidth={2.1} dot={false} />
+                      <Line type="monotone" dataKey={selectedSectorHistoryConfig.dataKey} stroke={selectedSectorHistoryConfig.stroke} strokeWidth={2.1} dot={false} connectNulls={false} />
                     </LineChart>
                   </ResponsiveContainer>
-                </div>
-
-                <div className="mt-6 border-t border-white/10 pt-5 text-sm leading-7 text-stone-300">
-                  <p>{selectedSectorConclusion}</p>
                 </div>
 
                 <div className="mt-6 space-y-4 border-t border-white/10 pt-5 text-sm text-stone-300">
@@ -880,19 +976,37 @@ export default function Home() {
               <article className="research-panel">
                 <p className="eyebrow">Update Policy</p>
                 <h3 className="mt-4 text-xl font-semibold tracking-tight text-stone-50">資料會持續更新嗎？</h3>
+                <div className="mt-4 grid gap-3 sm:grid-cols-2">
+                  <div className="border border-white/10 bg-white/[0.025] px-4 py-3">
+                    <div className="text-[0.68rem] uppercase tracking-[0.16em] text-stone-500">目前模式</div>
+                    <p className="mt-2 text-sm leading-7 text-stone-300">這是靜態網站版本，因此頁面本身不會自動即時重抓資料；資料會在重新執行擷取腳本並重新發佈之後更新。</p>
+                  </div>
+                  <div className="border border-white/10 bg-white/[0.025] px-4 py-3">
+                    <div className="text-[0.68rem] uppercase tracking-[0.16em] text-stone-500">最近刷新</div>
+                    <p className="mt-2 text-sm leading-7 text-stone-100">{data.update_policy.last_refresh}</p>
+                    <p className="mt-1 text-[0.78rem] leading-6 text-stone-400">可自動化的模組已重新抓取至最新可取得時間點；低頻欄位則保留來源與口徑說明。</p>
+                  </div>
+                </div>
                 <div className="mt-4 space-y-4 text-sm leading-7 text-stone-300">
-                  <p><strong className="text-stone-100">目前答案是：</strong> 這是靜態網站版本，因此頁面本身不會自動即時重抓資料；資料會在重新執行擷取腳本並重新發佈之後更新。</p>
                   <p>{data.update_policy.cadence}</p>
                   <p>{data.update_policy.delivery_mode}</p>
                 </div>
-                <div className="mt-6 border-t border-white/10 pt-5 text-sm text-stone-300">
-                  <div className="metric-row">
-                    <span>最近刷新</span>
-                    <strong>{data.update_policy.last_refresh}</strong>
+                <div className="mt-6 grid gap-3 text-sm text-stone-300">
+                  <div className="border border-white/10 bg-white/[0.025] px-4 py-3">
+                    <div className="text-[0.68rem] uppercase tracking-[0.16em] text-stone-500">Automation Status</div>
+                    <p className="mt-2 leading-7">{data.update_policy.automation_status}</p>
                   </div>
-                  <div className="mt-4 rounded-none border border-white/10 bg-white/[0.03] px-4 py-4 leading-7">
-                    <strong className="text-stone-100">最佳使用流程：</strong> {data.update_policy.analysis_flow}
+                  <div className="border border-white/10 bg-white/[0.025] px-4 py-3">
+                    <div className="text-[0.68rem] uppercase tracking-[0.16em] text-stone-500">Published Site Note</div>
+                    <p className="mt-2 leading-7">{data.update_policy.published_site_note}</p>
                   </div>
+                  <div className="border border-[#8fc1b7]/18 bg-[#102027] px-4 py-3">
+                    <div className="text-[0.68rem] uppercase tracking-[0.16em] text-[#9fd8ce]">Recommended Next Step</div>
+                    <p className="mt-2 leading-7 text-stone-100">{data.update_policy.recommended_next_step}</p>
+                  </div>
+                </div>
+                <div className="mt-6 rounded-none border border-white/10 bg-white/[0.03] px-4 py-4 text-sm leading-7 text-stone-300">
+                  <strong className="text-stone-100">最佳使用流程：</strong> {data.update_policy.analysis_flow}
                 </div>
               </article>
             </aside>
@@ -919,14 +1033,34 @@ export default function Home() {
                   <Database className="h-4 w-4 text-[#8fc1b7]" />
                 </div>
 
-                <div className="mt-6 space-y-5">
+                <p className="mt-4 text-sm leading-7 text-stone-300">
+                  這一區保留<strong className="text-stone-100">低頻但重要</strong>的風險線索。可自動化的高頻數據已在上方模組更新；這裡則重點標示最新可驗證口徑、日期與來源，避免把不同統計口徑混在一起讀。
+                </p>
+
+                <div className="mt-6 space-y-4">
                   {data.low_frequency_indicators.map((row) => (
-                    <div key={row.series} className="border-t border-white/10 pt-5 first:border-t-0 first:pt-0">
-                      <div className="flex items-center justify-between gap-4">
-                        <h3 className="text-sm font-semibold text-stone-100">{row.series}</h3>
-                        <span className="status-chip status-chip-muted">{row.status}</span>
+                    <div key={row.series} className="border border-white/10 bg-white/[0.025] px-4 py-4">
+                      <div className="flex flex-wrap items-start justify-between gap-4">
+                        <div>
+                          <h3 className="text-sm font-semibold text-stone-100">{row.series}</h3>
+                          <div className="mt-2 flex flex-wrap items-center gap-2 text-[0.68rem] uppercase tracking-[0.14em] text-stone-500">
+                            <span>As of {row.as_of}</span>
+                            <span className="text-stone-600">/</span>
+                            <span>{row.update_frequency}</span>
+                          </div>
+                        </div>
+                        <div className="flex flex-wrap items-center gap-2">
+                          <span className="status-chip status-chip-muted">{row.status}</span>
+                          <span className="border border-[#8fc1b7]/25 bg-[#102027] px-2.5 py-1 text-[0.74rem] font-semibold text-stone-100">
+                            {row.latest_value === null ? row.unit : `${formatNumber(row.latest_value, 1)} ${row.unit}`}
+                          </span>
+                        </div>
                       </div>
                       <p className="mt-3 text-sm leading-7 text-stone-300">{row.note}</p>
+                      <div className="mt-3 border-t border-white/10 pt-3 text-[0.78rem] leading-6 text-stone-400">
+                        <span className="text-stone-500">Source</span>
+                        <div className="mt-1 break-all text-stone-300">{row.source}</div>
+                      </div>
                     </div>
                   ))}
                 </div>
