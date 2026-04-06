@@ -20,3 +20,10 @@
 - [ ] 確認板塊擁擠度 drill-down 功能完整，包括分數、5 日變化軌跡、20 日變化軌跡、結論同步切換。
 - [ ] 補強更新流程說明，明確區分可自動化的資料刷新與仍需人工分析判讀的部分。
 - [ ] 把此儀表板更新流程封裝為可重用 skill，讓之後可用 skill 進行資料更新與網站維護。
+- [ ] 確認 GitHub 匯出目標的 owner 名稱。
+- [ ] 確認 GitHub repository 名稱。
+- [ ] 確認原始碼是否設為 public，或僅公開已發布網站。
+- [ ] 完成專案匯出到 GitHub 並回報分享方式。
+- [ ] 以 owner `bobby0830` 建立公開 GitHub repository，名稱可自行決定但需清楚對應市場儀表板專案。
+- [ ] 將目前市場儀表板專案程式碼推送至新建的公開 GitHub repository。
+- [ ] 回報 GitHub repository URL 與公開網站 URL，方便對外分享。
