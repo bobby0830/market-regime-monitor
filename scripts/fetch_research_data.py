@@ -157,20 +157,26 @@ def normalize_to_0_100(value: float, series: pd.Series) -> float:
 
 def fetch_aaii_bearish() -> Tuple[Snapshot, List[Dict[str, float | str]]]:
     url = 'https://www.aaii.com/sentimentsurvey'
-    html = requests.get(url, headers=HEADERS, timeout=30).text
-    bearish_avg_match = re.search(r'Bearish sentiment.*?averaged\s+([0-9]+\.[0-9]+)%', html, re.I | re.S)
-    avg = float(bearish_avg_match.group(1)) if bearish_avg_match else 30.5
-
     rows = []
-    # Extract rows like 3/25/2026 32.1% 18.1% 49.8%
-    pattern = re.compile(r'(\d{1,2}/\d{1,2}/\d{4})\s*</[^>]+>\s*<[^>]+>\s*([0-9]+\.[0-9]+)%\s*<[^>]+>\s*([0-9]+\.[0-9]+)%\s*<[^>]+>\s*([0-9]+\.[0-9]+)%', re.I)
-    for match in pattern.finditer(html):
-        rows.append({
-            'date': pd.to_datetime(match.group(1)).strftime('%Y-%m-%d'),
-            'bullish': float(match.group(2)),
-            'neutral': float(match.group(3)),
-            'bearish': float(match.group(4)),
-        })
+    avg = 30.5
+    try:
+        html = requests.get(url, headers=HEADERS, timeout=30).text
+        bearish_avg_match = re.search(r'Bearish sentiment.*?averaged\s+([0-9]+\.[0-9]+)%', html, re.I | re.S)
+        if bearish_avg_match:
+            avg = float(bearish_avg_match.group(1))
+
+        # Extract rows like 3/25/2026 32.1% 18.1% 49.8%
+        pattern = re.compile(r'(\d{1,2}/\d{1,2}/\d{4})\s*</[^>]+>\s*<[^>]+>\s*([0-9]+\.[0-9]+)%\s*<[^>]+>\s*([0-9]+\.[0-9]+)%\s*<[^>]+>\s*([0-9]+\.[0-9]+)%', re.I)
+        for match in pattern.finditer(html):
+            rows.append({
+                'date': pd.to_datetime(match.group(1)).strftime('%Y-%m-%d'),
+                'bullish': float(match.group(2)),
+                'neutral': float(match.group(3)),
+                'bearish': float(match.group(4)),
+            })
+    except Exception as e:
+        print(f"Error fetching AAII sentiment: {e}")
+
     if not rows:
         # Fallback on visible recent values from current page content.
         rows = [
@@ -199,9 +205,13 @@ def fetch_aaii_bearish() -> Tuple[Snapshot, List[Dict[str, float | str]]]:
 def fetch_reddit_sentiment() -> Tuple[Snapshot, List[Dict[str, str | int | float]]]:
     items = []
     for subreddit, url in REDDIT_FEEDS:
-        r = requests.get(url, headers=HEADERS, timeout=30)
-        r.raise_for_status()
-        root = ET.fromstring(r.text)
+        try:
+            r = requests.get(url, headers=HEADERS, timeout=30)
+            r.raise_for_status()
+            root = ET.fromstring(r.text)
+        except Exception as e:
+            print(f"Error fetching Reddit feed for {subreddit}: {e}")
+            continue
         ns = {'a': 'http://www.w3.org/2005/Atom'}
         for entry in root.findall('a:entry', ns)[:25]:
             title = (entry.findtext('a:title', default='', namespaces=ns) or '').strip()
@@ -520,13 +530,14 @@ def build_treasury_yield_series() -> List[Dict[str, object]]:
 
 
 def main() -> None:
-    aaii_snapshot, aaii_history = fetch_aaii_bearish()
-    reddit_snapshot, reddit_posts = fetch_reddit_sentiment()
-    liquidity_history, liquidity_summary, liquidity_snapshot = build_liquidity_module()
-    corr_summary, corr_matrix, corr_meta = build_correlation_module()
-    sector_scores, sector_history, update_policy, sector_snapshot = build_sector_module()
-    low_freq = build_manual_low_freq_module()
-    dgs10_series = build_treasury_yield_series()
+    print("Starting main...")
+    print("Fetching AAII bearish..."); aaii_snapshot, aaii_history = fetch_aaii_bearish()
+    print("Fetching Reddit sentiment..."); reddit_snapshot, reddit_posts = fetch_reddit_sentiment()
+    print("Building liquidity module..."); liquidity_history, liquidity_summary, liquidity_snapshot = build_liquidity_module()
+    print("Building correlation module..."); corr_summary, corr_matrix, corr_meta = build_correlation_module()
+    print("Building sector module..."); sector_scores, sector_history, update_policy, sector_snapshot = build_sector_module()
+    print("Building low freq module..."); low_freq = build_manual_low_freq_module()
+    print("Building treasury yield series..."); dgs10_series = build_treasury_yield_series()
 
     dashboard = {
         'generated_at': UTC_NOW.isoformat(),
