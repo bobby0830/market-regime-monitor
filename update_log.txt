@@ -1,0 +1,6 @@
+2026-04-11 18:01:47 - 開始執行市場資料更新流程...
+Traceback (most recent call last):
+  File "/home/ubuntu/market-regime-monitor/scripts/fetch_research_data.py", line 14, in <module>
+    import yfinance as yf
+ModuleNotFoundError: No module named 'yfinance'
+2026-04-11 18:01:49 - 錯誤: 資料抓取失敗。
