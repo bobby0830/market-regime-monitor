@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-04-24T22:04:52.533175+00:00",
+  "generated_at": "2026-04-25T22:05:25.614131+00:00",
   "hero_summary": {
     "title": "Market Regime Monitor",
     "subtitle": "整合擁擠度、流動性、跨資產相關性與社群情緒的研究儀表板",
@@ -30,25 +30,25 @@
     },
     {
       "label": "社群情緒指標",
-      "value": 51.3,
+      "value": 51.4,
       "unit": "/100",
       "status": "balanced",
       "description": "以 Reddit 多個美股討論版最新文章標題的正負詞命中數建立的即時情緒代理指標。",
       "source": "https://www.reddit.com/",
       "frequency": "daily proxy",
       "methodology": "抓取 wallstreetbets、stocks、investing、options 的 RSS 新文，計算正負關鍵詞分數，再映射為 0-100。50 為中性。",
-      "as_of": "2026-04-24"
+      "as_of": "2026-04-25"
     },
     {
       "label": "板塊擁擠度領先者",
-      "value": 70.2,
+      "value": 70.3,
       "unit": "/100",
       "status": "科技 (XLK)",
       "description": "以技術、成交量、短線動能與可得 short interest proxy 建立的簡化板塊擁擠度分數。",
       "source": "https://finance.yahoo.com/",
       "frequency": "daily",
       "methodology": "針對 11 個 SPDR Sector ETF 計算 RSI、52 週高點距離、60 日成交量 z-score、3 個月動能與 short interest proxy，並輸出近 1 年歷史分數，以及 5 日 / 20 日變化序列。",
-      "as_of": "2026-04-24"
+      "as_of": "2026-04-25"
     }
   ],
   "aaii_history": [
@@ -1520,7 +1520,7 @@
       "spy_vs_bond": 0.27,
       "spx_vs_bond": 0.2682,
       "xmag_vs_bond": 0.2578,
-      "spy_vs_xmag": 0.9314,
+      "spy_vs_xmag": 0.9315,
       "interpretation": "股票與債券近期同向，傳統股債分散效果下降。"
     },
     {
@@ -1579,7 +1579,7 @@
       "window": "20d",
       "asset_x": "spx_index",
       "asset_y": "xmag",
-      "corr": 0.9355
+      "corr": 0.9356
     },
     {
       "window": "20d",
@@ -1615,7 +1615,7 @@
       "window": "20d",
       "asset_x": "xmag",
       "asset_y": "spx_index",
-      "corr": 0.9355
+      "corr": 0.9356
     },
     {
       "window": "20d",
@@ -1651,7 +1651,7 @@
       "window": "60d",
       "asset_x": "spy_etf",
       "asset_y": "xmag",
-      "corr": 0.9314
+      "corr": 0.9315
     },
     {
       "window": "60d",
@@ -1705,7 +1705,7 @@
       "window": "60d",
       "asset_x": "xmag",
       "asset_y": "spy_etf",
-      "corr": 0.9314
+      "corr": 0.9315
     },
     {
       "window": "60d",
@@ -1836,12 +1836,12 @@
       "description": "涵蓋大型軟體、半導體與硬體公司，對成長預期與利率敏感。",
       "rsi14": 76.19,
       "distance_to_52w_high_pct": 0.0,
-      "volume_zscore_60d": -0.92,
+      "volume_zscore_60d": -0.9,
       "momentum_3m_pct": 10.57,
       "short_interest_pct": null,
-      "crowded_score": 70.2,
-      "crowded_change_5d": 2.9,
-      "crowded_change_20d": 29.4,
+      "crowded_score": 70.3,
+      "crowded_change_5d": 3.0,
+      "crowded_change_20d": 29.5,
       "current_rank": 1
     },
     {
@@ -1851,7 +1851,7 @@
       "description": "涵蓋電力與公用服務公司，收益穩定但常受利率影響。",
       "rsi14": 52.31,
       "distance_to_52w_high_pct": -2.57,
-      "volume_zscore_60d": -0.39,
+      "volume_zscore_60d": -0.38,
       "momentum_3m_pct": 9.26,
       "short_interest_pct": null,
       "crowded_score": 64.8,
@@ -1866,10 +1866,10 @@
       "description": "涵蓋 REITs 與房地產營運公司，對利率與融資條件敏感。",
       "rsi14": 61.43,
       "distance_to_52w_high_pct": -1.81,
-      "volume_zscore_60d": -1.51,
+      "volume_zscore_60d": -1.5,
       "momentum_3m_pct": 6.97,
       "short_interest_pct": null,
-      "crowded_score": 62.4,
+      "crowded_score": 62.5,
       "crowded_change_5d": -3.4,
       "crowded_change_20d": 5.7,
       "current_rank": 3
@@ -1881,11 +1881,11 @@
       "description": "涵蓋石油、天然氣與能源設備公司，常受油價與景氣循環影響。",
       "rsi14": 48.36,
       "distance_to_52w_high_pct": -9.1,
-      "volume_zscore_60d": -0.98,
+      "volume_zscore_60d": -0.96,
       "momentum_3m_pct": 16.37,
       "short_interest_pct": null,
-      "crowded_score": 60.9,
-      "crowded_change_5d": -2.5,
+      "crowded_score": 61.0,
+      "crowded_change_5d": -2.4,
       "crowded_change_20d": -17.9,
       "current_rank": 4
     },
@@ -1911,12 +1911,12 @@
       "description": "涵蓋運輸、製造與資本財公司，常反映景氣與投資循環。",
       "rsi14": 56.2,
       "distance_to_52w_high_pct": -3.32,
-      "volume_zscore_60d": -1.34,
+      "volume_zscore_60d": -1.33,
       "momentum_3m_pct": 5.32,
       "short_interest_pct": null,
       "crowded_score": 59.5,
       "crowded_change_5d": -2.7,
-      "crowded_change_20d": 5.3,
+      "crowded_change_20d": 5.4,
       "current_rank": 6
     },
     {
@@ -1926,11 +1926,11 @@
       "description": "涵蓋媒體、互聯網平台與電信公司，兼具成長與廣告週期特徵。",
       "rsi14": 51.01,
       "distance_to_52w_high_pct": -3.47,
-      "volume_zscore_60d": -0.97,
+      "volume_zscore_60d": -0.96,
       "momentum_3m_pct": -0.9,
       "short_interest_pct": null,
       "crowded_score": 55.5,
-      "crowded_change_5d": -6.8,
+      "crowded_change_5d": -6.7,
       "crowded_change_20d": 8.5,
       "current_rank": 7
     },
@@ -1944,7 +1944,7 @@
       "volume_zscore_60d": -1.47,
       "momentum_3m_pct": -3.41,
       "short_interest_pct": null,
-      "crowded_score": 53.8,
+      "crowded_score": 53.9,
       "crowded_change_5d": -7.7,
       "crowded_change_20d": 15.0,
       "current_rank": 8
@@ -1975,7 +1975,7 @@
       "momentum_3m_pct": -2.61,
       "short_interest_pct": null,
       "crowded_score": 49.2,
-      "crowded_change_5d": -7.5,
+      "crowded_change_5d": -7.4,
       "crowded_change_20d": 9.4,
       "current_rank": 10
     },
@@ -18465,15 +18465,15 @@
       "ticker": "XLC",
       "name": "通訊服務",
       "crowded_score": 55.5,
-      "crowded_change_5d": -6.8,
+      "crowded_change_5d": -6.7,
       "crowded_change_20d": 8.5
     },
     {
       "date": "2026-04-24",
       "ticker": "XLE",
       "name": "能源",
-      "crowded_score": 60.9,
-      "crowded_change_5d": -2.5,
+      "crowded_score": 61.0,
+      "crowded_change_5d": -2.4,
       "crowded_change_20d": -17.9
     },
     {
@@ -18481,7 +18481,7 @@
       "ticker": "XLF",
       "name": "金融",
       "crowded_score": 49.2,
-      "crowded_change_5d": -7.5,
+      "crowded_change_5d": -7.4,
       "crowded_change_20d": 9.4
     },
     {
@@ -18490,15 +18490,15 @@
       "name": "工業",
       "crowded_score": 59.5,
       "crowded_change_5d": -2.7,
-      "crowded_change_20d": 5.3
+      "crowded_change_20d": 5.4
     },
     {
       "date": "2026-04-24",
       "ticker": "XLK",
       "name": "科技",
-      "crowded_score": 70.2,
-      "crowded_change_5d": 2.9,
-      "crowded_change_20d": 29.4
+      "crowded_score": 70.3,
+      "crowded_change_5d": 3.0,
+      "crowded_change_20d": 29.5
     },
     {
       "date": "2026-04-24",
@@ -18512,7 +18512,7 @@
       "date": "2026-04-24",
       "ticker": "XLRE",
       "name": "房地產",
-      "crowded_score": 62.4,
+      "crowded_score": 62.5,
       "crowded_change_5d": -3.4,
       "crowded_change_20d": 5.7
     },
@@ -18536,13 +18536,13 @@
       "date": "2026-04-24",
       "ticker": "XLY",
       "name": "非必需消費",
-      "crowded_score": 53.8,
+      "crowded_score": 53.9,
       "crowded_change_5d": -7.7,
       "crowded_change_20d": 15.0
     }
   ],
   "update_policy": {
-    "last_refresh": "2026-04-24 22:04 UTC",
+    "last_refresh": "2026-04-25 22:05 UTC",
     "cadence": "ETF 價格、成交量、相關性與 Reddit proxy 可用日更流程重建；AAII 為週更；BofA、Vanda 與私人信用等低頻模組仍需按月或按季補錄。",
     "delivery_mode": "目前網站仍是靜態發佈模式：頁面可展示最新資料檔，但公開站若要持續更新，仍需要定時重建資料並重新發佈，或升級為含後端的自動抓取架構。",
     "analysis_flow": "先看最近刷新與資料頻率，再點擊板塊切換歷史圖，把 Current Score、5 日、20 日三種視角交叉比對，最後再讀右側自動結論。",
@@ -18553,483 +18553,483 @@
   "social_posts": [
     {
       "subreddit": "wallstreetbets",
-      "title": "INTC Last Minute Play",
-      "published": "2026-04-24T22:02:34+00:00",
-      "positive_hits": 0,
-      "negative_hits": 0,
-      "score": 0
-    },
-    {
-      "subreddit": "wallstreetbets",
-      "title": "⚛️ DD: X-energy (ticker:XE) and TRISO Fuel : A next-generation nuclear approach - backed by Amazon",
-      "published": "2026-04-24T22:01:19+00:00",
-      "positive_hits": 0,
-      "negative_hits": 0,
-      "score": 0
-    },
-    {
-      "subreddit": "wallstreetbets",
-      "title": "AMD Treated Me Well Today",
-      "published": "2026-04-24T22:00:12+00:00",
-      "positive_hits": 0,
-      "negative_hits": 0,
-      "score": 0
-    },
-    {
-      "subreddit": "options",
-      "title": "EchoStar (SATS) Equity Arbitrage via SpaceX Valuation and AT&T Capital Infusion",
-      "published": "2026-04-24T21:29:40+00:00",
-      "positive_hits": 0,
-      "negative_hits": 0,
-      "score": 0
-    },
-    {
-      "subreddit": "wallstreetbets",
-      "title": "Full ported into $MSFT before earnings. $500 eoy",
-      "published": "2026-04-24T21:17:42+00:00",
-      "positive_hits": 0,
-      "negative_hits": 0,
-      "score": 0
-    },
-    {
-      "subreddit": "wallstreetbets",
-      "title": "Betting everything on HIMS and MU",
-      "published": "2026-04-24T21:15:15+00:00",
-      "positive_hits": 0,
-      "negative_hits": 0,
-      "score": 0
-    },
-    {
-      "subreddit": "investing",
-      "title": "Is Robinhood or Schwab better?",
-      "published": "2026-04-24T21:14:15+00:00",
-      "positive_hits": 0,
-      "negative_hits": 0,
-      "score": 0
-    },
-    {
-      "subreddit": "wallstreetbets",
-      "title": "Sometimes its tough to pick my favorite chip stonk....",
-      "published": "2026-04-24T20:57:57+00:00",
-      "positive_hits": 0,
-      "negative_hits": 0,
-      "score": 0
-    },
-    {
-      "subreddit": "wallstreetbets",
-      "title": "MOAE: META Earning Play",
-      "published": "2026-04-24T20:47:47+00:00",
-      "positive_hits": 0,
-      "negative_hits": 0,
-      "score": 0
-    },
-    {
-      "subreddit": "stocks",
-      "title": "Why BlackBerry ($BB) isn’t a meme stock anymore…",
-      "published": "2026-04-24T20:45:33+00:00",
-      "positive_hits": 0,
-      "negative_hits": 0,
-      "score": 0
-    },
-    {
-      "subreddit": "wallstreetbets",
-      "title": "My last hurrah....PLTR to 1T",
-      "published": "2026-04-24T20:45:00+00:00",
-      "positive_hits": 0,
-      "negative_hits": 0,
-      "score": 0
-    },
-    {
-      "subreddit": "wallstreetbets",
-      "title": "Grandma would be proud",
-      "published": "2026-04-24T20:38:46+00:00",
-      "positive_hits": 0,
-      "negative_hits": 0,
-      "score": 0
-    },
-    {
-      "subreddit": "wallstreetbets",
-      "title": "Google to invest $10B in Anthropic at $350B valuation with up to $30B more tied to AI growth targets",
-      "published": "2026-04-24T20:29:52+00:00",
-      "positive_hits": 0,
-      "negative_hits": 0,
-      "score": 0
-    },
-    {
-      "subreddit": "wallstreetbets",
-      "title": "The goal of options is supposed to be red…right?",
-      "published": "2026-04-24T20:21:59+00:00",
-      "positive_hits": 0,
-      "negative_hits": 0,
-      "score": 0
-    },
-    {
-      "subreddit": "wallstreetbets",
-      "title": "Full Idiot Mode this Week",
-      "published": "2026-04-24T20:20:25+00:00",
-      "positive_hits": 0,
-      "negative_hits": 0,
-      "score": 0
-    },
-    {
-      "subreddit": "options",
-      "title": "Option Market Makers AmA",
-      "published": "2026-04-24T20:17:30+00:00",
-      "positive_hits": 0,
-      "negative_hits": 0,
-      "score": 0
-    },
-    {
-      "subreddit": "wallstreetbets",
-      "title": "I prefer the top when it comes to squeezes",
-      "published": "2026-04-24T20:07:07+00:00",
-      "positive_hits": 0,
-      "negative_hits": 0,
-      "score": 0
-    },
-    {
-      "subreddit": "wallstreetbets",
-      "title": "Weekend Discussion Thread for the Weekend of April 24, 2026",
-      "published": "2026-04-24T19:57:11+00:00",
-      "positive_hits": 0,
-      "negative_hits": 0,
-      "score": 0
-    },
-    {
-      "subreddit": "wallstreetbets",
-      "title": "$80k QCOM YOLO",
-      "published": "2026-04-24T19:57:00+00:00",
-      "positive_hits": 0,
-      "negative_hits": 0,
-      "score": 0
-    },
-    {
-      "subreddit": "wallstreetbets",
-      "title": "INTC BROKE ALL TIME HIGHS. SO DID I.",
-      "published": "2026-04-24T19:55:19+00:00",
-      "positive_hits": 0,
-      "negative_hits": 0,
-      "score": 0
-    },
-    {
-      "subreddit": "wallstreetbets",
-      "title": "$3k -> $22k in 16 days, too many trades to show everything.",
-      "published": "2026-04-24T19:51:27+00:00",
-      "positive_hits": 0,
-      "negative_hits": 0,
-      "score": 0
-    },
-    {
-      "subreddit": "wallstreetbets",
-      "title": "Guess I'll have to get a $CAR",
-      "published": "2026-04-24T19:48:44+00:00",
-      "positive_hits": 0,
-      "negative_hits": 0,
-      "score": 0
-    },
-    {
-      "subreddit": "investing",
-      "title": "Tell us about alternative physical investments people can stack, or would like to. Let's get weird",
-      "published": "2026-04-24T19:46:30+00:00",
-      "positive_hits": 0,
-      "negative_hits": 0,
-      "score": 0
-    },
-    {
-      "subreddit": "wallstreetbets",
-      "title": "Roast me!",
-      "published": "2026-04-24T19:34:14+00:00",
-      "positive_hits": 0,
-      "negative_hits": 0,
-      "score": 0
-    },
-    {
-      "subreddit": "wallstreetbets",
-      "title": "Ready to buy a new $CAR",
-      "published": "2026-04-24T19:31:13+00:00",
+      "title": "Bitcoin flirting with $80K again—history says this could rip higher",
+      "published": "2026-04-25T22:01:48+00:00",
       "positive_hits": 1,
       "negative_hits": 0,
       "score": 1
     },
     {
+      "subreddit": "investing",
+      "title": "Why the Market Makes No Sense Right Now",
+      "published": "2026-04-25T22:00:52+00:00",
+      "positive_hits": 0,
+      "negative_hits": 0,
+      "score": 0
+    },
+    {
       "subreddit": "stocks",
-      "title": "How ONE decision produced over $285 Billion in total market cap",
-      "published": "2026-04-24T19:24:41+00:00",
+      "title": "Florida Representative bought 65K worth of Cisco and Florida is one of the fastest Growing datacenter Market.",
+      "published": "2026-04-25T21:46:39+00:00",
       "positive_hits": 0,
       "negative_hits": 0,
       "score": 0
     },
     {
       "subreddit": "investing",
-      "title": "ONE decision turned what looked like a $5 billion mistake into over $285 billion in market cap",
-      "published": "2026-04-24T19:23:38+00:00",
-      "positive_hits": 0,
-      "negative_hits": 0,
-      "score": 0
-    },
-    {
-      "subreddit": "options",
-      "title": "Options strate that i figured out on my own",
-      "published": "2026-04-24T19:04:15+00:00",
-      "positive_hits": 0,
-      "negative_hits": 0,
-      "score": 0
-    },
-    {
-      "subreddit": "stocks",
-      "title": "Google is so afraid of falling behind that they’re dropping $40 billion on Anthropic",
-      "published": "2026-04-24T19:01:40+00:00",
-      "positive_hits": 0,
-      "negative_hits": 0,
-      "score": 0
-    },
-    {
-      "subreddit": "options",
-      "title": "Advice for splitting money between short term options and long term holdings",
-      "published": "2026-04-24T18:58:58+00:00",
-      "positive_hits": 1,
-      "negative_hits": 1,
-      "score": 0
-    },
-    {
-      "subreddit": "options",
-      "title": "ATHs and Exit Strategies on Calls",
-      "published": "2026-04-24T18:55:30+00:00",
-      "positive_hits": 0,
-      "negative_hits": 0,
-      "score": 0
-    },
-    {
-      "subreddit": "wallstreetbets",
-      "title": "NVTS",
-      "published": "2026-04-24T18:52:54+00:00",
-      "positive_hits": 0,
-      "negative_hits": 0,
-      "score": 0
-    },
-    {
-      "subreddit": "wallstreetbets",
-      "title": "$193k gone in a day because I thought I could outsmart the market",
-      "published": "2026-04-24T18:48:56+00:00",
-      "positive_hits": 0,
-      "negative_hits": 0,
-      "score": 0
-    },
-    {
-      "subreddit": "wallstreetbets",
-      "title": "$115K to $288K - 150% Gain Buying $CAR Puts",
-      "published": "2026-04-24T18:48:00+00:00",
+      "title": "What’s everyone’s opinions on the longevity of private credit?",
+      "published": "2026-04-25T21:42:50+00:00",
       "positive_hits": 1,
       "negative_hits": 0,
       "score": 1
     },
     {
       "subreddit": "wallstreetbets",
-      "title": "NDX100k Profits",
-      "published": "2026-04-24T18:47:14+00:00",
-      "positive_hits": 0,
-      "negative_hits": 0,
-      "score": 0
-    },
-    {
-      "subreddit": "options",
-      "title": "Guidance please. Starting Out! Me Nub!",
-      "published": "2026-04-24T18:44:47+00:00",
-      "positive_hits": 0,
-      "negative_hits": 0,
-      "score": 0
-    },
-    {
-      "subreddit": "stocks",
-      "title": "FOMO is strong !",
-      "published": "2026-04-24T18:38:40+00:00",
-      "positive_hits": 1,
-      "negative_hits": 0,
-      "score": 1
-    },
-    {
-      "subreddit": "stocks",
-      "title": "Logic → Memory → Power",
-      "published": "2026-04-24T18:28:43+00:00",
+      "title": "China's silver imports rose +78% MoM, to a record ~836 tonnes in March. This is +173% above the 10-year seasonal average for March",
+      "published": "2026-04-25T20:50:05+00:00",
       "positive_hits": 0,
       "negative_hits": 0,
       "score": 0
     },
     {
       "subreddit": "wallstreetbets",
-      "title": "How to Lose Bigly on AMD while Holding Shares",
-      "published": "2026-04-24T18:16:57+00:00",
-      "positive_hits": 0,
-      "negative_hits": 0,
-      "score": 0
-    },
-    {
-      "subreddit": "options",
-      "title": "Stock Price Movement",
-      "published": "2026-04-24T18:09:58+00:00",
+      "title": "It's easy to squeeze, but hard to find. The NeeDoh obsession is real.",
+      "published": "2026-04-25T20:26:03+00:00",
       "positive_hits": 0,
       "negative_hits": 0,
       "score": 0
     },
     {
       "subreddit": "investing",
-      "title": "When does it make sense to sell and reinvest?",
-      "published": "2026-04-24T18:01:30+00:00",
+      "title": "Organizing my portfolio holdings at various brokers as a single spreadsheet",
+      "published": "2026-04-25T20:09:27+00:00",
+      "positive_hits": 0,
+      "negative_hits": 0,
+      "score": 0
+    },
+    {
+      "subreddit": "investing",
+      "title": "What is better ETF or Mutual Funds for the long term - Also what is better Fidelity / Charles Schwabb / or Vanguard?",
+      "published": "2026-04-25T19:09:55+00:00",
+      "positive_hits": 1,
+      "negative_hits": 0,
+      "score": 1
+    },
+    {
+      "subreddit": "options",
+      "title": "Is wheeling worth it?",
+      "published": "2026-04-25T19:08:24+00:00",
+      "positive_hits": 0,
+      "negative_hits": 0,
+      "score": 0
+    },
+    {
+      "subreddit": "stocks",
+      "title": "MOO ETF looks like the best setup for the next 30-90 days with this war and feed prices climbing",
+      "published": "2026-04-25T18:42:24+00:00",
+      "positive_hits": 0,
+      "negative_hits": 0,
+      "score": 0
+    },
+    {
+      "subreddit": "investing",
+      "title": "When to close out an investment when it is in a pension account I can't access for 20 more years...",
+      "published": "2026-04-25T18:26:05+00:00",
+      "positive_hits": 0,
+      "negative_hits": 0,
+      "score": 0
+    },
+    {
+      "subreddit": "stocks",
+      "title": "Earnings Week: Best Long Call Picks?",
+      "published": "2026-04-25T18:02:31+00:00",
+      "positive_hits": 1,
+      "negative_hits": 0,
+      "score": 1
+    },
+    {
+      "subreddit": "investing",
+      "title": "To investors who crossed the $1M mark around the age of 40. How’s life?",
+      "published": "2026-04-25T17:13:06+00:00",
+      "positive_hits": 0,
+      "negative_hits": 0,
+      "score": 0
+    },
+    {
+      "subreddit": "stocks",
+      "title": "Google literally makes its own CPUs (Axion), not just TPUs. Why is $GOOGL not mooning like Intel/AMD on “CPU for AI” trend?",
+      "published": "2026-04-25T17:06:35+00:00",
+      "positive_hits": 1,
+      "negative_hits": 0,
+      "score": 1
+    },
+    {
+      "subreddit": "stocks",
+      "title": "Intel is killing themselves and the market is celebrating",
+      "published": "2026-04-25T16:53:34+00:00",
+      "positive_hits": 0,
+      "negative_hits": 0,
+      "score": 0
+    },
+    {
+      "subreddit": "stocks",
+      "title": "Oracle data center $16 billion financing gets over the line",
+      "published": "2026-04-25T16:32:37+00:00",
+      "positive_hits": 0,
+      "negative_hits": 0,
+      "score": 0
+    },
+    {
+      "subreddit": "wallstreetbets",
+      "title": "I went all-in on shipping",
+      "published": "2026-04-25T16:20:43+00:00",
+      "positive_hits": 0,
+      "negative_hits": 0,
+      "score": 0
+    },
+    {
+      "subreddit": "stocks",
+      "title": "OMER: A Biotech on the Rise",
+      "published": "2026-04-25T16:10:45+00:00",
+      "positive_hits": 0,
+      "negative_hits": 0,
+      "score": 0
+    },
+    {
+      "subreddit": "investing",
+      "title": "CME Institutional Flow Analysis (OI/CHGE) – Full Week Overview",
+      "published": "2026-04-25T16:01:39+00:00",
+      "positive_hits": 0,
+      "negative_hits": 0,
+      "score": 0
+    },
+    {
+      "subreddit": "stocks",
+      "title": "r/Stocks Weekly Thread on Meme Stocks Saturday - Apr 25, 2026",
+      "published": "2026-04-25T16:00:09+00:00",
+      "positive_hits": 0,
+      "negative_hits": 0,
+      "score": 0
+    },
+    {
+      "subreddit": "wallstreetbets",
+      "title": "ROI -: 7% ... Holding period -: 4-5 days. Indian stock market",
+      "published": "2026-04-25T15:49:39+00:00",
+      "positive_hits": 0,
+      "negative_hits": 0,
+      "score": 0
+    },
+    {
+      "subreddit": "stocks",
+      "title": "Yara International a Good Buy, It seems to be sinificantly below its intrinsic price using DCF",
+      "published": "2026-04-25T15:42:52+00:00",
+      "positive_hits": 1,
+      "negative_hits": 0,
+      "score": 1
+    },
+    {
+      "subreddit": "wallstreetbets",
+      "title": "How regarded is this play?",
+      "published": "2026-04-25T15:09:11+00:00",
+      "positive_hits": 0,
+      "negative_hits": 0,
+      "score": 0
+    },
+    {
+      "subreddit": "stocks",
+      "title": "Reddit DD, 2030 valuation",
+      "published": "2026-04-25T15:01:53+00:00",
+      "positive_hits": 0,
+      "negative_hits": 0,
+      "score": 0
+    },
+    {
+      "subreddit": "wallstreetbets",
+      "title": "Not selling till we hit $300 a share",
+      "published": "2026-04-25T14:44:03+00:00",
       "positive_hits": 0,
       "negative_hits": 1,
       "score": -1
     },
     {
       "subreddit": "stocks",
-      "title": "The Warsh Playbook",
-      "published": "2026-04-24T17:24:20+00:00",
+      "title": "GOOGL’s $40B Anthropic bet, A strategic move toward $400/share?",
+      "published": "2026-04-25T14:36:19+00:00",
+      "positive_hits": 0,
+      "negative_hits": 0,
+      "score": 0
+    },
+    {
+      "subreddit": "investing",
+      "title": "My theory on why the stock market will always go up, and it has nothing to do with finance",
+      "published": "2026-04-25T14:13:12+00:00",
+      "positive_hits": 0,
+      "negative_hits": 0,
+      "score": 0
+    },
+    {
+      "subreddit": "stocks",
+      "title": "Cerebras IPO- next SNDK or NBIS?",
+      "published": "2026-04-25T13:55:37+00:00",
       "positive_hits": 0,
       "negative_hits": 0,
       "score": 0
     },
     {
       "subreddit": "options",
-      "title": "Everyone selling covered calls thinks they're in the premium business. 12,638 contracts disagree",
-      "published": "2026-04-24T17:05:01+00:00",
-      "positive_hits": 0,
-      "negative_hits": 1,
-      "score": -1
-    },
-    {
-      "subreddit": "stocks",
-      "title": "INTC, NVDA and infinite ai",
-      "published": "2026-04-24T17:03:29+00:00",
+      "title": "I can't believe it took me 12 years to figure out my iron condor problem",
+      "published": "2026-04-25T13:51:50+00:00",
       "positive_hits": 0,
       "negative_hits": 0,
       "score": 0
-    },
-    {
-      "subreddit": "stocks",
-      "title": "Who does insider trading actually harm?",
-      "published": "2026-04-24T16:58:25+00:00",
-      "positive_hits": 0,
-      "negative_hits": 0,
-      "score": 0
-    },
-    {
-      "subreddit": "stocks",
-      "title": "Institutional Selling?",
-      "published": "2026-04-24T16:47:00+00:00",
-      "positive_hits": 0,
-      "negative_hits": 1,
-      "score": -1
     },
     {
       "subreddit": "options",
-      "title": "The Options seller substack, any opinions?",
-      "published": "2026-04-24T16:44:07+00:00",
-      "positive_hits": 0,
-      "negative_hits": 1,
-      "score": -1
-    },
-    {
-      "subreddit": "stocks",
-      "title": "How is DELL moving perfectly sideways? Can somebody explain this? Is this",
-      "published": "2026-04-24T16:42:57+00:00",
+      "title": "Im interested in deep OTM puts",
+      "published": "2026-04-25T13:38:51+00:00",
       "positive_hits": 0,
       "negative_hits": 0,
       "score": 0
     },
     {
       "subreddit": "stocks",
-      "title": "Waste Management (WM). Solid long term DCA stock?",
-      "published": "2026-04-24T16:38:14+00:00",
-      "positive_hits": 1,
+      "title": "Wash sales - please help me understand",
+      "published": "2026-04-25T13:36:50+00:00",
+      "positive_hits": 0,
       "negative_hits": 0,
-      "score": 1
+      "score": 0
     },
     {
       "subreddit": "options",
-      "title": "An idea for NVIDIA...",
-      "published": "2026-04-24T16:37:16+00:00",
+      "title": "Am I the only one manually cross-referencing SpotGamma levels with TradingView charts?",
+      "published": "2026-04-25T12:33:31+00:00",
       "positive_hits": 0,
       "negative_hits": 0,
       "score": 0
     },
     {
-      "subreddit": "investing",
-      "title": "Are markets becoming more political than ever?",
-      "published": "2026-04-24T16:25:39+00:00",
-      "positive_hits": 0,
-      "negative_hits": 0,
-      "score": 0
-    },
-    {
-      "subreddit": "investing",
-      "title": "Gold just posted its first weekly decline in five weeks and nobody is connecting the dots",
-      "published": "2026-04-24T16:14:59+00:00",
+      "subreddit": "wallstreetbets",
+      "title": "The pill numbers - based on sex?",
+      "published": "2026-04-25T12:10:58+00:00",
       "positive_hits": 0,
       "negative_hits": 0,
       "score": 0
     },
     {
       "subreddit": "stocks",
-      "title": "Can someone explain why the Intel's earnings beat is able to single-handedly boost the Nasdaq by 1.5%?",
-      "published": "2026-04-24T15:48:00+00:00",
-      "positive_hits": 1,
-      "negative_hits": 0,
-      "score": 1
-    },
-    {
-      "subreddit": "investing",
-      "title": "VISA, V earnings on 28th. What are the anticipations for post earning value?",
-      "published": "2026-04-24T15:33:26+00:00",
-      "positive_hits": 0,
-      "negative_hits": 0,
-      "score": 0
-    },
-    {
-      "subreddit": "investing",
-      "title": "$ELMT New ipo. Is it a Great buy ?",
-      "published": "2026-04-24T15:16:24+00:00",
+      "title": "If you had 70,000 bucks on your hands, what stocks would you buy with the hope of taking profits in this year?",
+      "published": "2026-04-25T11:56:39+00:00",
       "positive_hits": 1,
       "negative_hits": 0,
       "score": 1
     },
     {
       "subreddit": "stocks",
-      "title": "Doubled down on FIG today",
-      "published": "2026-04-24T15:12:28+00:00",
-      "positive_hits": 0,
-      "negative_hits": 0,
-      "score": 0
-    },
-    {
-      "subreddit": "options",
-      "title": "INTC Grandma, I'm back +800%",
-      "published": "2026-04-24T15:06:39+00:00",
-      "positive_hits": 0,
-      "negative_hits": 0,
-      "score": 0
-    },
-    {
-      "subreddit": "stocks",
-      "title": "DOJ drops criminal probe of Fed Chair Powell, removes hurdle for Warsh confirmation",
-      "published": "2026-04-24T15:05:20+00:00",
+      "title": "Robotic boom exposure ETFs",
+      "published": "2026-04-25T11:23:26+00:00",
       "positive_hits": 0,
       "negative_hits": 0,
       "score": 0
     },
     {
       "subreddit": "investing",
-      "title": "NXXT pushes through .40 and starts working into overhead supply near .43",
-      "published": "2026-04-24T14:59:54+00:00",
+      "title": "should I add SPMO or VOO to round out my portfolio?",
+      "published": "2026-04-25T10:35:48+00:00",
       "positive_hits": 0,
       "negative_hits": 0,
       "score": 0
     },
     {
       "subreddit": "stocks",
-      "title": "APLD – Quiet AI Infrastructure Play Flying Under the Radar?",
-      "published": "2026-04-24T14:50:59+00:00",
+      "title": "In the battle between Systematic Shorting and Corporate Buybacks, which side should you take?",
+      "published": "2026-04-25T09:48:51+00:00",
+      "positive_hits": 1,
+      "negative_hits": 1,
+      "score": 0
+    },
+    {
+      "subreddit": "stocks",
+      "title": "/r/Stocks Weekend Discussion Saturday - Apr 25, 2026",
+      "published": "2026-04-25T09:30:06+00:00",
       "positive_hits": 0,
       "negative_hits": 0,
       "score": 0
+    },
+    {
+      "subreddit": "wallstreetbets",
+      "title": "1 Play from 167k-2.2m, planning for 10m+",
+      "published": "2026-04-25T09:09:26+00:00",
+      "positive_hits": 0,
+      "negative_hits": 0,
+      "score": 0
+    },
+    {
+      "subreddit": "stocks",
+      "title": "Inogen (INGN) starting to grow again?",
+      "published": "2026-04-25T08:09:38+00:00",
+      "positive_hits": 0,
+      "negative_hits": 0,
+      "score": 0
+    },
+    {
+      "subreddit": "wallstreetbets",
+      "title": "25 Bands in Meta into Earnings",
+      "published": "2026-04-25T08:02:22+00:00",
+      "positive_hits": 0,
+      "negative_hits": 0,
+      "score": 0
+    },
+    {
+      "subreddit": "investing",
+      "title": "Daily General Discussion and Advice Thread - April 25, 2026",
+      "published": "2026-04-25T08:00:40+00:00",
+      "positive_hits": 0,
+      "negative_hits": 0,
+      "score": 0
+    },
+    {
+      "subreddit": "investing",
+      "title": "What is the beta of your portfolio?",
+      "published": "2026-04-25T06:41:27+00:00",
+      "positive_hits": 0,
+      "negative_hits": 0,
+      "score": 0
+    },
+    {
+      "subreddit": "wallstreetbets",
+      "title": "I believe in GOOGL",
+      "published": "2026-04-25T06:04:34+00:00",
+      "positive_hits": 0,
+      "negative_hits": 0,
+      "score": 0
+    },
+    {
+      "subreddit": "wallstreetbets",
+      "title": "RDDT earnings DD, Growth (Part 2)",
+      "published": "2026-04-25T05:54:05+00:00",
+      "positive_hits": 0,
+      "negative_hits": 0,
+      "score": 0
+    },
+    {
+      "subreddit": "wallstreetbets",
+      "title": "only investing nvidia 1 year progress",
+      "published": "2026-04-25T05:01:18+00:00",
+      "positive_hits": 0,
+      "negative_hits": 0,
+      "score": 0
+    },
+    {
+      "subreddit": "investing",
+      "title": "In India Investing and trading are getting mixed up and it’s costing people",
+      "published": "2026-04-25T04:09:15+00:00",
+      "positive_hits": 0,
+      "negative_hits": 0,
+      "score": 0
+    },
+    {
+      "subreddit": "wallstreetbets",
+      "title": "$DXYZ = good way to invest in Anthropic?",
+      "published": "2026-04-25T03:49:27+00:00",
+      "positive_hits": 0,
+      "negative_hits": 0,
+      "score": 0
+    },
+    {
+      "subreddit": "investing",
+      "title": "SOX up for 17 consecutive days and up 42% this month",
+      "published": "2026-04-25T03:47:02+00:00",
+      "positive_hits": 0,
+      "negative_hits": 0,
+      "score": 0
+    },
+    {
+      "subreddit": "wallstreetbets",
+      "title": "In Su Bae we trust",
+      "published": "2026-04-25T03:42:54+00:00",
+      "positive_hits": 0,
+      "negative_hits": 0,
+      "score": 0
+    },
+    {
+      "subreddit": "stocks",
+      "title": "DXYZ = easy way to invest in Anthropic",
+      "published": "2026-04-25T03:34:39+00:00",
+      "positive_hits": 0,
+      "negative_hits": 0,
+      "score": 0
+    },
+    {
+      "subreddit": "wallstreetbets",
+      "title": "$2.2M gain on TECL since March 2023. Anyone a similar regard?",
+      "published": "2026-04-25T03:33:14+00:00",
+      "positive_hits": 0,
+      "negative_hits": 0,
+      "score": 0
+    },
+    {
+      "subreddit": "stocks",
+      "title": "HIMS - Brace yourself for the next earning call",
+      "published": "2026-04-25T03:29:17+00:00",
+      "positive_hits": 0,
+      "negative_hits": 0,
+      "score": 0
+    },
+    {
+      "subreddit": "wallstreetbets",
+      "title": "Gay bear loss",
+      "published": "2026-04-25T03:18:49+00:00",
+      "positive_hits": 0,
+      "negative_hits": 1,
+      "score": -1
+    },
+    {
+      "subreddit": "investing",
+      "title": "The future for AI and tech industry",
+      "published": "2026-04-25T02:41:34+00:00",
+      "positive_hits": 0,
+      "negative_hits": 0,
+      "score": 0
+    },
+    {
+      "subreddit": "wallstreetbets",
+      "title": "What a year",
+      "published": "2026-04-25T01:37:29+00:00",
+      "positive_hits": 0,
+      "negative_hits": 0,
+      "score": 0
+    },
+    {
+      "subreddit": "stocks",
+      "title": "Why is Xiaomis stock not pricing them having one of the best chinese LLMs?",
+      "published": "2026-04-25T01:34:05+00:00",
+      "positive_hits": 0,
+      "negative_hits": 0,
+      "score": 0
+    },
+    {
+      "subreddit": "wallstreetbets",
+      "title": "I’m almost there…",
+      "published": "2026-04-25T01:20:37+00:00",
+      "positive_hits": 0,
+      "negative_hits": 0,
+      "score": 0
+    },
+    {
+      "subreddit": "wallstreetbets",
+      "title": "POET finally ripping — turned student loan-era investing into an almost 1 million dollar portfolio. Still bullish to $50 EOY",
+      "published": "2026-04-25T00:44:42+00:00",
+      "positive_hits": 3,
+      "negative_hits": 0,
+      "score": 3
+    },
+    {
+      "subreddit": "stocks",
+      "title": "My Bearish take on OKLO",
+      "published": "2026-04-25T00:35:16+00:00",
+      "positive_hits": 0,
+      "negative_hits": 2,
+      "score": -2
     }
   ],
   "low_frequency_indicators": [
@@ -19047,7 +19047,7 @@
       "series": "Vanda 零售流向 / chatter",
       "latest_value": null,
       "unit": "subscription",
-      "as_of": "2026-04-24",
+      "as_of": "2026-04-25",
       "update_frequency": "daily (official feed) / proxy used in this site",
       "status": "proxy-active",
       "source": "https://www.vandatrack.com/",
