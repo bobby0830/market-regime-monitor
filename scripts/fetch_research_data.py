@@ -128,11 +128,20 @@ class Snapshot:
     as_of: str | None = None
 
 
+import time
+
 def fetch_fred_csv(series_id: str) -> pd.DataFrame:
     url = f'https://fred.stlouisfed.org/graph/fredgraph.csv?id={series_id}'
-    r = requests.get(url, headers=HEADERS, timeout=30)
-    r.raise_for_status()
-    df = pd.read_csv(pd.io.common.StringIO(r.text))
+    for i in range(3):
+        try:
+            r = requests.get(url, headers=HEADERS, timeout=30)
+            r.raise_for_status()
+            df = pd.read_csv(pd.io.common.StringIO(r.text))
+            break
+        except Exception as e:
+            if i == 2: raise e
+            print(f"Retry {i+1} for {series_id} due to {e}")
+            time.sleep(2)
     df.columns = ['date', 'value']
     df['date'] = pd.to_datetime(df['date'])
     df['value'] = pd.to_numeric(df['value'], errors='coerce')
