@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-05-04T22:02:02.292028+00:00",
+  "generated_at": "2026-05-05T22:04:22.269555+00:00",
   "hero_summary": {
     "title": "Market Regime Monitor",
     "subtitle": "整合擁擠度、流動性、跨資產相關性與社群情緒的研究儀表板",
@@ -30,25 +30,25 @@
     },
     {
       "label": "社群情緒指標",
-      "value": 49.1,
+      "value": 49.3,
       "unit": "/100",
       "status": "balanced",
       "description": "以 Reddit 多個美股討論版最新文章標題的正負詞命中數建立的即時情緒代理指標。",
       "source": "https://www.reddit.com/",
       "frequency": "daily proxy",
       "methodology": "抓取 wallstreetbets、stocks、investing、options 的 RSS 新文，計算正負關鍵詞分數，再映射為 0-100。50 為中性。",
-      "as_of": "2026-05-04"
+      "as_of": "2026-05-05"
     },
     {
       "label": "板塊擁擠度領先者",
-      "value": 71.1,
+      "value": 73.5,
       "unit": "/100",
       "status": "科技 (XLK)",
       "description": "以技術、成交量、短線動能與可得 short interest proxy 建立的簡化板塊擁擠度分數。",
       "source": "https://finance.yahoo.com/",
       "frequency": "daily",
       "methodology": "針對 11 個 SPDR Sector ETF 計算 RSI、52 週高點距離、60 日成交量 z-score、3 個月動能與 short interest proxy，並輸出近 1 年歷史分數，以及 5 日 / 20 日變化序列。",
-      "as_of": "2026-05-04"
+      "as_of": "2026-05-05"
     }
   ],
   "aaii_history": [
@@ -1509,26 +1509,26 @@
   "correlation_summary": [
     {
       "window": "20d",
-      "spy_vs_bond": 0.6857,
-      "spx_vs_bond": 0.6938,
-      "xmag_vs_bond": 0.6523,
-      "spy_vs_xmag": 0.8796,
+      "spy_vs_bond": 0.7415,
+      "spx_vs_bond": 0.7465,
+      "xmag_vs_bond": 0.7025,
+      "spy_vs_xmag": 0.8773,
       "interpretation": "股票與債券近期同向，傳統股債分散效果下降。"
     },
     {
       "window": "60d",
-      "spy_vs_bond": 0.3464,
-      "spx_vs_bond": 0.3447,
-      "xmag_vs_bond": 0.3285,
-      "spy_vs_xmag": 0.9233,
+      "spy_vs_bond": 0.3602,
+      "spx_vs_bond": 0.359,
+      "xmag_vs_bond": 0.3549,
+      "spy_vs_xmag": 0.9226,
       "interpretation": "股票與債券近期同向，傳統股債分散效果下降。"
     },
     {
       "window": "120d",
-      "spy_vs_bond": 0.2865,
-      "spx_vs_bond": 0.2864,
-      "xmag_vs_bond": 0.2821,
-      "spy_vs_xmag": 0.9135,
+      "spy_vs_bond": 0.3002,
+      "spx_vs_bond": 0.2999,
+      "xmag_vs_bond": 0.2911,
+      "spy_vs_xmag": 0.9145,
       "interpretation": "股票與債券近期同向，傳統股債分散效果下降。"
     }
   ],
@@ -1549,13 +1549,13 @@
       "window": "20d",
       "asset_x": "spy_etf",
       "asset_y": "us10y_price_proxy",
-      "corr": 0.6857
+      "corr": 0.7415
     },
     {
       "window": "20d",
       "asset_x": "spy_etf",
       "asset_y": "xmag",
-      "corr": 0.8796
+      "corr": 0.8773
     },
     {
       "window": "20d",
@@ -1573,25 +1573,25 @@
       "window": "20d",
       "asset_x": "spx_index",
       "asset_y": "us10y_price_proxy",
-      "corr": 0.6938
+      "corr": 0.7465
     },
     {
       "window": "20d",
       "asset_x": "spx_index",
       "asset_y": "xmag",
-      "corr": 0.8807
+      "corr": 0.8786
     },
     {
       "window": "20d",
       "asset_x": "us10y_price_proxy",
       "asset_y": "spy_etf",
-      "corr": 0.6857
+      "corr": 0.7415
     },
     {
       "window": "20d",
       "asset_x": "us10y_price_proxy",
       "asset_y": "spx_index",
-      "corr": 0.6938
+      "corr": 0.7465
     },
     {
       "window": "20d",
@@ -1603,25 +1603,25 @@
       "window": "20d",
       "asset_x": "us10y_price_proxy",
       "asset_y": "xmag",
-      "corr": 0.6523
+      "corr": 0.7025
     },
     {
       "window": "20d",
       "asset_x": "xmag",
       "asset_y": "spy_etf",
-      "corr": 0.8796
+      "corr": 0.8773
     },
     {
       "window": "20d",
       "asset_x": "xmag",
       "asset_y": "spx_index",
-      "corr": 0.8807
+      "corr": 0.8786
     },
     {
       "window": "20d",
       "asset_x": "xmag",
       "asset_y": "us10y_price_proxy",
-      "corr": 0.6523
+      "corr": 0.7025
     },
     {
       "window": "20d",
@@ -1645,13 +1645,13 @@
       "window": "60d",
       "asset_x": "spy_etf",
       "asset_y": "us10y_price_proxy",
-      "corr": 0.3464
+      "corr": 0.3602
     },
     {
       "window": "60d",
       "asset_x": "spy_etf",
       "asset_y": "xmag",
-      "corr": 0.9233
+      "corr": 0.9226
     },
     {
       "window": "60d",
@@ -1669,25 +1669,25 @@
       "window": "60d",
       "asset_x": "spx_index",
       "asset_y": "us10y_price_proxy",
-      "corr": 0.3447
+      "corr": 0.359
     },
     {
       "window": "60d",
       "asset_x": "spx_index",
       "asset_y": "xmag",
-      "corr": 0.9265
+      "corr": 0.9253
     },
     {
       "window": "60d",
       "asset_x": "us10y_price_proxy",
       "asset_y": "spy_etf",
-      "corr": 0.3464
+      "corr": 0.3602
     },
     {
       "window": "60d",
       "asset_x": "us10y_price_proxy",
       "asset_y": "spx_index",
-      "corr": 0.3447
+      "corr": 0.359
     },
     {
       "window": "60d",
@@ -1699,25 +1699,25 @@
       "window": "60d",
       "asset_x": "us10y_price_proxy",
       "asset_y": "xmag",
-      "corr": 0.3285
+      "corr": 0.3549
     },
     {
       "window": "60d",
       "asset_x": "xmag",
       "asset_y": "spy_etf",
-      "corr": 0.9233
+      "corr": 0.9226
     },
     {
       "window": "60d",
       "asset_x": "xmag",
       "asset_y": "spx_index",
-      "corr": 0.9265
+      "corr": 0.9253
     },
     {
       "window": "60d",
       "asset_x": "xmag",
       "asset_y": "us10y_price_proxy",
-      "corr": 0.3285
+      "corr": 0.3549
     },
     {
       "window": "60d",
@@ -1741,13 +1741,13 @@
       "window": "120d",
       "asset_x": "spy_etf",
       "asset_y": "us10y_price_proxy",
-      "corr": 0.2865
+      "corr": 0.3002
     },
     {
       "window": "120d",
       "asset_x": "spy_etf",
       "asset_y": "xmag",
-      "corr": 0.9135
+      "corr": 0.9145
     },
     {
       "window": "120d",
@@ -1765,25 +1765,25 @@
       "window": "120d",
       "asset_x": "spx_index",
       "asset_y": "us10y_price_proxy",
-      "corr": 0.2864
+      "corr": 0.2999
     },
     {
       "window": "120d",
       "asset_x": "spx_index",
       "asset_y": "xmag",
-      "corr": 0.9145
+      "corr": 0.9154
     },
     {
       "window": "120d",
       "asset_x": "us10y_price_proxy",
       "asset_y": "spy_etf",
-      "corr": 0.2865
+      "corr": 0.3002
     },
     {
       "window": "120d",
       "asset_x": "us10y_price_proxy",
       "asset_y": "spx_index",
-      "corr": 0.2864
+      "corr": 0.2999
     },
     {
       "window": "120d",
@@ -1795,25 +1795,25 @@
       "window": "120d",
       "asset_x": "us10y_price_proxy",
       "asset_y": "xmag",
-      "corr": 0.2821
+      "corr": 0.2911
     },
     {
       "window": "120d",
       "asset_x": "xmag",
       "asset_y": "spy_etf",
-      "corr": 0.9135
-    },
-    {
-      "window": "120d",
-      "asset_x": "xmag",
-      "asset_y": "spx_index",
       "corr": 0.9145
     },
     {
       "window": "120d",
       "asset_x": "xmag",
+      "asset_y": "spx_index",
+      "corr": 0.9154
+    },
+    {
+      "window": "120d",
+      "asset_x": "xmag",
       "asset_y": "us10y_price_proxy",
-      "corr": 0.2821
+      "corr": 0.2911
     },
     {
       "window": "120d",
@@ -1834,44 +1834,44 @@
       "name": "科技",
       "english_name": "Technology",
       "description": "涵蓋大型軟體、半導體與硬體公司，對成長預期與利率敏感。",
-      "rsi14": 73.73,
+      "rsi14": 77.34,
       "distance_to_52w_high_pct": 0.0,
-      "volume_zscore_60d": -0.86,
-      "momentum_3m_pct": 11.7,
+      "volume_zscore_60d": -1.1,
+      "momentum_3m_pct": 16.72,
       "short_interest_pct": null,
-      "crowded_score": 71.1,
-      "crowded_change_5d": 1.9,
-      "crowded_change_20d": 24.7,
+      "crowded_score": 73.5,
+      "crowded_change_5d": 7.7,
+      "crowded_change_20d": 26.8,
       "current_rank": 1
-    },
-    {
-      "ticker": "XLE",
-      "name": "能源",
-      "english_name": "Energy",
-      "description": "涵蓋石油、天然氣與能源設備公司，常受油價與景氣循環影響。",
-      "rsi14": 59.63,
-      "distance_to_52w_high_pct": -5.07,
-      "volume_zscore_60d": -0.79,
-      "momentum_3m_pct": 19.44,
-      "short_interest_pct": null,
-      "crowded_score": 69.5,
-      "crowded_change_5d": 9.3,
-      "crowded_change_20d": 1.8,
-      "current_rank": 2
     },
     {
       "ticker": "XLRE",
       "name": "房地產",
       "english_name": "Real Estate",
       "description": "涵蓋 REITs 與房地產營運公司，對利率與融資條件敏感。",
-      "rsi14": 59.41,
-      "distance_to_52w_high_pct": -1.25,
-      "volume_zscore_60d": -1.19,
-      "momentum_3m_pct": 8.34,
+      "rsi14": 60.21,
+      "distance_to_52w_high_pct": -1.05,
+      "volume_zscore_60d": -0.75,
+      "momentum_3m_pct": 8.96,
       "short_interest_pct": null,
-      "crowded_score": 64.3,
-      "crowded_change_5d": 3.4,
-      "crowded_change_20d": 7.6,
+      "crowded_score": 66.6,
+      "crowded_change_5d": 1.3,
+      "crowded_change_20d": 9.7,
+      "current_rank": 2
+    },
+    {
+      "ticker": "XLE",
+      "name": "能源",
+      "english_name": "Energy",
+      "description": "涵蓋石油、天然氣與能源設備公司，常受油價與景氣循環影響。",
+      "rsi14": 59.9,
+      "distance_to_52w_high_pct": -4.97,
+      "volume_zscore_60d": -1.18,
+      "momentum_3m_pct": 15.81,
+      "short_interest_pct": null,
+      "crowded_score": 66.1,
+      "crowded_change_5d": 1.9,
+      "crowded_change_20d": -4.7,
       "current_rank": 3
     },
     {
@@ -1881,27 +1881,27 @@
       "description": "涵蓋電力與公用服務公司，收益穩定但常受利率影響。",
       "rsi14": 52.82,
       "distance_to_52w_high_pct": -2.17,
-      "volume_zscore_60d": -0.86,
-      "momentum_3m_pct": 9.56,
+      "volume_zscore_60d": -1.0,
+      "momentum_3m_pct": 7.99,
       "short_interest_pct": null,
-      "crowded_score": 63.9,
-      "crowded_change_5d": 3.0,
-      "crowded_change_20d": 4.6,
+      "crowded_score": 62.4,
+      "crowded_change_5d": 2.5,
+      "crowded_change_20d": 1.3,
       "current_rank": 4
     },
     {
-      "ticker": "XLY",
-      "name": "非必需消費",
-      "english_name": "Consumer Discretionary",
-      "description": "涵蓋零售、汽車與可選消費品牌，對消費信心與成長預期敏感。",
-      "rsi14": 56.31,
-      "distance_to_52w_high_pct": -5.27,
-      "volume_zscore_60d": -0.02,
-      "momentum_3m_pct": -3.29,
+      "ticker": "XLB",
+      "name": "原物料",
+      "english_name": "Materials",
+      "description": "涵蓋化工、金屬與建材公司，受全球製造與商品週期影響。",
+      "rsi14": 53.63,
+      "distance_to_52w_high_pct": -3.47,
+      "volume_zscore_60d": -0.82,
+      "momentum_3m_pct": 2.09,
       "short_interest_pct": null,
-      "crowded_score": 56.9,
-      "crowded_change_5d": 3.0,
-      "crowded_change_20d": 15.6,
+      "crowded_score": 58.4,
+      "crowded_change_5d": 0.6,
+      "crowded_change_20d": 0.5,
       "current_rank": 5
     },
     {
@@ -1909,14 +1909,14 @@
       "name": "工業",
       "english_name": "Industrials",
       "description": "涵蓋運輸、製造與資本財公司，常反映景氣與投資循環。",
-      "rsi14": 51.1,
-      "distance_to_52w_high_pct": -4.16,
-      "volume_zscore_60d": -1.16,
-      "momentum_3m_pct": 2.35,
+      "rsi14": 53.88,
+      "distance_to_52w_high_pct": -3.36,
+      "volume_zscore_60d": -1.45,
+      "momentum_3m_pct": 2.34,
       "short_interest_pct": null,
-      "crowded_score": 56.3,
-      "crowded_change_5d": -2.6,
-      "crowded_change_20d": 4.1,
+      "crowded_score": 56.7,
+      "crowded_change_5d": -1.6,
+      "crowded_change_20d": 3.1,
       "current_rank": 6
     },
     {
@@ -1924,44 +1924,44 @@
       "name": "通訊服務",
       "english_name": "Communication Services",
       "description": "涵蓋媒體、互聯網平台與電信公司，兼具成長與廣告週期特徵。",
-      "rsi14": 52.6,
-      "distance_to_52w_high_pct": -3.01,
+      "rsi14": 50.29,
+      "distance_to_52w_high_pct": -3.4,
       "volume_zscore_60d": -0.64,
-      "momentum_3m_pct": -2.67,
+      "momentum_3m_pct": -1.48,
       "short_interest_pct": null,
-      "crowded_score": 56.2,
-      "crowded_change_5d": 0.9,
-      "crowded_change_20d": 9.4,
+      "crowded_score": 56.1,
+      "crowded_change_5d": 0.8,
+      "crowded_change_20d": 8.7,
       "current_rank": 7
-    },
-    {
-      "ticker": "XLB",
-      "name": "原物料",
-      "english_name": "Materials",
-      "description": "涵蓋化工、金屬與建材公司，受全球製造與商品週期影響。",
-      "rsi14": 45.09,
-      "distance_to_52w_high_pct": -5.12,
-      "volume_zscore_60d": -0.95,
-      "momentum_3m_pct": 2.47,
-      "short_interest_pct": null,
-      "crowded_score": 54.8,
-      "crowded_change_5d": -4.4,
-      "crowded_change_20d": -3.7,
-      "current_rank": 8
     },
     {
       "ticker": "XLP",
       "name": "必需消費",
       "english_name": "Consumer Staples",
       "description": "涵蓋食品、飲料與日用品公司，通常屬防禦型板塊。",
-      "rsi14": 53.94,
-      "distance_to_52w_high_pct": -6.67,
-      "volume_zscore_60d": -0.79,
-      "momentum_3m_pct": -0.58,
+      "rsi14": 56.71,
+      "distance_to_52w_high_pct": -6.08,
+      "volume_zscore_60d": -1.01,
+      "momentum_3m_pct": -1.56,
       "short_interest_pct": null,
-      "crowded_score": 54.3,
-      "crowded_change_5d": 3.0,
-      "crowded_change_20d": 1.3,
+      "crowded_score": 54.1,
+      "crowded_change_5d": 1.1,
+      "crowded_change_20d": 3.2,
+      "current_rank": 8
+    },
+    {
+      "ticker": "XLY",
+      "name": "非必需消費",
+      "english_name": "Consumer Discretionary",
+      "description": "涵蓋零售、汽車與可選消費品牌，對消費信心與成長預期敏感。",
+      "rsi14": 57.36,
+      "distance_to_52w_high_pct": -4.99,
+      "volume_zscore_60d": -1.24,
+      "momentum_3m_pct": -2.22,
+      "short_interest_pct": null,
+      "crowded_score": 54.0,
+      "crowded_change_5d": 2.0,
+      "crowded_change_20d": 13.9,
       "current_rank": 9
     },
     {
@@ -1969,14 +1969,14 @@
       "name": "金融",
       "english_name": "Financials",
       "description": "涵蓋銀行、保險與資本市場公司，受信用循環與殖利率曲線影響。",
-      "rsi14": 52.62,
-      "distance_to_52w_high_pct": -8.08,
-      "volume_zscore_60d": -0.36,
-      "momentum_3m_pct": -4.04,
+      "rsi14": 52.73,
+      "distance_to_52w_high_pct": -8.06,
+      "volume_zscore_60d": -1.22,
+      "momentum_3m_pct": -3.13,
       "short_interest_pct": null,
-      "crowded_score": 52.1,
-      "crowded_change_5d": 1.5,
-      "crowded_change_20d": 10.7,
+      "crowded_score": 49.8,
+      "crowded_change_5d": -1.3,
+      "crowded_change_20d": 8.7,
       "current_rank": 10
     },
     {
@@ -1984,107 +1984,19 @@
       "name": "醫療保健",
       "english_name": "Health Care",
       "description": "涵蓋藥廠、醫療設備與醫療服務公司，通常較具防禦性。",
-      "rsi14": 44.12,
-      "distance_to_52w_high_pct": -9.29,
-      "volume_zscore_60d": -0.46,
-      "momentum_3m_pct": -6.66,
+      "rsi14": 46.15,
+      "distance_to_52w_high_pct": -8.93,
+      "volume_zscore_60d": -1.25,
+      "momentum_3m_pct": -5.32,
       "short_interest_pct": null,
-      "crowded_score": 47.1,
-      "crowded_change_5d": 7.0,
-      "crowded_change_20d": 4.2,
+      "crowded_score": 46.1,
+      "crowded_change_5d": 2.8,
+      "crowded_change_20d": -0.4,
       "current_rank": 11
     }
   ],
   "sector_history": [
     {
-      "date": "2025-08-05",
-      "ticker": "XLB",
-      "name": "原物料",
-      "crowded_score": 63.9,
-      "crowded_change_5d": null,
-      "crowded_change_20d": null
-    },
-    {
-      "date": "2025-08-05",
-      "ticker": "XLC",
-      "name": "通訊服務",
-      "crowded_score": 68.7,
-      "crowded_change_5d": null,
-      "crowded_change_20d": null
-    },
-    {
-      "date": "2025-08-05",
-      "ticker": "XLE",
-      "name": "能源",
-      "crowded_score": 60.9,
-      "crowded_change_5d": null,
-      "crowded_change_20d": null
-    },
-    {
-      "date": "2025-08-05",
-      "ticker": "XLF",
-      "name": "金融",
-      "crowded_score": 59.7,
-      "crowded_change_5d": null,
-      "crowded_change_20d": null
-    },
-    {
-      "date": "2025-08-05",
-      "ticker": "XLI",
-      "name": "工業",
-      "crowded_score": 69.6,
-      "crowded_change_5d": null,
-      "crowded_change_20d": null
-    },
-    {
-      "date": "2025-08-05",
-      "ticker": "XLK",
-      "name": "科技",
-      "crowded_score": 73.2,
-      "crowded_change_5d": null,
-      "crowded_change_20d": null
-    },
-    {
-      "date": "2025-08-05",
-      "ticker": "XLP",
-      "name": "必需消費",
-      "crowded_score": 59.4,
-      "crowded_change_5d": null,
-      "crowded_change_20d": null
-    },
-    {
-      "date": "2025-08-05",
-      "ticker": "XLRE",
-      "name": "房地產",
-      "crowded_score": 60.4,
-      "crowded_change_5d": null,
-      "crowded_change_20d": null
-    },
-    {
-      "date": "2025-08-05",
-      "ticker": "XLU",
-      "name": "公用事業",
-      "crowded_score": 69.0,
-      "crowded_change_5d": null,
-      "crowded_change_20d": null
-    },
-    {
-      "date": "2025-08-05",
-      "ticker": "XLV",
-      "name": "醫療保健",
-      "crowded_score": 56.1,
-      "crowded_change_5d": null,
-      "crowded_change_20d": null
-    },
-    {
-      "date": "2025-08-05",
-      "ticker": "XLY",
-      "name": "非必需消費",
-      "crowded_score": 66.5,
-      "crowded_change_5d": null,
-      "crowded_change_20d": null
-    },
-    {
       "date": "2025-08-06",
       "ticker": "XLB",
       "name": "原物料",
@@ -2096,7 +2008,7 @@
       "date": "2025-08-06",
       "ticker": "XLC",
       "name": "通訊服務",
-      "crowded_score": 68.4,
+      "crowded_score": 68.3,
       "crowded_change_5d": null,
       "crowded_change_20d": null
     },
@@ -2112,7 +2024,7 @@
       "date": "2025-08-06",
       "ticker": "XLF",
       "name": "金融",
-      "crowded_score": 61.6,
+      "crowded_score": 61.8,
       "crowded_change_5d": null,
       "crowded_change_20d": null
     },
@@ -2120,7 +2032,7 @@
       "date": "2025-08-06",
       "ticker": "XLI",
       "name": "工業",
-      "crowded_score": 68.2,
+      "crowded_score": 68.4,
       "crowded_change_5d": null,
       "crowded_change_20d": null
     },
@@ -2128,7 +2040,7 @@
       "date": "2025-08-06",
       "ticker": "XLK",
       "name": "科技",
-      "crowded_score": 73.8,
+      "crowded_score": 74.0,
       "crowded_change_5d": null,
       "crowded_change_20d": null
     },
@@ -2136,7 +2048,7 @@
       "date": "2025-08-06",
       "ticker": "XLP",
       "name": "必需消費",
-      "crowded_score": 64.6,
+      "crowded_score": 64.7,
       "crowded_change_5d": null,
       "crowded_change_20d": null
     },
@@ -2144,7 +2056,7 @@
       "date": "2025-08-06",
       "ticker": "XLRE",
       "name": "房地產",
-      "crowded_score": 60.6,
+      "crowded_score": 60.7,
       "crowded_change_5d": null,
       "crowded_change_20d": null
     },
@@ -2152,7 +2064,7 @@
       "date": "2025-08-06",
       "ticker": "XLU",
       "name": "公用事業",
-      "crowded_score": 66.3,
+      "crowded_score": 66.2,
       "crowded_change_5d": null,
       "crowded_change_20d": null
     },
@@ -2160,7 +2072,7 @@
       "date": "2025-08-06",
       "ticker": "XLV",
       "name": "醫療保健",
-      "crowded_score": 54.4,
+      "crowded_score": 55.2,
       "crowded_change_5d": null,
       "crowded_change_20d": null
     },
@@ -2168,7 +2080,7 @@
       "date": "2025-08-06",
       "ticker": "XLY",
       "name": "非必需消費",
-      "crowded_score": 72.9,
+      "crowded_score": 73.0,
       "crowded_change_5d": null,
       "crowded_change_20d": null
     },
@@ -2184,7 +2096,7 @@
       "date": "2025-08-07",
       "ticker": "XLC",
       "name": "通訊服務",
-      "crowded_score": 69.6,
+      "crowded_score": 69.5,
       "crowded_change_5d": null,
       "crowded_change_20d": null
     },
@@ -2200,7 +2112,7 @@
       "date": "2025-08-07",
       "ticker": "XLF",
       "name": "金融",
-      "crowded_score": 62.1,
+      "crowded_score": 62.2,
       "crowded_change_5d": null,
       "crowded_change_20d": null
     },
@@ -2208,7 +2120,7 @@
       "date": "2025-08-07",
       "ticker": "XLI",
       "name": "工業",
-      "crowded_score": 67.7,
+      "crowded_score": 67.9,
       "crowded_change_5d": null,
       "crowded_change_20d": null
     },
@@ -2216,7 +2128,7 @@
       "date": "2025-08-07",
       "ticker": "XLK",
       "name": "科技",
-      "crowded_score": 74.2,
+      "crowded_score": 74.4,
       "crowded_change_5d": null,
       "crowded_change_20d": null
     },
@@ -2232,7 +2144,7 @@
       "date": "2025-08-07",
       "ticker": "XLRE",
       "name": "房地產",
-      "crowded_score": 59.9,
+      "crowded_score": 60.0,
       "crowded_change_5d": null,
       "crowded_change_20d": null
     },
@@ -2240,7 +2152,7 @@
       "date": "2025-08-07",
       "ticker": "XLU",
       "name": "公用事業",
-      "crowded_score": 70.1,
+      "crowded_score": 70.0,
       "crowded_change_5d": null,
       "crowded_change_20d": null
     },
@@ -2248,7 +2160,7 @@
       "date": "2025-08-07",
       "ticker": "XLV",
       "name": "醫療保健",
-      "crowded_score": 59.2,
+      "crowded_score": 60.0,
       "crowded_change_5d": null,
       "crowded_change_20d": null
     },
@@ -2256,7 +2168,7 @@
       "date": "2025-08-07",
       "ticker": "XLY",
       "name": "非必需消費",
-      "crowded_score": 72.6,
+      "crowded_score": 72.8,
       "crowded_change_5d": null,
       "crowded_change_20d": null
     },
@@ -2288,7 +2200,7 @@
       "date": "2025-08-08",
       "ticker": "XLF",
       "name": "金融",
-      "crowded_score": 62.6,
+      "crowded_score": 62.7,
       "crowded_change_5d": null,
       "crowded_change_20d": null
     },
@@ -2296,7 +2208,7 @@
       "date": "2025-08-08",
       "ticker": "XLI",
       "name": "工業",
-      "crowded_score": 64.8,
+      "crowded_score": 65.0,
       "crowded_change_5d": null,
       "crowded_change_20d": null
     },
@@ -2304,7 +2216,7 @@
       "date": "2025-08-08",
       "ticker": "XLK",
       "name": "科技",
-      "crowded_score": 76.5,
+      "crowded_score": 76.7,
       "crowded_change_5d": null,
       "crowded_change_20d": null
     },
@@ -2320,7 +2232,7 @@
       "date": "2025-08-08",
       "ticker": "XLRE",
       "name": "房地產",
-      "crowded_score": 59.3,
+      "crowded_score": 59.4,
       "crowded_change_5d": null,
       "crowded_change_20d": null
     },
@@ -2328,7 +2240,7 @@
       "date": "2025-08-08",
       "ticker": "XLU",
       "name": "公用事業",
-      "crowded_score": 65.5,
+      "crowded_score": 65.4,
       "crowded_change_5d": null,
       "crowded_change_20d": null
     },
@@ -2336,7 +2248,7 @@
       "date": "2025-08-08",
       "ticker": "XLV",
       "name": "醫療保健",
-      "crowded_score": 53.6,
+      "crowded_score": 54.4,
       "crowded_change_5d": null,
       "crowded_change_20d": null
     },
@@ -2344,7 +2256,7 @@
       "date": "2025-08-08",
       "ticker": "XLY",
       "name": "非必需消費",
-      "crowded_score": 70.0,
+      "crowded_score": 70.1,
       "crowded_change_5d": null,
       "crowded_change_20d": null
     },
@@ -2376,7 +2288,7 @@
       "date": "2025-08-11",
       "ticker": "XLF",
       "name": "金融",
-      "crowded_score": 58.3,
+      "crowded_score": 58.4,
       "crowded_change_5d": null,
       "crowded_change_20d": null
     },
@@ -2384,7 +2296,7 @@
       "date": "2025-08-11",
       "ticker": "XLI",
       "name": "工業",
-      "crowded_score": 64.1,
+      "crowded_score": 64.4,
       "crowded_change_5d": null,
       "crowded_change_20d": null
     },
@@ -2392,7 +2304,7 @@
       "date": "2025-08-11",
       "ticker": "XLK",
       "name": "科技",
-      "crowded_score": 72.9,
+      "crowded_score": 73.1,
       "crowded_change_5d": null,
       "crowded_change_20d": null
     },
@@ -2408,7 +2320,7 @@
       "date": "2025-08-11",
       "ticker": "XLRE",
       "name": "房地產",
-      "crowded_score": 55.7,
+      "crowded_score": 55.8,
       "crowded_change_5d": null,
       "crowded_change_20d": null
     },
@@ -2416,7 +2328,7 @@
       "date": "2025-08-11",
       "ticker": "XLU",
       "name": "公用事業",
-      "crowded_score": 65.1,
+      "crowded_score": 65.0,
       "crowded_change_5d": null,
       "crowded_change_20d": null
     },
@@ -2424,7 +2336,7 @@
       "date": "2025-08-11",
       "ticker": "XLV",
       "name": "醫療保健",
-      "crowded_score": 55.3,
+      "crowded_score": 56.1,
       "crowded_change_5d": null,
       "crowded_change_20d": null
     },
@@ -2432,7 +2344,7 @@
       "date": "2025-08-11",
       "ticker": "XLY",
       "name": "非必需消費",
-      "crowded_score": 69.7,
+      "crowded_score": 69.9,
       "crowded_change_5d": null,
       "crowded_change_20d": null
     },
@@ -2441,7 +2353,7 @@
       "ticker": "XLB",
       "name": "原物料",
       "crowded_score": 61.8,
-      "crowded_change_5d": -2.2,
+      "crowded_change_5d": null,
       "crowded_change_20d": null
     },
     {
@@ -2449,7 +2361,7 @@
       "ticker": "XLC",
       "name": "通訊服務",
       "crowded_score": 75.9,
-      "crowded_change_5d": 7.2,
+      "crowded_change_5d": null,
       "crowded_change_20d": null
     },
     {
@@ -2457,39 +2369,39 @@
       "ticker": "XLE",
       "name": "能源",
       "crowded_score": 56.2,
-      "crowded_change_5d": -4.7,
+      "crowded_change_5d": null,
       "crowded_change_20d": null
     },
     {
       "date": "2025-08-12",
       "ticker": "XLF",
       "name": "金融",
-      "crowded_score": 63.7,
-      "crowded_change_5d": 4.0,
+      "crowded_score": 63.8,
+      "crowded_change_5d": null,
       "crowded_change_20d": null
     },
     {
       "date": "2025-08-12",
       "ticker": "XLI",
       "name": "工業",
-      "crowded_score": 65.0,
-      "crowded_change_5d": -4.6,
+      "crowded_score": 65.2,
+      "crowded_change_5d": null,
       "crowded_change_20d": null
     },
     {
       "date": "2025-08-12",
       "ticker": "XLK",
       "name": "科技",
-      "crowded_score": 75.7,
-      "crowded_change_5d": 2.5,
+      "crowded_score": 75.9,
+      "crowded_change_5d": null,
       "crowded_change_20d": null
     },
     {
       "date": "2025-08-12",
       "ticker": "XLP",
       "name": "必需消費",
-      "crowded_score": 68.2,
-      "crowded_change_5d": 8.9,
+      "crowded_score": 68.3,
+      "crowded_change_5d": null,
       "crowded_change_20d": null
     },
     {
@@ -2497,7 +2409,7 @@
       "ticker": "XLRE",
       "name": "房地產",
       "crowded_score": 59.3,
-      "crowded_change_5d": -1.1,
+      "crowded_change_5d": null,
       "crowded_change_20d": null
     },
     {
@@ -2505,23 +2417,23 @@
       "ticker": "XLU",
       "name": "公用事業",
       "crowded_score": 67.2,
-      "crowded_change_5d": -1.7,
+      "crowded_change_5d": null,
       "crowded_change_20d": null
     },
     {
       "date": "2025-08-12",
       "ticker": "XLV",
       "name": "醫療保健",
-      "crowded_score": 58.2,
-      "crowded_change_5d": 2.1,
+      "crowded_score": 59.0,
+      "crowded_change_5d": null,
       "crowded_change_20d": null
     },
     {
       "date": "2025-08-12",
       "ticker": "XLY",
       "name": "非必需消費",
-      "crowded_score": 69.0,
-      "crowded_change_5d": 2.6,
+      "crowded_score": 69.2,
+      "crowded_change_5d": null,
       "crowded_change_20d": null
     },
     {
@@ -2536,7 +2448,7 @@
       "date": "2025-08-13",
       "ticker": "XLC",
       "name": "通訊服務",
-      "crowded_score": 78.6,
+      "crowded_score": 78.5,
       "crowded_change_5d": 10.2,
       "crowded_change_20d": null
     },
@@ -2552,15 +2464,15 @@
       "date": "2025-08-13",
       "ticker": "XLF",
       "name": "金融",
-      "crowded_score": 66.6,
-      "crowded_change_5d": 5.0,
+      "crowded_score": 66.7,
+      "crowded_change_5d": 4.9,
       "crowded_change_20d": null
     },
     {
       "date": "2025-08-13",
       "ticker": "XLI",
       "name": "工業",
-      "crowded_score": 69.4,
+      "crowded_score": 69.6,
       "crowded_change_5d": 1.2,
       "crowded_change_20d": null
     },
@@ -2568,15 +2480,15 @@
       "date": "2025-08-13",
       "ticker": "XLK",
       "name": "科技",
-      "crowded_score": 77.8,
-      "crowded_change_5d": 4.1,
+      "crowded_score": 78.0,
+      "crowded_change_5d": 4.0,
       "crowded_change_20d": null
     },
     {
       "date": "2025-08-13",
       "ticker": "XLP",
       "name": "必需消費",
-      "crowded_score": 70.2,
+      "crowded_score": 70.3,
       "crowded_change_5d": 5.6,
       "crowded_change_20d": null
     },
@@ -2584,7 +2496,7 @@
       "date": "2025-08-13",
       "ticker": "XLRE",
       "name": "房地產",
-      "crowded_score": 57.0,
+      "crowded_score": 57.1,
       "crowded_change_5d": -3.6,
       "crowded_change_20d": null
     },
@@ -2592,7 +2504,7 @@
       "date": "2025-08-13",
       "ticker": "XLU",
       "name": "公用事業",
-      "crowded_score": 68.8,
+      "crowded_score": 68.7,
       "crowded_change_5d": 2.5,
       "crowded_change_20d": null
     },
@@ -2600,16 +2512,16 @@
       "date": "2025-08-13",
       "ticker": "XLV",
       "name": "醫療保健",
-      "crowded_score": 61.9,
-      "crowded_change_5d": 7.5,
+      "crowded_score": 62.6,
+      "crowded_change_5d": 7.4,
       "crowded_change_20d": null
     },
     {
       "date": "2025-08-13",
       "ticker": "XLY",
       "name": "非必需消費",
-      "crowded_score": 73.2,
-      "crowded_change_5d": 0.4,
+      "crowded_score": 73.4,
+      "crowded_change_5d": 0.3,
       "crowded_change_20d": null
     },
     {
@@ -2624,7 +2536,7 @@
       "date": "2025-08-14",
       "ticker": "XLC",
       "name": "通訊服務",
-      "crowded_score": 71.6,
+      "crowded_score": 71.5,
       "crowded_change_5d": 2.0,
       "crowded_change_20d": null
     },
@@ -2640,7 +2552,7 @@
       "date": "2025-08-14",
       "ticker": "XLF",
       "name": "金融",
-      "crowded_score": 65.6,
+      "crowded_score": 65.7,
       "crowded_change_5d": 3.5,
       "crowded_change_20d": null
     },
@@ -2648,15 +2560,15 @@
       "date": "2025-08-14",
       "ticker": "XLI",
       "name": "工業",
-      "crowded_score": 62.6,
-      "crowded_change_5d": -5.1,
+      "crowded_score": 62.7,
+      "crowded_change_5d": -5.2,
       "crowded_change_20d": null
     },
     {
       "date": "2025-08-14",
       "ticker": "XLK",
       "name": "科技",
-      "crowded_score": 78.5,
+      "crowded_score": 78.7,
       "crowded_change_5d": 4.3,
       "crowded_change_20d": null
     },
@@ -2664,7 +2576,7 @@
       "date": "2025-08-14",
       "ticker": "XLP",
       "name": "必需消費",
-      "crowded_score": 62.6,
+      "crowded_score": 62.7,
       "crowded_change_5d": -4.0,
       "crowded_change_20d": null
     },
@@ -2688,7 +2600,7 @@
       "date": "2025-08-14",
       "ticker": "XLV",
       "name": "醫療保健",
-      "crowded_score": 64.9,
+      "crowded_score": 65.7,
       "crowded_change_5d": 5.7,
       "crowded_change_20d": null
     },
@@ -2696,7 +2608,7 @@
       "date": "2025-08-14",
       "ticker": "XLY",
       "name": "非必需消費",
-      "crowded_score": 71.0,
+      "crowded_score": 71.2,
       "crowded_change_5d": -1.6,
       "crowded_change_20d": null
     },
@@ -2704,7 +2616,7 @@
       "date": "2025-08-15",
       "ticker": "XLB",
       "name": "原物料",
-      "crowded_score": 66.4,
+      "crowded_score": 66.5,
       "crowded_change_5d": 7.3,
       "crowded_change_20d": null
     },
@@ -2728,15 +2640,15 @@
       "date": "2025-08-15",
       "ticker": "XLF",
       "name": "金融",
-      "crowded_score": 66.5,
-      "crowded_change_5d": 4.0,
+      "crowded_score": 66.6,
+      "crowded_change_5d": 3.9,
       "crowded_change_20d": null
     },
     {
       "date": "2025-08-15",
       "ticker": "XLI",
       "name": "工業",
-      "crowded_score": 59.4,
+      "crowded_score": 59.5,
       "crowded_change_5d": -5.4,
       "crowded_change_20d": null
     },
@@ -2744,15 +2656,15 @@
       "date": "2025-08-15",
       "ticker": "XLK",
       "name": "科技",
-      "crowded_score": 73.2,
-      "crowded_change_5d": -3.2,
+      "crowded_score": 73.4,
+      "crowded_change_5d": -3.3,
       "crowded_change_20d": null
     },
     {
       "date": "2025-08-15",
       "ticker": "XLP",
       "name": "必需消費",
-      "crowded_score": 61.2,
+      "crowded_score": 61.3,
       "crowded_change_5d": -4.3,
       "crowded_change_20d": null
     },
@@ -2760,7 +2672,7 @@
       "date": "2025-08-15",
       "ticker": "XLRE",
       "name": "房地產",
-      "crowded_score": 57.4,
+      "crowded_score": 57.5,
       "crowded_change_5d": -1.9,
       "crowded_change_20d": null
     },
@@ -2768,7 +2680,7 @@
       "date": "2025-08-15",
       "ticker": "XLU",
       "name": "公用事業",
-      "crowded_score": 68.4,
+      "crowded_score": 68.3,
       "crowded_change_5d": 2.9,
       "crowded_change_20d": null
     },
@@ -2776,7 +2688,7 @@
       "date": "2025-08-15",
       "ticker": "XLV",
       "name": "醫療保健",
-      "crowded_score": 66.4,
+      "crowded_score": 67.2,
       "crowded_change_5d": 12.8,
       "crowded_change_20d": null
     },
@@ -2784,8 +2696,8 @@
       "date": "2025-08-15",
       "ticker": "XLY",
       "name": "非必需消費",
-      "crowded_score": 68.2,
-      "crowded_change_5d": -1.7,
+      "crowded_score": 68.3,
+      "crowded_change_5d": -1.8,
       "crowded_change_20d": null
     },
     {
@@ -2816,7 +2728,7 @@
       "date": "2025-08-18",
       "ticker": "XLF",
       "name": "金融",
-      "crowded_score": 57.4,
+      "crowded_score": 57.5,
       "crowded_change_5d": -0.9,
       "crowded_change_20d": null
     },
@@ -2824,15 +2736,15 @@
       "date": "2025-08-18",
       "ticker": "XLI",
       "name": "工業",
-      "crowded_score": 58.1,
-      "crowded_change_5d": -6.0,
+      "crowded_score": 58.2,
+      "crowded_change_5d": -6.1,
       "crowded_change_20d": null
     },
     {
       "date": "2025-08-18",
       "ticker": "XLK",
       "name": "科技",
-      "crowded_score": 72.3,
+      "crowded_score": 72.5,
       "crowded_change_5d": -0.6,
       "crowded_change_20d": null
     },
@@ -2848,7 +2760,7 @@
       "date": "2025-08-18",
       "ticker": "XLRE",
       "name": "房地產",
-      "crowded_score": 52.2,
+      "crowded_score": 52.3,
       "crowded_change_5d": -3.5,
       "crowded_change_20d": null
     },
@@ -2856,7 +2768,7 @@
       "date": "2025-08-18",
       "ticker": "XLU",
       "name": "公用事業",
-      "crowded_score": 58.8,
+      "crowded_score": 58.7,
       "crowded_change_5d": -6.2,
       "crowded_change_20d": null
     },
@@ -2864,15 +2776,15 @@
       "date": "2025-08-18",
       "ticker": "XLV",
       "name": "醫療保健",
-      "crowded_score": 63.3,
-      "crowded_change_5d": 8.0,
+      "crowded_score": 64.0,
+      "crowded_change_5d": 7.9,
       "crowded_change_20d": null
     },
     {
       "date": "2025-08-18",
       "ticker": "XLY",
       "name": "非必需消費",
-      "crowded_score": 68.5,
+      "crowded_score": 68.6,
       "crowded_change_5d": -1.3,
       "crowded_change_20d": null
     },
@@ -2904,23 +2816,23 @@
       "date": "2025-08-19",
       "ticker": "XLF",
       "name": "金融",
-      "crowded_score": 57.8,
-      "crowded_change_5d": -5.8,
+      "crowded_score": 57.9,
+      "crowded_change_5d": -5.9,
       "crowded_change_20d": null
     },
     {
       "date": "2025-08-19",
       "ticker": "XLI",
       "name": "工業",
-      "crowded_score": 60.7,
-      "crowded_change_5d": -4.2,
+      "crowded_score": 60.9,
+      "crowded_change_5d": -4.3,
       "crowded_change_20d": null
     },
     {
       "date": "2025-08-19",
       "ticker": "XLK",
       "name": "科技",
-      "crowded_score": 74.1,
+      "crowded_score": 74.2,
       "crowded_change_5d": -1.6,
       "crowded_change_20d": null
     },
@@ -2928,7 +2840,7 @@
       "date": "2025-08-19",
       "ticker": "XLP",
       "name": "必需消費",
-      "crowded_score": 63.7,
+      "crowded_score": 63.8,
       "crowded_change_5d": -4.5,
       "crowded_change_20d": null
     },
@@ -2944,7 +2856,7 @@
       "date": "2025-08-19",
       "ticker": "XLU",
       "name": "公用事業",
-      "crowded_score": 61.5,
+      "crowded_score": 61.4,
       "crowded_change_5d": -5.7,
       "crowded_change_20d": null
     },
@@ -2952,16 +2864,16 @@
       "date": "2025-08-19",
       "ticker": "XLV",
       "name": "醫療保健",
-      "crowded_score": 65.1,
-      "crowded_change_5d": 6.9,
+      "crowded_score": 65.8,
+      "crowded_change_5d": 6.8,
       "crowded_change_20d": null
     },
     {
       "date": "2025-08-19",
       "ticker": "XLY",
       "name": "非必需消費",
-      "crowded_score": 71.4,
-      "crowded_change_5d": 2.4,
+      "crowded_score": 71.5,
+      "crowded_change_5d": 2.3,
       "crowded_change_20d": null
     },
     {
@@ -2992,24 +2904,24 @@
       "date": "2025-08-20",
       "ticker": "XLF",
       "name": "金融",
-      "crowded_score": 65.6,
-      "crowded_change_5d": -0.9,
+      "crowded_score": 65.7,
+      "crowded_change_5d": -1.0,
       "crowded_change_20d": null
     },
     {
       "date": "2025-08-20",
       "ticker": "XLI",
       "name": "工業",
-      "crowded_score": 61.3,
-      "crowded_change_5d": -8.1,
+      "crowded_score": 61.4,
+      "crowded_change_5d": -8.2,
       "crowded_change_20d": null
     },
     {
       "date": "2025-08-20",
       "ticker": "XLK",
       "name": "科技",
-      "crowded_score": 74.0,
-      "crowded_change_5d": -3.8,
+      "crowded_score": 74.1,
+      "crowded_change_5d": -3.9,
       "crowded_change_20d": null
     },
     {
@@ -3025,7 +2937,7 @@
       "ticker": "XLRE",
       "name": "房地產",
       "crowded_score": 62.2,
-      "crowded_change_5d": 5.2,
+      "crowded_change_5d": 5.1,
       "crowded_change_20d": null
     },
     {
@@ -3040,15 +2952,15 @@
       "date": "2025-08-20",
       "ticker": "XLV",
       "name": "醫療保健",
-      "crowded_score": 67.1,
-      "crowded_change_5d": 5.2,
+      "crowded_score": 67.3,
+      "crowded_change_5d": 4.7,
       "crowded_change_20d": null
     },
     {
       "date": "2025-08-20",
       "ticker": "XLY",
       "name": "非必需消費",
-      "crowded_score": 72.4,
+      "crowded_score": 72.5,
       "crowded_change_5d": -0.8,
       "crowded_change_20d": null
     },
@@ -3056,7 +2968,7 @@
       "date": "2025-08-21",
       "ticker": "XLB",
       "name": "原物料",
-      "crowded_score": 64.7,
+      "crowded_score": 64.8,
       "crowded_change_5d": -2.4,
       "crowded_change_20d": null
     },
@@ -3080,7 +2992,7 @@
       "date": "2025-08-21",
       "ticker": "XLF",
       "name": "金融",
-      "crowded_score": 61.8,
+      "crowded_score": 61.9,
       "crowded_change_5d": -3.8,
       "crowded_change_20d": null
     },
@@ -3088,7 +3000,7 @@
       "date": "2025-08-21",
       "ticker": "XLI",
       "name": "工業",
-      "crowded_score": 59.0,
+      "crowded_score": 59.1,
       "crowded_change_5d": -3.6,
       "crowded_change_20d": null
     },
@@ -3096,7 +3008,7 @@
       "date": "2025-08-21",
       "ticker": "XLK",
       "name": "科技",
-      "crowded_score": 69.2,
+      "crowded_score": 69.3,
       "crowded_change_5d": -9.3,
       "crowded_change_20d": null
     },
@@ -3104,7 +3016,7 @@
       "date": "2025-08-21",
       "ticker": "XLP",
       "name": "必需消費",
-      "crowded_score": 66.5,
+      "crowded_score": 66.6,
       "crowded_change_5d": 3.9,
       "crowded_change_20d": null
     },
@@ -3112,7 +3024,7 @@
       "date": "2025-08-21",
       "ticker": "XLRE",
       "name": "房地產",
-      "crowded_score": 60.8,
+      "crowded_score": 60.9,
       "crowded_change_5d": 0.4,
       "crowded_change_20d": null
     },
@@ -3128,15 +3040,15 @@
       "date": "2025-08-21",
       "ticker": "XLV",
       "name": "醫療保健",
-      "crowded_score": 66.3,
-      "crowded_change_5d": 1.4,
+      "crowded_score": 66.5,
+      "crowded_change_5d": 0.9,
       "crowded_change_20d": null
     },
     {
       "date": "2025-08-21",
       "ticker": "XLY",
       "name": "非必需消費",
-      "crowded_score": 66.1,
+      "crowded_score": 66.2,
       "crowded_change_5d": -5.0,
       "crowded_change_20d": null
     },
@@ -3144,7 +3056,7 @@
       "date": "2025-08-22",
       "ticker": "XLB",
       "name": "原物料",
-      "crowded_score": 68.1,
+      "crowded_score": 68.2,
       "crowded_change_5d": 1.7,
       "crowded_change_20d": null
     },
@@ -3168,7 +3080,7 @@
       "date": "2025-08-22",
       "ticker": "XLF",
       "name": "金融",
-      "crowded_score": 73.5,
+      "crowded_score": 73.6,
       "crowded_change_5d": 7.0,
       "crowded_change_20d": null
     },
@@ -3176,7 +3088,7 @@
       "date": "2025-08-22",
       "ticker": "XLI",
       "name": "工業",
-      "crowded_score": 65.9,
+      "crowded_score": 66.0,
       "crowded_change_5d": 6.5,
       "crowded_change_20d": null
     },
@@ -3184,8 +3096,8 @@
       "date": "2025-08-22",
       "ticker": "XLK",
       "name": "科技",
-      "crowded_score": 71.2,
-      "crowded_change_5d": -2.0,
+      "crowded_score": 71.3,
+      "crowded_change_5d": -2.1,
       "crowded_change_20d": null
     },
     {
@@ -3216,16 +3128,16 @@
       "date": "2025-08-22",
       "ticker": "XLV",
       "name": "醫療保健",
-      "crowded_score": 67.0,
-      "crowded_change_5d": 0.6,
+      "crowded_score": 67.3,
+      "crowded_change_5d": 0.1,
       "crowded_change_20d": null
     },
     {
       "date": "2025-08-22",
       "ticker": "XLY",
       "name": "非必需消費",
-      "crowded_score": 77.2,
-      "crowded_change_5d": 9.0,
+      "crowded_score": 77.3,
+      "crowded_change_5d": 8.9,
       "crowded_change_20d": null
     },
     {
@@ -3256,7 +3168,7 @@
       "date": "2025-08-25",
       "ticker": "XLF",
       "name": "金融",
-      "crowded_score": 62.7,
+      "crowded_score": 62.8,
       "crowded_change_5d": 5.3,
       "crowded_change_20d": null
     },
@@ -3264,16 +3176,16 @@
       "date": "2025-08-25",
       "ticker": "XLI",
       "name": "工業",
-      "crowded_score": 60.1,
-      "crowded_change_5d": 2.0,
+      "crowded_score": 60.2,
+      "crowded_change_5d": 1.9,
       "crowded_change_20d": null
     },
     {
       "date": "2025-08-25",
       "ticker": "XLK",
       "name": "科技",
-      "crowded_score": 67.9,
-      "crowded_change_5d": -4.4,
+      "crowded_score": 68.0,
+      "crowded_change_5d": -4.5,
       "crowded_change_20d": null
     },
     {
@@ -3288,7 +3200,7 @@
       "date": "2025-08-25",
       "ticker": "XLRE",
       "name": "房地產",
-      "crowded_score": 64.1,
+      "crowded_score": 64.2,
       "crowded_change_5d": 11.9,
       "crowded_change_20d": null
     },
@@ -3304,15 +3216,15 @@
       "date": "2025-08-25",
       "ticker": "XLV",
       "name": "醫療保健",
-      "crowded_score": 62.0,
-      "crowded_change_5d": -1.3,
+      "crowded_score": 62.2,
+      "crowded_change_5d": -1.8,
       "crowded_change_20d": null
     },
     {
       "date": "2025-08-25",
       "ticker": "XLY",
       "name": "非必需消費",
-      "crowded_score": 71.5,
+      "crowded_score": 71.6,
       "crowded_change_5d": 3.0,
       "crowded_change_20d": null
     },
@@ -3352,7 +3264,7 @@
       "date": "2025-08-26",
       "ticker": "XLI",
       "name": "工業",
-      "crowded_score": 62.0,
+      "crowded_score": 62.1,
       "crowded_change_5d": 1.3,
       "crowded_change_20d": null
     },
@@ -3360,7 +3272,7 @@
       "date": "2025-08-26",
       "ticker": "XLK",
       "name": "科技",
-      "crowded_score": 67.9,
+      "crowded_score": 68.0,
       "crowded_change_5d": -6.2,
       "crowded_change_20d": null
     },
@@ -3376,7 +3288,7 @@
       "date": "2025-08-26",
       "ticker": "XLRE",
       "name": "房地產",
-      "crowded_score": 59.0,
+      "crowded_score": 59.1,
       "crowded_change_5d": -1.6,
       "crowded_change_20d": null
     },
@@ -3384,24 +3296,24 @@
       "date": "2025-08-26",
       "ticker": "XLU",
       "name": "公用事業",
-      "crowded_score": 59.8,
-      "crowded_change_5d": -1.8,
+      "crowded_score": 59.7,
+      "crowded_change_5d": -1.7,
       "crowded_change_20d": null
     },
     {
       "date": "2025-08-26",
       "ticker": "XLV",
       "name": "醫療保健",
-      "crowded_score": 63.3,
-      "crowded_change_5d": -1.8,
+      "crowded_score": 63.5,
+      "crowded_change_5d": -2.3,
       "crowded_change_20d": null
     },
     {
       "date": "2025-08-26",
       "ticker": "XLY",
       "name": "非必需消費",
-      "crowded_score": 71.4,
-      "crowded_change_5d": 0.0,
+      "crowded_score": 71.5,
+      "crowded_change_5d": -0.0,
       "crowded_change_20d": null
     },
     {
@@ -3432,7 +3344,7 @@
       "date": "2025-08-27",
       "ticker": "XLF",
       "name": "金融",
-      "crowded_score": 70.2,
+      "crowded_score": 70.3,
       "crowded_change_5d": 4.6,
       "crowded_change_20d": null
     },
@@ -3440,7 +3352,7 @@
       "date": "2025-08-27",
       "ticker": "XLI",
       "name": "工業",
-      "crowded_score": 61.4,
+      "crowded_score": 61.5,
       "crowded_change_5d": 0.1,
       "crowded_change_20d": null
     },
@@ -3448,7 +3360,7 @@
       "date": "2025-08-27",
       "ticker": "XLK",
       "name": "科技",
-      "crowded_score": 70.2,
+      "crowded_score": 70.3,
       "crowded_change_5d": -3.8,
       "crowded_change_20d": null
     },
@@ -3464,7 +3376,7 @@
       "date": "2025-08-27",
       "ticker": "XLRE",
       "name": "房地產",
-      "crowded_score": 61.6,
+      "crowded_score": 61.7,
       "crowded_change_5d": -0.6,
       "crowded_change_20d": null
     },
@@ -3480,15 +3392,15 @@
       "date": "2025-08-27",
       "ticker": "XLV",
       "name": "醫療保健",
-      "crowded_score": 60.6,
-      "crowded_change_5d": -6.4,
+      "crowded_score": 60.8,
+      "crowded_change_5d": -6.5,
       "crowded_change_20d": null
     },
     {
       "date": "2025-08-27",
       "ticker": "XLY",
       "name": "非必需消費",
-      "crowded_score": 69.7,
+      "crowded_score": 69.8,
       "crowded_change_5d": -2.7,
       "crowded_change_20d": null
     },
@@ -3520,7 +3432,7 @@
       "date": "2025-08-28",
       "ticker": "XLF",
       "name": "金融",
-      "crowded_score": 65.8,
+      "crowded_score": 65.9,
       "crowded_change_5d": 4.0,
       "crowded_change_20d": null
     },
@@ -3528,7 +3440,7 @@
       "date": "2025-08-28",
       "ticker": "XLI",
       "name": "工業",
-      "crowded_score": 63.5,
+      "crowded_score": 63.6,
       "crowded_change_5d": 4.5,
       "crowded_change_20d": null
     },
@@ -3536,8 +3448,8 @@
       "date": "2025-08-28",
       "ticker": "XLK",
       "name": "科技",
-      "crowded_score": 73.2,
-      "crowded_change_5d": 4.0,
+      "crowded_score": 73.3,
+      "crowded_change_5d": 3.9,
       "crowded_change_20d": null
     },
     {
@@ -3560,7 +3472,7 @@
       "date": "2025-08-28",
       "ticker": "XLU",
       "name": "公用事業",
-      "crowded_score": 57.7,
+      "crowded_score": 57.6,
       "crowded_change_5d": -2.9,
       "crowded_change_20d": null
     },
@@ -3568,23 +3480,23 @@
       "date": "2025-08-28",
       "ticker": "XLV",
       "name": "醫療保健",
-      "crowded_score": 60.1,
-      "crowded_change_5d": -6.2,
+      "crowded_score": 60.2,
+      "crowded_change_5d": -6.3,
       "crowded_change_20d": null
     },
     {
       "date": "2025-08-28",
       "ticker": "XLY",
       "name": "非必需消費",
-      "crowded_score": 69.3,
-      "crowded_change_5d": 3.3,
+      "crowded_score": 69.4,
+      "crowded_change_5d": 3.2,
       "crowded_change_20d": null
     },
     {
       "date": "2025-08-29",
       "ticker": "XLB",
       "name": "原物料",
-      "crowded_score": 65.4,
+      "crowded_score": 65.5,
       "crowded_change_5d": -2.7,
       "crowded_change_20d": null
     },
@@ -3616,7 +3528,7 @@
       "date": "2025-08-29",
       "ticker": "XLI",
       "name": "工業",
-      "crowded_score": 62.3,
+      "crowded_score": 62.4,
       "crowded_change_5d": -3.6,
       "crowded_change_20d": null
     },
@@ -3632,7 +3544,7 @@
       "date": "2025-08-29",
       "ticker": "XLP",
       "name": "必需消費",
-      "crowded_score": 57.3,
+      "crowded_score": 57.4,
       "crowded_change_5d": -7.9,
       "crowded_change_20d": null
     },
@@ -3656,15 +3568,15 @@
       "date": "2025-08-29",
       "ticker": "XLV",
       "name": "醫療保健",
-      "crowded_score": 62.2,
-      "crowded_change_5d": -4.8,
+      "crowded_score": 62.4,
+      "crowded_change_5d": -4.9,
       "crowded_change_20d": null
     },
     {
       "date": "2025-08-29",
       "ticker": "XLY",
       "name": "非必需消費",
-      "crowded_score": 70.4,
+      "crowded_score": 70.5,
       "crowded_change_5d": -6.8,
       "crowded_change_20d": null
     },
@@ -3704,8 +3616,8 @@
       "date": "2025-09-02",
       "ticker": "XLI",
       "name": "工業",
-      "crowded_score": 60.8,
-      "crowded_change_5d": 0.8,
+      "crowded_score": 60.9,
+      "crowded_change_5d": 0.7,
       "crowded_change_20d": null
     },
     {
@@ -3728,7 +3640,7 @@
       "date": "2025-09-02",
       "ticker": "XLRE",
       "name": "房地產",
-      "crowded_score": 62.1,
+      "crowded_score": 62.2,
       "crowded_change_5d": -2.0,
       "crowded_change_20d": null
     },
@@ -3744,7 +3656,7 @@
       "date": "2025-09-02",
       "ticker": "XLV",
       "name": "醫療保健",
-      "crowded_score": 65.9,
+      "crowded_score": 66.0,
       "crowded_change_5d": 3.8,
       "crowded_change_20d": null
     },
@@ -3762,7 +3674,7 @@
       "name": "原物料",
       "crowded_score": 61.6,
       "crowded_change_5d": -2.0,
-      "crowded_change_20d": -2.3
+      "crowded_change_20d": null
     },
     {
       "date": "2025-09-03",
@@ -3770,7 +3682,7 @@
       "name": "通訊服務",
       "crowded_score": 79.0,
       "crowded_change_5d": 11.7,
-      "crowded_change_20d": 10.3
+      "crowded_change_20d": null
     },
     {
       "date": "2025-09-03",
@@ -3778,39 +3690,39 @@
       "name": "能源",
       "crowded_score": 65.7,
       "crowded_change_5d": -0.2,
-      "crowded_change_20d": 4.8
+      "crowded_change_20d": null
     },
     {
       "date": "2025-09-03",
       "ticker": "XLF",
       "name": "金融",
-      "crowded_score": 65.9,
+      "crowded_score": 66.0,
       "crowded_change_5d": 1.1,
-      "crowded_change_20d": 6.2
+      "crowded_change_20d": null
     },
     {
       "date": "2025-09-03",
       "ticker": "XLI",
       "name": "工業",
-      "crowded_score": 61.5,
+      "crowded_score": 61.6,
       "crowded_change_5d": -0.5,
-      "crowded_change_20d": -8.0
+      "crowded_change_20d": null
     },
     {
       "date": "2025-09-03",
       "ticker": "XLK",
       "name": "科技",
-      "crowded_score": 69.6,
+      "crowded_score": 69.7,
       "crowded_change_5d": 1.7,
-      "crowded_change_20d": -3.5
+      "crowded_change_20d": null
     },
     {
       "date": "2025-09-03",
       "ticker": "XLP",
       "name": "必需消費",
-      "crowded_score": 55.7,
+      "crowded_score": 55.8,
       "crowded_change_5d": -2.6,
-      "crowded_change_20d": -3.6
+      "crowded_change_20d": null
     },
     {
       "date": "2025-09-03",
@@ -3818,7 +3730,7 @@
       "name": "房地產",
       "crowded_score": 57.1,
       "crowded_change_5d": -2.0,
-      "crowded_change_20d": -3.3
+      "crowded_change_20d": null
     },
     {
       "date": "2025-09-03",
@@ -3826,29 +3738,29 @@
       "name": "公用事業",
       "crowded_score": 54.7,
       "crowded_change_5d": -5.0,
-      "crowded_change_20d": -14.2
+      "crowded_change_20d": null
     },
     {
       "date": "2025-09-03",
       "ticker": "XLV",
       "name": "醫療保健",
-      "crowded_score": 63.6,
-      "crowded_change_5d": 0.3,
-      "crowded_change_20d": 7.5
+      "crowded_score": 63.7,
+      "crowded_change_5d": 0.2,
+      "crowded_change_20d": null
     },
     {
       "date": "2025-09-03",
       "ticker": "XLY",
       "name": "非必需消費",
-      "crowded_score": 70.9,
+      "crowded_score": 71.0,
       "crowded_change_5d": -0.5,
-      "crowded_change_20d": 4.4
+      "crowded_change_20d": null
     },
     {
       "date": "2025-09-04",
       "ticker": "XLB",
       "name": "原物料",
-      "crowded_score": 64.4,
+      "crowded_score": 64.5,
       "crowded_change_5d": -1.3,
       "crowded_change_20d": 4.8
     },
@@ -3858,7 +3770,7 @@
       "name": "通訊服務",
       "crowded_score": 73.2,
       "crowded_change_5d": 7.8,
-      "crowded_change_20d": 4.8
+      "crowded_change_20d": 4.9
     },
     {
       "date": "2025-09-04",
@@ -3872,9 +3784,9 @@
       "date": "2025-09-04",
       "ticker": "XLF",
       "name": "金融",
-      "crowded_score": 67.4,
+      "crowded_score": 67.5,
       "crowded_change_5d": -2.8,
-      "crowded_change_20d": 5.8
+      "crowded_change_20d": 5.7
     },
     {
       "date": "2025-09-04",
@@ -3882,15 +3794,15 @@
       "name": "工業",
       "crowded_score": 62.6,
       "crowded_change_5d": 1.2,
-      "crowded_change_20d": -5.6
+      "crowded_change_20d": -5.8
     },
     {
       "date": "2025-09-04",
       "ticker": "XLK",
       "name": "科技",
-      "crowded_score": 75.7,
+      "crowded_score": 75.8,
       "crowded_change_5d": 5.5,
-      "crowded_change_20d": 2.0
+      "crowded_change_20d": 1.8
     },
     {
       "date": "2025-09-04",
@@ -3904,9 +3816,9 @@
       "date": "2025-09-04",
       "ticker": "XLRE",
       "name": "房地產",
-      "crowded_score": 59.2,
+      "crowded_score": 59.3,
       "crowded_change_5d": -2.4,
-      "crowded_change_20d": -1.4
+      "crowded_change_20d": -1.5
     },
     {
       "date": "2025-09-04",
@@ -3920,17 +3832,17 @@
       "date": "2025-09-04",
       "ticker": "XLV",
       "name": "醫療保健",
-      "crowded_score": 63.6,
-      "crowded_change_5d": 3.0,
-      "crowded_change_20d": 9.2
+      "crowded_score": 63.8,
+      "crowded_change_5d": 2.9,
+      "crowded_change_20d": 8.5
     },
     {
       "date": "2025-09-04",
       "ticker": "XLY",
       "name": "非必需消費",
-      "crowded_score": 79.7,
+      "crowded_score": 79.8,
       "crowded_change_5d": 10.0,
-      "crowded_change_20d": 6.9
+      "crowded_change_20d": 6.7
     },
     {
       "date": "2025-09-05",
@@ -3960,25 +3872,25 @@
       "date": "2025-09-05",
       "ticker": "XLF",
       "name": "金融",
-      "crowded_score": 72.0,
+      "crowded_score": 72.1,
       "crowded_change_5d": 6.2,
-      "crowded_change_20d": 10.0
+      "crowded_change_20d": 9.8
     },
     {
       "date": "2025-09-05",
       "ticker": "XLI",
       "name": "工業",
-      "crowded_score": 69.3,
+      "crowded_score": 69.4,
       "crowded_change_5d": 5.8,
-      "crowded_change_20d": 1.6
+      "crowded_change_20d": 1.4
     },
     {
       "date": "2025-09-05",
       "ticker": "XLK",
       "name": "科技",
       "crowded_score": 76.2,
-      "crowded_change_5d": 3.0,
-      "crowded_change_20d": 2.0
+      "crowded_change_5d": 2.9,
+      "crowded_change_20d": 1.8
     },
     {
       "date": "2025-09-05",
@@ -3986,7 +3898,7 @@
       "name": "必需消費",
       "crowded_score": 63.4,
       "crowded_change_5d": 8.6,
-      "crowded_change_20d": -3.2
+      "crowded_change_20d": -3.3
     },
     {
       "date": "2025-09-05",
@@ -3994,31 +3906,31 @@
       "name": "房地產",
       "crowded_score": 60.6,
       "crowded_change_5d": 1.9,
-      "crowded_change_20d": 0.7
+      "crowded_change_20d": 0.6
     },
     {
       "date": "2025-09-05",
       "ticker": "XLU",
       "name": "公用事業",
       "crowded_score": 59.8,
-      "crowded_change_5d": 2.1,
-      "crowded_change_20d": -10.3
+      "crowded_change_5d": 2.2,
+      "crowded_change_20d": -10.2
     },
     {
       "date": "2025-09-05",
       "ticker": "XLV",
       "name": "醫療保健",
-      "crowded_score": 67.3,
+      "crowded_score": 67.4,
       "crowded_change_5d": 7.2,
-      "crowded_change_20d": 8.1
+      "crowded_change_20d": 7.4
     },
     {
       "date": "2025-09-05",
       "ticker": "XLY",
       "name": "非必需消費",
-      "crowded_score": 81.4,
+      "crowded_score": 81.5,
       "crowded_change_5d": 12.1,
-      "crowded_change_20d": 8.8
+      "crowded_change_20d": 8.7
     },
     {
       "date": "2025-09-08",
@@ -4050,15 +3962,15 @@
       "name": "金融",
       "crowded_score": 67.8,
       "crowded_change_5d": -1.2,
-      "crowded_change_20d": 5.2
+      "crowded_change_20d": 5.1
     },
     {
       "date": "2025-09-08",
       "ticker": "XLI",
       "name": "工業",
-      "crowded_score": 63.5,
+      "crowded_score": 63.6,
       "crowded_change_5d": 1.2,
-      "crowded_change_20d": -1.2
+      "crowded_change_20d": -1.4
     },
     {
       "date": "2025-09-08",
@@ -4066,7 +3978,7 @@
       "name": "科技",
       "crowded_score": 74.2,
       "crowded_change_5d": -0.5,
-      "crowded_change_20d": -2.3
+      "crowded_change_20d": -2.4
     },
     {
       "date": "2025-09-08",
@@ -4082,7 +3994,7 @@
       "name": "房地產",
       "crowded_score": 62.9,
       "crowded_change_5d": 1.9,
-      "crowded_change_20d": 3.6
+      "crowded_change_20d": 3.5
     },
     {
       "date": "2025-09-08",
@@ -4096,9 +4008,9 @@
       "date": "2025-09-08",
       "ticker": "XLV",
       "name": "醫療保健",
-      "crowded_score": 67.6,
-      "crowded_change_5d": 5.4,
-      "crowded_change_20d": 13.9
+      "crowded_score": 67.7,
+      "crowded_change_5d": 5.3,
+      "crowded_change_20d": 13.3
     },
     {
       "date": "2025-09-08",
@@ -4106,7 +4018,7 @@
       "name": "非必需消費",
       "crowded_score": 78.5,
       "crowded_change_5d": 8.1,
-      "crowded_change_20d": 8.5
+      "crowded_change_20d": 8.4
     },
     {
       "date": "2025-09-09",
@@ -4136,17 +4048,17 @@
       "date": "2025-09-09",
       "ticker": "XLF",
       "name": "金融",
-      "crowded_score": 65.1,
+      "crowded_score": 65.2,
       "crowded_change_5d": -2.4,
-      "crowded_change_20d": 6.8
+      "crowded_change_20d": 6.7
     },
     {
       "date": "2025-09-09",
       "ticker": "XLI",
       "name": "工業",
       "crowded_score": 62.3,
-      "crowded_change_5d": 1.5,
-      "crowded_change_20d": -1.9
+      "crowded_change_5d": 1.4,
+      "crowded_change_20d": -2.0
     },
     {
       "date": "2025-09-09",
@@ -4154,7 +4066,7 @@
       "name": "科技",
       "crowded_score": 73.4,
       "crowded_change_5d": 1.3,
-      "crowded_change_20d": 0.5
+      "crowded_change_20d": 0.4
     },
     {
       "date": "2025-09-09",
@@ -4162,39 +4074,39 @@
       "name": "必需消費",
       "crowded_score": 55.9,
       "crowded_change_5d": -1.8,
-      "crowded_change_20d": -8.4
+      "crowded_change_20d": -8.5
     },
     {
       "date": "2025-09-09",
       "ticker": "XLRE",
       "name": "房地產",
-      "crowded_score": 56.5,
+      "crowded_score": 56.6,
       "crowded_change_5d": -5.6,
-      "crowded_change_20d": 0.8
+      "crowded_change_20d": 0.7
     },
     {
       "date": "2025-09-09",
       "ticker": "XLU",
       "name": "公用事業",
-      "crowded_score": 58.9,
+      "crowded_score": 58.8,
       "crowded_change_5d": 1.6,
-      "crowded_change_20d": -6.2
+      "crowded_change_20d": -6.1
     },
     {
       "date": "2025-09-09",
       "ticker": "XLV",
       "name": "醫療保健",
-      "crowded_score": 65.5,
+      "crowded_score": 65.6,
       "crowded_change_5d": -0.4,
-      "crowded_change_20d": 10.1
+      "crowded_change_20d": 9.5
     },
     {
       "date": "2025-09-09",
       "ticker": "XLY",
       "name": "非必需消費",
-      "crowded_score": 73.3,
+      "crowded_score": 73.4,
       "crowded_change_5d": 2.0,
-      "crowded_change_20d": 3.6
+      "crowded_change_20d": 3.5
     },
     {
       "date": "2025-09-10",
@@ -4208,9 +4120,9 @@
       "date": "2025-09-10",
       "ticker": "XLC",
       "name": "通訊服務",
-      "crowded_score": 70.9,
+      "crowded_score": 70.8,
       "crowded_change_5d": -8.1,
-      "crowded_change_20d": -5.1
+      "crowded_change_20d": -5.0
     },
     {
       "date": "2025-09-10",
@@ -4224,9 +4136,9 @@
       "date": "2025-09-10",
       "ticker": "XLF",
       "name": "金融",
-      "crowded_score": 61.7,
+      "crowded_score": 61.8,
       "crowded_change_5d": -4.2,
-      "crowded_change_20d": -1.9
+      "crowded_change_20d": -2.0
     },
     {
       "date": "2025-09-10",
@@ -4234,7 +4146,7 @@
       "name": "工業",
       "crowded_score": 69.8,
       "crowded_change_5d": 8.2,
-      "crowded_change_20d": 4.8
+      "crowded_change_20d": 4.7
     },
     {
       "date": "2025-09-10",
@@ -4242,7 +4154,7 @@
       "name": "科技",
       "crowded_score": 81.0,
       "crowded_change_5d": 11.3,
-      "crowded_change_20d": 5.3
+      "crowded_change_20d": 5.2
     },
     {
       "date": "2025-09-10",
@@ -4256,9 +4168,9 @@
       "date": "2025-09-10",
       "ticker": "XLRE",
       "name": "房地產",
-      "crowded_score": 55.4,
+      "crowded_score": 55.5,
       "crowded_change_5d": -1.6,
-      "crowded_change_20d": -3.8
+      "crowded_change_20d": -3.9
     },
     {
       "date": "2025-09-10",
@@ -4266,23 +4178,23 @@
       "name": "公用事業",
       "crowded_score": 67.2,
       "crowded_change_5d": 12.5,
-      "crowded_change_20d": -0.0
+      "crowded_change_20d": 0.0
     },
     {
       "date": "2025-09-10",
       "ticker": "XLV",
       "name": "醫療保健",
-      "crowded_score": 63.1,
-      "crowded_change_5d": -0.4,
-      "crowded_change_20d": 4.9
+      "crowded_score": 63.2,
+      "crowded_change_5d": -0.5,
+      "crowded_change_20d": 4.3
     },
     {
       "date": "2025-09-10",
       "ticker": "XLY",
       "name": "非必需消費",
-      "crowded_score": 70.9,
+      "crowded_score": 71.0,
       "crowded_change_5d": 0.0,
-      "crowded_change_20d": 1.9
+      "crowded_change_20d": 1.8
     },
     {
       "date": "2025-09-11",
@@ -4314,7 +4226,7 @@
       "name": "金融",
       "crowded_score": 67.8,
       "crowded_change_5d": 0.3,
-      "crowded_change_20d": 1.2
+      "crowded_change_20d": 1.1
     },
     {
       "date": "2025-09-11",
@@ -4322,15 +4234,15 @@
       "name": "工業",
       "crowded_score": 73.6,
       "crowded_change_5d": 11.0,
-      "crowded_change_20d": 4.2
+      "crowded_change_20d": 4.1
     },
     {
       "date": "2025-09-11",
       "ticker": "XLK",
       "name": "科技",
-      "crowded_score": 79.7,
+      "crowded_score": 79.8,
       "crowded_change_5d": 4.0,
-      "crowded_change_20d": 1.9
+      "crowded_change_20d": 1.8
     },
     {
       "date": "2025-09-11",
@@ -4344,25 +4256,25 @@
       "date": "2025-09-11",
       "ticker": "XLRE",
       "name": "房地產",
-      "crowded_score": 59.5,
+      "crowded_score": 59.6,
       "crowded_change_5d": 0.3,
-      "crowded_change_20d": 2.5
+      "crowded_change_20d": 2.4
     },
     {
       "date": "2025-09-11",
       "ticker": "XLU",
       "name": "公用事業",
       "crowded_score": 64.6,
-      "crowded_change_5d": 6.4,
+      "crowded_change_5d": 6.5,
       "crowded_change_20d": -4.1
     },
     {
       "date": "2025-09-11",
       "ticker": "XLV",
       "name": "醫療保健",
-      "crowded_score": 69.6,
-      "crowded_change_5d": 6.0,
-      "crowded_change_20d": 7.7
+      "crowded_score": 69.7,
+      "crowded_change_5d": 5.9,
+      "crowded_change_20d": 7.1
     },
     {
       "date": "2025-09-11",
@@ -4370,7 +4282,7 @@
       "name": "非必需消費",
       "crowded_score": 75.7,
       "crowded_change_5d": -4.0,
-      "crowded_change_20d": 2.5
+      "crowded_change_20d": 2.4
     },
     {
       "date": "2025-09-12",
@@ -4386,7 +4298,7 @@
       "name": "通訊服務",
       "crowded_score": 75.3,
       "crowded_change_5d": 2.1,
-      "crowded_change_20d": 3.7
+      "crowded_change_20d": 3.8
     },
     {
       "date": "2025-09-12",
@@ -4400,9 +4312,9 @@
       "date": "2025-09-12",
       "ticker": "XLF",
       "name": "金融",
-      "crowded_score": 62.0,
+      "crowded_score": 62.1,
       "crowded_change_5d": -10.0,
-      "crowded_change_20d": -3.5
+      "crowded_change_20d": -3.6
     },
     {
       "date": "2025-09-12",
@@ -4410,7 +4322,7 @@
       "name": "工業",
       "crowded_score": 61.4,
       "crowded_change_5d": -7.9,
-      "crowded_change_20d": -1.2
+      "crowded_change_20d": -1.3
     },
     {
       "date": "2025-09-12",
@@ -4418,14 +4330,14 @@
       "name": "科技",
       "crowded_score": 73.8,
       "crowded_change_5d": -2.4,
-      "crowded_change_20d": -4.7
+      "crowded_change_20d": -4.9
     },
     {
       "date": "2025-09-12",
       "ticker": "XLP",
       "name": "必需消費",
       "crowded_score": 51.5,
-      "crowded_change_5d": -11.8,
+      "crowded_change_5d": -11.9,
       "crowded_change_20d": -11.1
     },
     {
@@ -4434,23 +4346,23 @@
       "name": "房地產",
       "crowded_score": 56.3,
       "crowded_change_5d": -4.3,
-      "crowded_change_20d": -4.2
+      "crowded_change_20d": -4.3
     },
     {
       "date": "2025-09-12",
       "ticker": "XLU",
       "name": "公用事業",
       "crowded_score": 62.5,
-      "crowded_change_5d": 2.6,
-      "crowded_change_20d": -2.4
+      "crowded_change_5d": 2.7,
+      "crowded_change_20d": -2.3
     },
     {
       "date": "2025-09-12",
       "ticker": "XLV",
       "name": "醫療保健",
-      "crowded_score": 60.8,
-      "crowded_change_5d": -6.5,
-      "crowded_change_20d": -4.1
+      "crowded_score": 60.9,
+      "crowded_change_5d": -6.6,
+      "crowded_change_20d": -4.8
     },
     {
       "date": "2025-09-12",
@@ -4458,7 +4370,7 @@
       "name": "非必需消費",
       "crowded_score": 71.2,
       "crowded_change_5d": -10.3,
-      "crowded_change_20d": 0.1
+      "crowded_change_20d": 0.0
     },
     {
       "date": "2025-09-15",
@@ -4489,24 +4401,24 @@
       "ticker": "XLF",
       "name": "金融",
       "crowded_score": 65.4,
-      "crowded_change_5d": -2.4,
-      "crowded_change_20d": -1.2
+      "crowded_change_5d": -2.5,
+      "crowded_change_20d": -1.3
     },
     {
       "date": "2025-09-15",
       "ticker": "XLI",
       "name": "工業",
       "crowded_score": 63.9,
-      "crowded_change_5d": 0.4,
-      "crowded_change_20d": 4.5
+      "crowded_change_5d": 0.3,
+      "crowded_change_20d": 4.4
     },
     {
       "date": "2025-09-15",
       "ticker": "XLK",
       "name": "科技",
-      "crowded_score": 76.6,
-      "crowded_change_5d": 2.5,
-      "crowded_change_20d": 3.4
+      "crowded_score": 76.7,
+      "crowded_change_5d": 2.4,
+      "crowded_change_20d": 3.3
     },
     {
       "date": "2025-09-15",
@@ -4530,23 +4442,23 @@
       "name": "公用事業",
       "crowded_score": 65.6,
       "crowded_change_5d": 8.1,
-      "crowded_change_20d": -2.8
+      "crowded_change_20d": -2.7
     },
     {
       "date": "2025-09-15",
       "ticker": "XLV",
       "name": "醫療保健",
       "crowded_score": 58.7,
-      "crowded_change_5d": -8.9,
-      "crowded_change_20d": -7.8
+      "crowded_change_5d": -9.0,
+      "crowded_change_20d": -8.4
     },
     {
       "date": "2025-09-15",
       "ticker": "XLY",
       "name": "非必需消費",
-      "crowded_score": 76.6,
+      "crowded_score": 76.7,
       "crowded_change_5d": -1.9,
-      "crowded_change_20d": 8.4
+      "crowded_change_20d": 8.3
     },
     {
       "date": "2025-09-16",
@@ -4578,7 +4490,7 @@
       "name": "金融",
       "crowded_score": 62.6,
       "crowded_change_5d": -2.5,
-      "crowded_change_20d": 5.2
+      "crowded_change_20d": 5.1
     },
     {
       "date": "2025-09-16",
@@ -4586,7 +4498,7 @@
       "name": "工業",
       "crowded_score": 63.7,
       "crowded_change_5d": 1.4,
-      "crowded_change_20d": 5.5
+      "crowded_change_20d": 5.4
     },
     {
       "date": "2025-09-16",
@@ -4594,14 +4506,14 @@
       "name": "科技",
       "crowded_score": 74.2,
       "crowded_change_5d": 0.8,
-      "crowded_change_20d": 1.9
+      "crowded_change_20d": 1.7
     },
     {
       "date": "2025-09-16",
       "ticker": "XLP",
       "name": "必需消費",
       "crowded_score": 55.9,
-      "crowded_change_5d": -0.0,
+      "crowded_change_5d": -0.1,
       "crowded_change_20d": -3.8
     },
     {
@@ -4624,17 +4536,17 @@
       "date": "2025-09-16",
       "ticker": "XLV",
       "name": "醫療保健",
-      "crowded_score": 60.0,
-      "crowded_change_5d": -5.4,
-      "crowded_change_20d": -3.3
+      "crowded_score": 60.1,
+      "crowded_change_5d": -5.5,
+      "crowded_change_20d": -3.9
     },
     {
       "date": "2025-09-16",
       "ticker": "XLY",
       "name": "非必需消費",
       "crowded_score": 72.7,
-      "crowded_change_5d": -0.6,
-      "crowded_change_20d": 4.2
+      "crowded_change_5d": -0.7,
+      "crowded_change_20d": 4.1
     },
     {
       "date": "2025-09-17",
@@ -4664,17 +4576,17 @@
       "date": "2025-09-17",
       "ticker": "XLF",
       "name": "金融",
-      "crowded_score": 73.5,
+      "crowded_score": 73.6,
       "crowded_change_5d": 11.8,
-      "crowded_change_20d": 15.7
+      "crowded_change_20d": 15.6
     },
     {
       "date": "2025-09-17",
       "ticker": "XLI",
       "name": "工業",
-      "crowded_score": 65.4,
+      "crowded_score": 65.5,
       "crowded_change_5d": -4.3,
-      "crowded_change_20d": 4.7
+      "crowded_change_20d": 4.6
     },
     {
       "date": "2025-09-17",
@@ -4682,7 +4594,7 @@
       "name": "科技",
       "crowded_score": 75.3,
       "crowded_change_5d": -5.7,
-      "crowded_change_20d": 1.2
+      "crowded_change_20d": 1.1
     },
     {
       "date": "2025-09-17",
@@ -4706,23 +4618,23 @@
       "name": "公用事業",
       "crowded_score": 60.5,
       "crowded_change_5d": -6.7,
-      "crowded_change_20d": -1.0
+      "crowded_change_20d": -0.9
     },
     {
       "date": "2025-09-17",
       "ticker": "XLV",
       "name": "醫療保健",
-      "crowded_score": 61.7,
+      "crowded_score": 61.8,
       "crowded_change_5d": -1.4,
-      "crowded_change_20d": -3.4
+      "crowded_change_20d": -4.0
     },
     {
       "date": "2025-09-17",
       "ticker": "XLY",
       "name": "非必需消費",
-      "crowded_score": 78.3,
+      "crowded_score": 78.4,
       "crowded_change_5d": 7.4,
-      "crowded_change_20d": 6.9
+      "crowded_change_20d": 6.8
     },
     {
       "date": "2025-09-18",
@@ -4762,22 +4674,22 @@
       "name": "工業",
       "crowded_score": 69.2,
       "crowded_change_5d": -4.4,
-      "crowded_change_20d": 8.0
+      "crowded_change_20d": 7.9
     },
     {
       "date": "2025-09-18",
       "ticker": "XLK",
       "name": "科技",
-      "crowded_score": 79.6,
+      "crowded_score": 79.7,
       "crowded_change_5d": -0.1,
-      "crowded_change_20d": 5.7
+      "crowded_change_20d": 5.6
     },
     {
       "date": "2025-09-18",
       "ticker": "XLP",
       "name": "必需消費",
       "crowded_score": 60.5,
-      "crowded_change_5d": 1.7,
+      "crowded_change_5d": 1.6,
       "crowded_change_20d": -14.0
     },
     {
@@ -4786,7 +4698,7 @@
       "name": "房地產",
       "crowded_score": 59.5,
       "crowded_change_5d": -0.1,
-      "crowded_change_20d": -2.7
+      "crowded_change_20d": -2.8
     },
     {
       "date": "2025-09-18",
@@ -4800,9 +4712,9 @@
       "date": "2025-09-18",
       "ticker": "XLV",
       "name": "醫療保健",
-      "crowded_score": 61.4,
+      "crowded_score": 61.5,
       "crowded_change_5d": -8.2,
-      "crowded_change_20d": -5.7
+      "crowded_change_20d": -5.9
     },
     {
       "date": "2025-09-18",
@@ -4850,15 +4762,15 @@
       "name": "工業",
       "crowded_score": 64.9,
       "crowded_change_5d": 3.5,
-      "crowded_change_20d": 5.9
+      "crowded_change_20d": 5.8
     },
     {
       "date": "2025-09-19",
       "ticker": "XLK",
       "name": "科技",
       "crowded_score": 77.5,
-      "crowded_change_5d": 3.7,
-      "crowded_change_20d": 8.2
+      "crowded_change_5d": 3.6,
+      "crowded_change_20d": 8.1
     },
     {
       "date": "2025-09-19",
@@ -4873,8 +4785,8 @@
       "ticker": "XLRE",
       "name": "房地產",
       "crowded_score": 58.3,
-      "crowded_change_5d": 2.1,
-      "crowded_change_20d": -2.5
+      "crowded_change_5d": 2.0,
+      "crowded_change_20d": -2.6
     },
     {
       "date": "2025-09-19",
@@ -4882,15 +4794,15 @@
       "name": "公用事業",
       "crowded_score": 62.7,
       "crowded_change_5d": 0.2,
-      "crowded_change_20d": 2.0
+      "crowded_change_20d": 2.1
     },
     {
       "date": "2025-09-19",
       "ticker": "XLV",
       "name": "醫療保健",
-      "crowded_score": 61.1,
-      "crowded_change_5d": 0.4,
-      "crowded_change_20d": -5.1
+      "crowded_score": 61.2,
+      "crowded_change_5d": 0.3,
+      "crowded_change_20d": -5.3
     },
     {
       "date": "2025-09-19",
@@ -4898,7 +4810,7 @@
       "name": "非必需消費",
       "crowded_score": 75.5,
       "crowded_change_5d": 4.3,
-      "crowded_change_20d": 9.4
+      "crowded_change_20d": 9.3
     },
     {
       "date": "2025-09-22",
@@ -4936,23 +4848,23 @@
       "date": "2025-09-22",
       "ticker": "XLI",
       "name": "工業",
-      "crowded_score": 61.5,
+      "crowded_score": 61.6,
       "crowded_change_5d": -2.4,
-      "crowded_change_20d": -4.4
+      "crowded_change_20d": -4.5
     },
     {
       "date": "2025-09-22",
       "ticker": "XLK",
       "name": "科技",
       "crowded_score": 77.7,
-      "crowded_change_5d": 1.1,
-      "crowded_change_20d": 6.5
+      "crowded_change_5d": 1.0,
+      "crowded_change_20d": 6.4
     },
     {
       "date": "2025-09-22",
       "ticker": "XLP",
       "name": "必需消費",
-      "crowded_score": 47.5,
+      "crowded_score": 47.6,
       "crowded_change_5d": -5.8,
       "crowded_change_20d": -17.7
     },
@@ -4970,15 +4882,15 @@
       "name": "公用事業",
       "crowded_score": 63.7,
       "crowded_change_5d": -1.9,
-      "crowded_change_20d": -1.0
+      "crowded_change_20d": -0.9
     },
     {
       "date": "2025-09-22",
       "ticker": "XLV",
       "name": "醫療保健",
-      "crowded_score": 59.6,
+      "crowded_score": 59.7,
       "crowded_change_5d": 0.9,
-      "crowded_change_20d": -7.4
+      "crowded_change_20d": -7.6
     },
     {
       "date": "2025-09-22",
@@ -5034,7 +4946,7 @@
       "name": "科技",
       "crowded_score": 75.5,
       "crowded_change_5d": 1.3,
-      "crowded_change_20d": 7.6
+      "crowded_change_20d": 7.5
     },
     {
       "date": "2025-09-23",
@@ -5066,7 +4978,7 @@
       "name": "醫療保健",
       "crowded_score": 59.8,
       "crowded_change_5d": -0.3,
-      "crowded_change_20d": -2.3
+      "crowded_change_20d": -2.4
     },
     {
       "date": "2025-09-23",
@@ -5090,7 +5002,7 @@
       "name": "通訊服務",
       "crowded_score": 70.6,
       "crowded_change_5d": -5.5,
-      "crowded_change_20d": 3.2
+      "crowded_change_20d": 3.3
     },
     {
       "date": "2025-09-24",
@@ -5130,7 +5042,7 @@
       "name": "必需消費",
       "crowded_score": 49.8,
       "crowded_change_5d": -7.0,
-      "crowded_change_20d": -8.5
+      "crowded_change_20d": -8.6
     },
     {
       "date": "2025-09-24",
@@ -5138,7 +5050,7 @@
       "name": "房地產",
       "crowded_score": 56.5,
       "crowded_change_5d": -6.5,
-      "crowded_change_20d": -2.5
+      "crowded_change_20d": -2.6
     },
     {
       "date": "2025-09-24",
@@ -5146,21 +5058,21 @@
       "name": "公用事業",
       "crowded_score": 66.6,
       "crowded_change_5d": 6.0,
-      "crowded_change_20d": 6.8
+      "crowded_change_20d": 6.9
     },
     {
       "date": "2025-09-24",
       "ticker": "XLV",
       "name": "醫療保健",
-      "crowded_score": 56.3,
+      "crowded_score": 56.4,
       "crowded_change_5d": -5.4,
-      "crowded_change_20d": -7.0
+      "crowded_change_20d": -7.1
     },
     {
       "date": "2025-09-24",
       "ticker": "XLY",
       "name": "非必需消費",
-      "crowded_score": 70.0,
+      "crowded_score": 70.1,
       "crowded_change_5d": -8.3,
       "crowded_change_20d": -1.4
     },
@@ -5202,7 +5114,7 @@
       "name": "工業",
       "crowded_score": 59.1,
       "crowded_change_5d": -10.1,
-      "crowded_change_20d": -2.3
+      "crowded_change_20d": -2.4
     },
     {
       "date": "2025-09-25",
@@ -5210,7 +5122,7 @@
       "name": "科技",
       "crowded_score": 75.0,
       "crowded_change_5d": -4.6,
-      "crowded_change_20d": 4.8
+      "crowded_change_20d": 4.7
     },
     {
       "date": "2025-09-25",
@@ -5218,7 +5130,7 @@
       "name": "必需消費",
       "crowded_score": 48.7,
       "crowded_change_5d": -11.8,
-      "crowded_change_20d": -5.5
+      "crowded_change_20d": -5.6
     },
     {
       "date": "2025-09-25",
@@ -5240,9 +5152,9 @@
       "date": "2025-09-25",
       "ticker": "XLV",
       "name": "醫療保健",
-      "crowded_score": 57.5,
+      "crowded_score": 57.6,
       "crowded_change_5d": -3.9,
-      "crowded_change_20d": -3.1
+      "crowded_change_20d": -3.2
     },
     {
       "date": "2025-09-25",
@@ -5282,7 +5194,7 @@
       "name": "金融",
       "crowded_score": 63.6,
       "crowded_change_5d": -9.8,
-      "crowded_change_20d": -2.2
+      "crowded_change_20d": -2.3
     },
     {
       "date": "2025-09-26",
@@ -5297,8 +5209,8 @@
       "ticker": "XLK",
       "name": "科技",
       "crowded_score": 72.7,
-      "crowded_change_5d": -4.8,
-      "crowded_change_20d": -0.5
+      "crowded_change_5d": -4.7,
+      "crowded_change_20d": -0.6
     },
     {
       "date": "2025-09-26",
@@ -5322,15 +5234,15 @@
       "name": "公用事業",
       "crowded_score": 66.3,
       "crowded_change_5d": 3.7,
-      "crowded_change_20d": 8.6
+      "crowded_change_20d": 8.7
     },
     {
       "date": "2025-09-26",
       "ticker": "XLV",
       "name": "醫療保健",
-      "crowded_score": 57.0,
-      "crowded_change_5d": -4.1,
-      "crowded_change_20d": -3.0
+      "crowded_score": 57.1,
+      "crowded_change_5d": -4.2,
+      "crowded_change_20d": -3.2
     },
     {
       "date": "2025-09-26",
@@ -5378,7 +5290,7 @@
       "name": "工業",
       "crowded_score": 61.7,
       "crowded_change_5d": 0.2,
-      "crowded_change_20d": -0.6
+      "crowded_change_20d": -0.7
     },
     {
       "date": "2025-09-29",
@@ -5410,15 +5322,15 @@
       "name": "公用事業",
       "crowded_score": 67.0,
       "crowded_change_5d": 3.2,
-      "crowded_change_20d": 9.1
+      "crowded_change_20d": 9.2
     },
     {
       "date": "2025-09-29",
       "ticker": "XLV",
       "name": "醫療保健",
       "crowded_score": 55.3,
-      "crowded_change_5d": -4.3,
-      "crowded_change_20d": -7.0
+      "crowded_change_5d": -4.4,
+      "crowded_change_20d": -7.1
     },
     {
       "date": "2025-09-29",
@@ -5442,7 +5354,7 @@
       "name": "通訊服務",
       "crowded_score": 71.6,
       "crowded_change_5d": 0.5,
-      "crowded_change_20d": -4.0
+      "crowded_change_20d": -3.9
     },
     {
       "date": "2025-09-30",
@@ -5457,14 +5369,14 @@
       "ticker": "XLF",
       "name": "金融",
       "crowded_score": 63.1,
-      "crowded_change_5d": 0.7,
-      "crowded_change_20d": -4.4
+      "crowded_change_5d": 0.6,
+      "crowded_change_20d": -4.5
     },
     {
       "date": "2025-09-30",
       "ticker": "XLI",
       "name": "工業",
-      "crowded_score": 64.8,
+      "crowded_score": 64.9,
       "crowded_change_5d": 0.4,
       "crowded_change_20d": 4.0
     },
@@ -5473,7 +5385,7 @@
       "ticker": "XLK",
       "name": "科技",
       "crowded_score": 76.1,
-      "crowded_change_5d": 0.6,
+      "crowded_change_5d": 0.7,
       "crowded_change_20d": 4.0
     },
     {
@@ -5488,7 +5400,7 @@
       "date": "2025-09-30",
       "ticker": "XLRE",
       "name": "房地產",
-      "crowded_score": 60.1,
+      "crowded_score": 60.2,
       "crowded_change_5d": 4.2,
       "crowded_change_20d": -2.0
     },
@@ -5504,9 +5416,9 @@
       "date": "2025-09-30",
       "ticker": "XLV",
       "name": "醫療保健",
-      "crowded_score": 71.3,
-      "crowded_change_5d": 11.6,
-      "crowded_change_20d": 5.5
+      "crowded_score": 71.4,
+      "crowded_change_5d": 11.5,
+      "crowded_change_20d": 5.3
     },
     {
       "date": "2025-09-30",
@@ -5544,7 +5456,7 @@
       "date": "2025-10-01",
       "ticker": "XLF",
       "name": "金融",
-      "crowded_score": 60.6,
+      "crowded_score": 60.7,
       "crowded_change_5d": 0.6,
       "crowded_change_20d": -5.3
     },
@@ -5561,8 +5473,8 @@
       "ticker": "XLK",
       "name": "科技",
       "crowded_score": 75.8,
-      "crowded_change_5d": 4.8,
-      "crowded_change_20d": 6.2
+      "crowded_change_5d": 4.7,
+      "crowded_change_20d": 6.1
     },
     {
       "date": "2025-10-01",
@@ -5576,7 +5488,7 @@
       "date": "2025-10-01",
       "ticker": "XLRE",
       "name": "房地產",
-      "crowded_score": 65.5,
+      "crowded_score": 65.6,
       "crowded_change_5d": 9.0,
       "crowded_change_20d": 8.5
     },
@@ -5594,7 +5506,7 @@
       "name": "醫療保健",
       "crowded_score": 79.0,
       "crowded_change_5d": 22.7,
-      "crowded_change_20d": 15.5
+      "crowded_change_20d": 15.3
     },
     {
       "date": "2025-10-01",
@@ -5680,9 +5592,9 @@
       "date": "2025-10-02",
       "ticker": "XLV",
       "name": "醫療保健",
-      "crowded_score": 71.6,
+      "crowded_score": 71.7,
       "crowded_change_5d": 14.1,
-      "crowded_change_20d": 8.0
+      "crowded_change_20d": 7.9
     },
     {
       "date": "2025-10-02",
@@ -5770,7 +5682,7 @@
       "name": "醫療保健",
       "crowded_score": 73.8,
       "crowded_change_5d": 16.8,
-      "crowded_change_20d": 6.5
+      "crowded_change_20d": 6.4
     },
     {
       "date": "2025-10-03",
@@ -5826,7 +5738,7 @@
       "name": "科技",
       "crowded_score": 76.0,
       "crowded_change_5d": 3.0,
-      "crowded_change_20d": 1.8
+      "crowded_change_20d": 1.7
     },
     {
       "date": "2025-10-06",
@@ -5850,7 +5762,7 @@
       "name": "公用事業",
       "crowded_score": 72.3,
       "crowded_change_5d": 5.4,
-      "crowded_change_20d": 14.8
+      "crowded_change_20d": 14.9
     },
     {
       "date": "2025-10-06",
@@ -5858,15 +5770,15 @@
       "name": "醫療保健",
       "crowded_score": 70.1,
       "crowded_change_5d": 14.8,
-      "crowded_change_20d": 2.5
+      "crowded_change_20d": 2.4
     },
     {
       "date": "2025-10-06",
       "ticker": "XLY",
       "name": "非必需消費",
-      "crowded_score": 67.6,
+      "crowded_score": 67.7,
       "crowded_change_5d": -2.7,
-      "crowded_change_20d": -10.8
+      "crowded_change_20d": -10.9
     },
     {
       "date": "2025-10-07",
@@ -5913,7 +5825,7 @@
       "ticker": "XLK",
       "name": "科技",
       "crowded_score": 72.5,
-      "crowded_change_5d": -3.6,
+      "crowded_change_5d": -3.7,
       "crowded_change_20d": -0.9
     },
     {
@@ -5946,7 +5858,7 @@
       "name": "醫療保健",
       "crowded_score": 69.6,
       "crowded_change_5d": -1.7,
-      "crowded_change_20d": 4.1
+      "crowded_change_20d": 4.0
     },
     {
       "date": "2025-10-07",
@@ -5954,7 +5866,7 @@
       "name": "非必需消費",
       "crowded_score": 65.9,
       "crowded_change_5d": -4.1,
-      "crowded_change_20d": -7.4
+      "crowded_change_20d": -7.5
     },
     {
       "date": "2025-10-08",
@@ -5993,7 +5905,7 @@
       "ticker": "XLI",
       "name": "工業",
       "crowded_score": 66.6,
-      "crowded_change_5d": 2.2,
+      "crowded_change_5d": 2.1,
       "crowded_change_20d": -3.2
     },
     {
@@ -6034,7 +5946,7 @@
       "name": "醫療保健",
       "crowded_score": 66.5,
       "crowded_change_5d": -12.5,
-      "crowded_change_20d": 3.4
+      "crowded_change_20d": 3.3
     },
     {
       "date": "2025-10-08",
@@ -6042,7 +5954,7 @@
       "name": "非必需消費",
       "crowded_score": 60.3,
       "crowded_change_5d": -9.3,
-      "crowded_change_20d": -10.6
+      "crowded_change_20d": -10.7
     },
     {
       "date": "2025-10-09",
@@ -6074,7 +5986,7 @@
       "name": "金融",
       "crowded_score": 61.0,
       "crowded_change_5d": 1.6,
-      "crowded_change_20d": -6.7
+      "crowded_change_20d": -6.8
     },
     {
       "date": "2025-10-09",
@@ -6122,7 +6034,7 @@
       "name": "醫療保健",
       "crowded_score": 65.5,
       "crowded_change_5d": -6.2,
-      "crowded_change_20d": -4.1
+      "crowded_change_20d": -4.2
     },
     {
       "date": "2025-10-09",
@@ -6248,7 +6160,7 @@
       "date": "2025-10-13",
       "ticker": "XLF",
       "name": "金融",
-      "crowded_score": 60.4,
+      "crowded_score": 60.5,
       "crowded_change_5d": -2.0,
       "crowded_change_20d": -4.9
     },
@@ -6274,7 +6186,7 @@
       "name": "必需消費",
       "crowded_score": 52.1,
       "crowded_change_5d": 5.1,
-      "crowded_change_20d": -1.2
+      "crowded_change_20d": -1.3
     },
     {
       "date": "2025-10-13",
@@ -6290,7 +6202,7 @@
       "name": "公用事業",
       "crowded_score": 71.7,
       "crowded_change_5d": -0.6,
-      "crowded_change_20d": 6.1
+      "crowded_change_20d": 6.2
     },
     {
       "date": "2025-10-13",
@@ -6298,7 +6210,7 @@
       "name": "醫療保健",
       "crowded_score": 62.7,
       "crowded_change_5d": -7.4,
-      "crowded_change_20d": 4.0
+      "crowded_change_20d": 3.9
     },
     {
       "date": "2025-10-13",
@@ -6306,7 +6218,7 @@
       "name": "非必需消費",
       "crowded_score": 61.2,
       "crowded_change_5d": -6.5,
-      "crowded_change_20d": -15.4
+      "crowded_change_20d": -15.5
     },
     {
       "date": "2025-10-14",
@@ -6338,7 +6250,7 @@
       "name": "金融",
       "crowded_score": 70.3,
       "crowded_change_5d": 7.9,
-      "crowded_change_20d": 7.7
+      "crowded_change_20d": 7.6
     },
     {
       "date": "2025-10-14",
@@ -6346,7 +6258,7 @@
       "name": "工業",
       "crowded_score": 63.0,
       "crowded_change_5d": -3.4,
-      "crowded_change_20d": -0.6
+      "crowded_change_20d": -0.7
     },
     {
       "date": "2025-10-14",
@@ -6392,7 +6304,7 @@
       "date": "2025-10-14",
       "ticker": "XLY",
       "name": "非必需消費",
-      "crowded_score": 62.9,
+      "crowded_score": 63.0,
       "crowded_change_5d": -3.0,
       "crowded_change_20d": -9.7
     },
@@ -6425,14 +6337,14 @@
       "ticker": "XLF",
       "name": "金融",
       "crowded_score": 62.4,
-      "crowded_change_5d": 3.8,
+      "crowded_change_5d": 3.7,
       "crowded_change_20d": -11.2
     },
     {
       "date": "2025-10-15",
       "ticker": "XLI",
       "name": "工業",
-      "crowded_score": 60.7,
+      "crowded_score": 60.8,
       "crowded_change_5d": -5.9,
       "crowded_change_20d": -4.7
     },
@@ -6474,7 +6386,7 @@
       "name": "醫療保健",
       "crowded_score": 63.0,
       "crowded_change_5d": -3.5,
-      "crowded_change_20d": 1.3
+      "crowded_change_20d": 1.2
     },
     {
       "date": "2025-10-15",
@@ -6538,7 +6450,7 @@
       "name": "必需消費",
       "crowded_score": 55.8,
       "crowded_change_5d": 6.4,
-      "crowded_change_20d": -4.6
+      "crowded_change_20d": -4.7
     },
     {
       "date": "2025-10-16",
@@ -6562,7 +6474,7 @@
       "name": "醫療保健",
       "crowded_score": 66.4,
       "crowded_change_5d": 0.9,
-      "crowded_change_20d": 5.0
+      "crowded_change_20d": 4.9
     },
     {
       "date": "2025-10-16",
@@ -6602,7 +6514,7 @@
       "name": "金融",
       "crowded_score": 60.7,
       "crowded_change_5d": -2.5,
-      "crowded_change_20d": -12.6
+      "crowded_change_20d": -12.7
     },
     {
       "date": "2025-10-17",
@@ -6650,7 +6562,7 @@
       "name": "醫療保健",
       "crowded_score": 66.0,
       "crowded_change_5d": -0.1,
-      "crowded_change_20d": 4.9
+      "crowded_change_20d": 4.8
     },
     {
       "date": "2025-10-17",
@@ -6690,7 +6602,7 @@
       "name": "金融",
       "crowded_score": 59.9,
       "crowded_change_5d": -0.5,
-      "crowded_change_20d": -6.4
+      "crowded_change_20d": -6.5
     },
     {
       "date": "2025-10-20",
@@ -6738,7 +6650,7 @@
       "name": "醫療保健",
       "crowded_score": 67.7,
       "crowded_change_5d": 5.0,
-      "crowded_change_20d": 8.1
+      "crowded_change_20d": 8.0
     },
     {
       "date": "2025-10-20",
@@ -6746,7 +6658,7 @@
       "name": "非必需消費",
       "crowded_score": 59.9,
       "crowded_change_5d": -1.3,
-      "crowded_change_20d": -12.8
+      "crowded_change_20d": -12.9
     },
     {
       "date": "2025-10-21",
@@ -6810,7 +6722,7 @@
       "name": "房地產",
       "crowded_score": 64.9,
       "crowded_change_5d": 3.1,
-      "crowded_change_20d": 9.0
+      "crowded_change_20d": 8.9
     },
     {
       "date": "2025-10-21",
@@ -6826,7 +6738,7 @@
       "name": "醫療保健",
       "crowded_score": 67.2,
       "crowded_change_5d": 3.2,
-      "crowded_change_20d": 7.5
+      "crowded_change_20d": 7.4
     },
     {
       "date": "2025-10-21",
@@ -6914,7 +6826,7 @@
       "name": "醫療保健",
       "crowded_score": 71.5,
       "crowded_change_5d": 8.5,
-      "crowded_change_20d": 15.2
+      "crowded_change_20d": 15.1
     },
     {
       "date": "2025-10-22",
@@ -6954,7 +6866,7 @@
       "name": "金融",
       "crowded_score": 55.1,
       "crowded_change_5d": -7.4,
-      "crowded_change_20d": -4.0
+      "crowded_change_20d": -4.1
     },
     {
       "date": "2025-10-23",
@@ -7042,7 +6954,7 @@
       "name": "金融",
       "crowded_score": 59.2,
       "crowded_change_5d": -1.5,
-      "crowded_change_20d": -4.3
+      "crowded_change_20d": -4.4
     },
     {
       "date": "2025-10-24",
@@ -7146,7 +7058,7 @@
       "name": "科技",
       "crowded_score": 73.8,
       "crowded_change_5d": 4.7,
-      "crowded_change_20d": 0.9
+      "crowded_change_20d": 0.8
     },
     {
       "date": "2025-10-27",
@@ -7178,7 +7090,7 @@
       "name": "醫療保健",
       "crowded_score": 67.1,
       "crowded_change_5d": -0.6,
-      "crowded_change_20d": 11.9
+      "crowded_change_20d": 11.8
     },
     {
       "date": "2025-10-27",
@@ -7352,7 +7264,7 @@
       "date": "2025-10-29",
       "ticker": "XLV",
       "name": "醫療保健",
-      "crowded_score": 69.0,
+      "crowded_score": 69.1,
       "crowded_change_5d": -2.5,
       "crowded_change_20d": -10.0
     },
@@ -7360,7 +7272,7 @@
       "date": "2025-10-29",
       "ticker": "XLY",
       "name": "非必需消費",
-      "crowded_score": 66.2,
+      "crowded_score": 66.3,
       "crowded_change_5d": 1.0,
       "crowded_change_20d": -3.4
     },
@@ -7448,7 +7360,7 @@
       "date": "2025-10-30",
       "ticker": "XLY",
       "name": "非必需消費",
-      "crowded_score": 62.8,
+      "crowded_score": 62.9,
       "crowded_change_5d": -1.7,
       "crowded_change_20d": -5.7
     },
@@ -7482,7 +7394,7 @@
       "name": "金融",
       "crowded_score": 59.4,
       "crowded_change_5d": 0.2,
-      "crowded_change_20d": -2.6
+      "crowded_change_20d": -2.7
     },
     {
       "date": "2025-10-31",
@@ -7521,7 +7433,7 @@
       "ticker": "XLU",
       "name": "公用事業",
       "crowded_score": 57.4,
-      "crowded_change_5d": -12.8,
+      "crowded_change_5d": -12.9,
       "crowded_change_20d": -16.9
     },
     {
@@ -7578,7 +7490,7 @@
       "name": "工業",
       "crowded_score": 63.3,
       "crowded_change_5d": 2.2,
-      "crowded_change_20d": -0.9
+      "crowded_change_20d": -1.0
     },
     {
       "date": "2025-11-03",
@@ -7618,7 +7530,7 @@
       "name": "醫療保健",
       "crowded_score": 69.1,
       "crowded_change_5d": 2.0,
-      "crowded_change_20d": -0.9
+      "crowded_change_20d": -1.0
     },
     {
       "date": "2025-11-03",
@@ -7690,7 +7602,7 @@
       "name": "房地產",
       "crowded_score": 58.3,
       "crowded_change_5d": -9.6,
-      "crowded_change_20d": -0.1
+      "crowded_change_20d": -0.2
     },
     {
       "date": "2025-11-04",
@@ -7890,7 +7802,7 @@
       "name": "非必需消費",
       "crowded_score": 64.5,
       "crowded_change_5d": 1.6,
-      "crowded_change_20d": 3.9
+      "crowded_change_20d": 3.8
     },
     {
       "date": "2025-11-07",
@@ -8058,7 +7970,7 @@
       "name": "醫療保健",
       "crowded_score": 75.2,
       "crowded_change_5d": 6.1,
-      "crowded_change_20d": 12.6
+      "crowded_change_20d": 12.5
     },
     {
       "date": "2025-11-10",
@@ -8409,7 +8321,7 @@
       "ticker": "XLV",
       "name": "醫療保健",
       "crowded_score": 77.2,
-      "crowded_change_5d": 0.9,
+      "crowded_change_5d": 0.8,
       "crowded_change_20d": 11.2
     },
     {
@@ -8458,7 +8370,7 @@
       "name": "工業",
       "crowded_score": 60.9,
       "crowded_change_5d": -2.7,
-      "crowded_change_20d": 0.2
+      "crowded_change_20d": 0.1
     },
     {
       "date": "2025-11-17",
@@ -8538,7 +8450,7 @@
       "name": "金融",
       "crowded_score": 59.8,
       "crowded_change_5d": -0.4,
-      "crowded_change_20d": 3.0
+      "crowded_change_20d": 2.9
     },
     {
       "date": "2025-11-18",
@@ -9106,7 +9018,7 @@
       "name": "公用事業",
       "crowded_score": 61.0,
       "crowded_change_5d": -1.0,
-      "crowded_change_20d": -5.4
+      "crowded_change_20d": -5.3
     },
     {
       "date": "2025-11-26",
@@ -18386,7 +18298,7 @@
       "name": "能源",
       "crowded_score": 65.9,
       "crowded_change_5d": 4.9,
-      "crowded_change_20d": -5.8
+      "crowded_change_20d": -5.7
     },
     {
       "date": "2026-05-01",
@@ -18464,9 +18376,9 @@
       "date": "2026-05-04",
       "ticker": "XLC",
       "name": "通訊服務",
-      "crowded_score": 56.2,
-      "crowded_change_5d": 0.9,
-      "crowded_change_20d": 9.4
+      "crowded_score": 56.4,
+      "crowded_change_5d": 1.0,
+      "crowded_change_20d": 9.6
     },
     {
       "date": "2026-05-04",
@@ -18496,9 +18408,9 @@
       "date": "2026-05-04",
       "ticker": "XLK",
       "name": "科技",
-      "crowded_score": 71.1,
-      "crowded_change_5d": 1.9,
-      "crowded_change_20d": 24.7
+      "crowded_score": 71.2,
+      "crowded_change_5d": 2.0,
+      "crowded_change_20d": 24.8
     },
     {
       "date": "2026-05-04",
@@ -18529,7 +18441,7 @@
       "ticker": "XLV",
       "name": "醫療保健",
       "crowded_score": 47.1,
-      "crowded_change_5d": 7.0,
+      "crowded_change_5d": 7.1,
       "crowded_change_20d": 4.2
     },
     {
@@ -18539,10 +18451,98 @@
       "crowded_score": 56.9,
       "crowded_change_5d": 3.0,
       "crowded_change_20d": 15.6
+    },
+    {
+      "date": "2026-05-05",
+      "ticker": "XLB",
+      "name": "原物料",
+      "crowded_score": 58.4,
+      "crowded_change_5d": 0.6,
+      "crowded_change_20d": 0.5
+    },
+    {
+      "date": "2026-05-05",
+      "ticker": "XLC",
+      "name": "通訊服務",
+      "crowded_score": 56.1,
+      "crowded_change_5d": 0.8,
+      "crowded_change_20d": 8.7
+    },
+    {
+      "date": "2026-05-05",
+      "ticker": "XLE",
+      "name": "能源",
+      "crowded_score": 66.1,
+      "crowded_change_5d": 1.9,
+      "crowded_change_20d": -4.7
+    },
+    {
+      "date": "2026-05-05",
+      "ticker": "XLF",
+      "name": "金融",
+      "crowded_score": 49.8,
+      "crowded_change_5d": -1.3,
+      "crowded_change_20d": 8.7
+    },
+    {
+      "date": "2026-05-05",
+      "ticker": "XLI",
+      "name": "工業",
+      "crowded_score": 56.7,
+      "crowded_change_5d": -1.6,
+      "crowded_change_20d": 3.1
+    },
+    {
+      "date": "2026-05-05",
+      "ticker": "XLK",
+      "name": "科技",
+      "crowded_score": 73.5,
+      "crowded_change_5d": 7.7,
+      "crowded_change_20d": 26.8
+    },
+    {
+      "date": "2026-05-05",
+      "ticker": "XLP",
+      "name": "必需消費",
+      "crowded_score": 54.1,
+      "crowded_change_5d": 1.1,
+      "crowded_change_20d": 3.2
+    },
+    {
+      "date": "2026-05-05",
+      "ticker": "XLRE",
+      "name": "房地產",
+      "crowded_score": 66.6,
+      "crowded_change_5d": 1.3,
+      "crowded_change_20d": 9.7
+    },
+    {
+      "date": "2026-05-05",
+      "ticker": "XLU",
+      "name": "公用事業",
+      "crowded_score": 62.4,
+      "crowded_change_5d": 2.5,
+      "crowded_change_20d": 1.3
+    },
+    {
+      "date": "2026-05-05",
+      "ticker": "XLV",
+      "name": "醫療保健",
+      "crowded_score": 46.1,
+      "crowded_change_5d": 2.8,
+      "crowded_change_20d": -0.4
+    },
+    {
+      "date": "2026-05-05",
+      "ticker": "XLY",
+      "name": "非必需消費",
+      "crowded_score": 54.0,
+      "crowded_change_5d": 2.0,
+      "crowded_change_20d": 13.9
     }
   ],
   "update_policy": {
-    "last_refresh": "2026-05-04 22:02 UTC",
+    "last_refresh": "2026-05-05 22:04 UTC",
     "cadence": "ETF 價格、成交量、相關性與 Reddit proxy 可用日更流程重建；AAII 為週更；BofA、Vanda 與私人信用等低頻模組仍需按月或按季補錄。",
     "delivery_mode": "目前網站仍是靜態發佈模式：頁面可展示最新資料檔，但公開站若要持續更新，仍需要定時重建資料並重新發佈，或升級為含後端的自動抓取架構。",
     "analysis_flow": "先看最近刷新與資料頻率，再點擊板塊切換歷史圖，把 Current Score、5 日、20 日三種視角交叉比對，最後再讀右側自動結論。",
@@ -18552,481 +18552,481 @@
   },
   "social_posts": [
     {
-      "subreddit": "stocks",
-      "title": "Question on two funds.",
-      "published": "2026-05-04T22:01:56+00:00",
-      "positive_hits": 0,
-      "negative_hits": 0,
-      "score": 0
-    },
-    {
       "subreddit": "investing",
-      "title": "$15K to invest 31 yo portfolio",
-      "published": "2026-05-04T22:01:04+00:00",
+      "title": "Can someone explain why prices go up? Is it just because it’s a norm to join “good” companies?",
+      "published": "2026-05-05T22:04:18+00:00",
       "positive_hits": 0,
       "negative_hits": 0,
       "score": 0
     },
     {
       "subreddit": "wallstreetbets",
-      "title": "It's not too late to join",
-      "published": "2026-05-04T22:00:24+00:00",
+      "title": "Sexiest Woman of All Time",
+      "published": "2026-05-05T22:03:30+00:00",
       "positive_hits": 0,
       "negative_hits": 0,
       "score": 0
     },
     {
       "subreddit": "wallstreetbets",
-      "title": "1.6k to 20.5k in 3 months",
-      "published": "2026-05-04T21:55:33+00:00",
-      "positive_hits": 0,
-      "negative_hits": 0,
-      "score": 0
-    },
-    {
-      "subreddit": "wallstreetbets",
-      "title": "Believe it or not… calls",
-      "published": "2026-05-04T21:55:28+00:00",
-      "positive_hits": 0,
-      "negative_hits": 0,
-      "score": 0
-    },
-    {
-      "subreddit": "wallstreetbets",
-      "title": "I’m not going big, just trying to make around 5% a day and then go meet women from different countries, lol",
-      "published": "2026-05-04T21:47:11+00:00",
-      "positive_hits": 0,
-      "negative_hits": 0,
-      "score": 0
-    },
-    {
-      "subreddit": "wallstreetbets",
-      "title": "The good old days until i lost it all",
-      "published": "2026-05-04T21:39:55+00:00",
+      "title": "AMD Loss Porn",
+      "published": "2026-05-05T22:01:52+00:00",
       "positive_hits": 0,
       "negative_hits": 0,
       "score": 0
     },
     {
       "subreddit": "stocks",
-      "title": "QCOM - is the hyperscaler META?",
-      "published": "2026-05-04T21:27:47+00:00",
+      "title": "Alphabet INC (googl) has overtaken nvidia !",
+      "published": "2026-05-05T21:56:54+00:00",
       "positive_hits": 0,
       "negative_hits": 0,
       "score": 0
     },
     {
       "subreddit": "wallstreetbets",
-      "title": "Biggest Position In The Small Account Is on 🔥",
-      "published": "2026-05-04T21:22:13+00:00",
+      "title": "Hows your YTD going?",
+      "published": "2026-05-05T21:46:30+00:00",
       "positive_hits": 0,
       "negative_hits": 0,
       "score": 0
     },
     {
       "subreddit": "wallstreetbets",
-      "title": "Let's make Nana proud...",
-      "published": "2026-05-04T21:06:59+00:00",
+      "title": "Bought my first two stocks yesterday 1min before market close.",
+      "published": "2026-05-05T21:43:29+00:00",
       "positive_hits": 0,
       "negative_hits": 0,
       "score": 0
     },
     {
       "subreddit": "wallstreetbets",
-      "title": "Elephant Trade 35k to 1.18M ✅",
-      "published": "2026-05-04T20:54:23+00:00",
-      "positive_hits": 0,
+      "title": "AMD Bulls",
+      "published": "2026-05-05T21:42:33+00:00",
+      "positive_hits": 1,
       "negative_hits": 0,
-      "score": 0
+      "score": 1
     },
     {
-      "subreddit": "investing",
-      "title": "$200k in divorce. What to do?",
-      "published": "2026-05-04T20:48:55+00:00",
-      "positive_hits": 0,
-      "negative_hits": 0,
-      "score": 0
-    },
-    {
-      "subreddit": "stocks",
-      "title": "Husband owns a good chunk of $UPS, do we need to just keep it?",
-      "published": "2026-05-04T20:44:47+00:00",
+      "subreddit": "wallstreetbets",
+      "title": "My Second Million Dollar Play 40k To $1,000,000 In Less Than A Year",
+      "published": "2026-05-05T21:25:47+00:00",
       "positive_hits": 0,
       "negative_hits": 0,
       "score": 0
     },
     {
       "subreddit": "wallstreetbets",
-      "title": "$FISV Yolo - Earnings tomorrow",
-      "published": "2026-05-04T20:38:28+00:00",
-      "positive_hits": 0,
-      "negative_hits": 0,
-      "score": 0
-    },
-    {
-      "subreddit": "investing",
-      "title": "SpaceX IPO effect: Will we begin to have index based funds, but they don't invest in particular index companies?",
-      "published": "2026-05-04T20:37:07+00:00",
-      "positive_hits": 0,
-      "negative_hits": 0,
-      "score": 0
-    },
-    {
-      "subreddit": "stocks",
-      "title": "Palantir Q1 revenue jumps 85% to record on booming US business",
-      "published": "2026-05-04T20:14:24+00:00",
+      "title": "NVDA looking at GOOGL after taking the #1",
+      "published": "2026-05-05T21:25:32+00:00",
       "positive_hits": 0,
       "negative_hits": 0,
       "score": 0
     },
     {
       "subreddit": "wallstreetbets",
-      "title": "FIG YOLO - 1M Position, 25% Short Interest, May 4th 2026, Earnings Next Week",
-      "published": "2026-05-04T20:12:59+00:00",
+      "title": "I went balls deep. Now what?",
+      "published": "2026-05-05T21:23:30+00:00",
+      "positive_hits": 0,
+      "negative_hits": 0,
+      "score": 0
+    },
+    {
+      "subreddit": "wallstreetbets",
+      "title": "SEC considering giving companies option to report semi-annually.",
+      "published": "2026-05-05T21:20:24+00:00",
+      "positive_hits": 0,
+      "negative_hits": 0,
+      "score": 0
+    },
+    {
+      "subreddit": "wallstreetbets",
+      "title": "Finally in the green after ~10yrs",
+      "published": "2026-05-05T21:08:24+00:00",
+      "positive_hits": 0,
+      "negative_hits": 0,
+      "score": 0
+    },
+    {
+      "subreddit": "wallstreetbets",
+      "title": "Anthropic commits to spending $200 billion on Google's cloud and chips, the Information reports",
+      "published": "2026-05-05T20:59:16+00:00",
+      "positive_hits": 0,
+      "negative_hits": 0,
+      "score": 0
+    },
+    {
+      "subreddit": "options",
+      "title": "Will a PBR Petrobras call option get exercised and will I miss out the dividends?",
+      "published": "2026-05-05T20:54:18+00:00",
       "positive_hits": 0,
       "negative_hits": 1,
       "score": -1
     },
     {
-      "subreddit": "stocks",
-      "title": "US considering AI regulation, does this change the trade?",
-      "published": "2026-05-04T19:58:38+00:00",
+      "subreddit": "options",
+      "title": "I am pretty confident in $IREN Calls before the Earnings come. Need feedback tho. :)",
+      "published": "2026-05-05T20:50:36+00:00",
       "positive_hits": 0,
       "negative_hits": 0,
       "score": 0
     },
     {
       "subreddit": "wallstreetbets",
-      "title": "What Are Your Moves Tomorrow, May 05, 2026",
-      "published": "2026-05-04T19:57:10+00:00",
-      "positive_hits": 0,
+      "title": "Is this options flow on $LTH bullish? Can’t figure out if fellow degens are piling in or someone knows something…",
+      "published": "2026-05-05T20:49:23+00:00",
+      "positive_hits": 2,
       "negative_hits": 0,
-      "score": 0
+      "score": 2
     },
     {
-      "subreddit": "investing",
-      "title": "US considering AI regulation, does this change the trade?",
-      "published": "2026-05-04T19:55:49+00:00",
-      "positive_hits": 0,
-      "negative_hits": 0,
-      "score": 0
-    },
-    {
-      "subreddit": "stocks",
-      "title": "US and Iran trade shots in Strait of Hormuz, Lebanon is on fire, oil threatening to spike and the Nasdaq-100 casually drifting toward 28000",
-      "published": "2026-05-04T19:46:10+00:00",
-      "positive_hits": 0,
-      "negative_hits": 0,
-      "score": 0
-    },
-    {
-      "subreddit": "stocks",
-      "title": "Should I take the gains? Or hold?",
-      "published": "2026-05-04T19:41:54+00:00",
+      "subreddit": "wallstreetbets",
+      "title": "AMD KEEP GOING",
+      "published": "2026-05-05T20:47:20+00:00",
       "positive_hits": 0,
       "negative_hits": 0,
       "score": 0
     },
     {
       "subreddit": "wallstreetbets",
-      "title": "AXTI 380% gain after 4 months",
-      "published": "2026-05-04T19:34:35+00:00",
-      "positive_hits": 0,
-      "negative_hits": 0,
-      "score": 0
-    },
-    {
-      "subreddit": "stocks",
-      "title": "BOOM! Maybe not today, maybe not this week, but it will happen, i.e., I am talking about Amazon.",
-      "published": "2026-05-04T19:00:12+00:00",
-      "positive_hits": 0,
-      "negative_hits": 0,
-      "score": 0
-    },
-    {
-      "subreddit": "investing",
-      "title": "Google a battu le record mondial de bénéfice net.",
-      "published": "2026-05-04T18:57:03+00:00",
+      "title": "Went for shares instead of options for this one (MU)",
+      "published": "2026-05-05T20:46:38+00:00",
       "positive_hits": 0,
       "negative_hits": 0,
       "score": 0
     },
     {
       "subreddit": "wallstreetbets",
-      "title": "Rate my setup",
-      "published": "2026-05-04T18:52:44+00:00",
+      "title": "That feeling when you hit your entry after being down >20%",
+      "published": "2026-05-05T20:42:34+00:00",
+      "positive_hits": 0,
+      "negative_hits": 0,
+      "score": 0
+    },
+    {
+      "subreddit": "wallstreetbets",
+      "title": "My Second Million Dollar Play",
+      "published": "2026-05-05T20:41:19+00:00",
+      "positive_hits": 0,
+      "negative_hits": 0,
+      "score": 0
+    },
+    {
+      "subreddit": "stocks",
+      "title": "Memory and Memory Adjacent Stocks for the Win",
+      "published": "2026-05-05T20:37:25+00:00",
+      "positive_hits": 0,
+      "negative_hits": 0,
+      "score": 0
+    },
+    {
+      "subreddit": "wallstreetbets",
+      "title": "Imagine I wasn’t a chickenshit",
+      "published": "2026-05-05T20:34:34+00:00",
+      "positive_hits": 0,
+      "negative_hits": 0,
+      "score": 0
+    },
+    {
+      "subreddit": "wallstreetbets",
+      "title": "FIG YOLO - Diamond Hands - May 5th 2026",
+      "published": "2026-05-05T20:32:33+00:00",
+      "positive_hits": 0,
+      "negative_hits": 0,
+      "score": 0
+    },
+    {
+      "subreddit": "wallstreetbets",
+      "title": "Advanced Money Duplicator strikes again. Been telling y’all for a month.",
+      "published": "2026-05-05T20:31:59+00:00",
+      "positive_hits": 0,
+      "negative_hits": 0,
+      "score": 0
+    },
+    {
+      "subreddit": "wallstreetbets",
+      "title": "Google just passed Nvidia to become the largest Market Cap",
+      "published": "2026-05-05T20:28:43+00:00",
+      "positive_hits": 0,
+      "negative_hits": 0,
+      "score": 0
+    },
+    {
+      "subreddit": "wallstreetbets",
+      "title": "$ASTS 5th major 40-55% drawdown since Jan ’25… just another day in the office or conviction breaking?",
+      "published": "2026-05-05T20:27:38+00:00",
+      "positive_hits": 0,
+      "negative_hits": 0,
+      "score": 0
+    },
+    {
+      "subreddit": "wallstreetbets",
+      "title": "The little calls that could - Choo Choo mother fucker",
+      "published": "2026-05-05T20:23:37+00:00",
+      "positive_hits": 0,
+      "negative_hits": 0,
+      "score": 0
+    },
+    {
+      "subreddit": "stocks",
+      "title": "SNAP going up after earnings tomorrow after the bell seems too obvious… and it worries me.",
+      "published": "2026-05-05T20:17:48+00:00",
+      "positive_hits": 0,
+      "negative_hits": 0,
+      "score": 0
+    },
+    {
+      "subreddit": "wallstreetbets",
+      "title": "I sucked the past year",
+      "published": "2026-05-05T19:57:18+00:00",
+      "positive_hits": 0,
+      "negative_hits": 0,
+      "score": 0
+    },
+    {
+      "subreddit": "wallstreetbets",
+      "title": "What Are Your Moves Tomorrow, May 06, 2026",
+      "published": "2026-05-05T19:57:08+00:00",
+      "positive_hits": 0,
+      "negative_hits": 0,
+      "score": 0
+    },
+    {
+      "subreddit": "stocks",
+      "title": "Market rally will keep going into next year, says Yardeni Research’s Ed Yardeni",
+      "published": "2026-05-05T19:53:00+00:00",
+      "positive_hits": 1,
+      "negative_hits": 0,
+      "score": 1
+    },
+    {
+      "subreddit": "stocks",
+      "title": "$BGDE - UPDATE FROM THE BOARD",
+      "published": "2026-05-05T19:24:20+00:00",
+      "positive_hits": 0,
+      "negative_hits": 0,
+      "score": 0
+    },
+    {
+      "subreddit": "stocks",
+      "title": "How many years before AI makes the stock market efficient?",
+      "published": "2026-05-05T19:23:24+00:00",
       "positive_hits": 0,
       "negative_hits": 0,
       "score": 0
     },
     {
       "subreddit": "options",
-      "title": "Need help understanding my option selling.",
-      "published": "2026-05-04T18:52:04+00:00",
-      "positive_hits": 0,
+      "title": "Selling Bull Put Spread on boring stocks.",
+      "published": "2026-05-05T19:20:57+00:00",
+      "positive_hits": 1,
       "negative_hits": 1,
-      "score": -1
-    },
-    {
-      "subreddit": "investing",
-      "title": "I caught some big winners, so why don’t I feel good about it?",
-      "published": "2026-05-04T18:40:49+00:00",
-      "positive_hits": 0,
-      "negative_hits": 0,
-      "score": 0
-    },
-    {
-      "subreddit": "stocks",
-      "title": "I caught some big winners, so why don’t I feel good about it?",
-      "published": "2026-05-04T18:36:08+00:00",
-      "positive_hits": 0,
-      "negative_hits": 0,
       "score": 0
     },
     {
       "subreddit": "wallstreetbets",
-      "title": "eBay listing",
-      "published": "2026-05-04T18:20:06+00:00",
-      "positive_hits": 0,
-      "negative_hits": 0,
-      "score": 0
-    },
-    {
-      "subreddit": "wallstreetbets",
-      "title": "$272,000 on $TEAM",
-      "published": "2026-05-04T18:09:14+00:00",
+      "title": "Intel profit corn",
+      "published": "2026-05-05T19:16:35+00:00",
       "positive_hits": 0,
       "negative_hits": 0,
       "score": 0
     },
     {
       "subreddit": "options",
-      "title": "Sold XOM $149P expiring Friday — IVR hit 100 across the whole energy sector this morning. Gift or tr",
-      "published": "2026-05-04T17:54:31+00:00",
-      "positive_hits": 0,
-      "negative_hits": 0,
-      "score": 0
-    },
-    {
-      "subreddit": "stocks",
-      "title": "Thoughts on WTI oil?",
-      "published": "2026-05-04T17:53:57+00:00",
-      "positive_hits": 0,
-      "negative_hits": 0,
-      "score": 0
-    },
-    {
-      "subreddit": "wallstreetbets",
-      "title": "NVDA and ORCL YOLO - May the Fourth be with you! $10,000 each ending May 8th",
-      "published": "2026-05-04T17:50:30+00:00",
+      "title": "Looking for a satellite ticker for wheeling. Wondering about UUUU",
+      "published": "2026-05-05T19:04:06+00:00",
       "positive_hits": 0,
       "negative_hits": 0,
       "score": 0
     },
     {
       "subreddit": "options",
-      "title": "Wheel Strategy Advice",
-      "published": "2026-05-04T17:45:10+00:00",
+      "title": "Insane chart: 8 IV with earnings this evening",
+      "published": "2026-05-05T19:02:33+00:00",
+      "positive_hits": 0,
+      "negative_hits": 0,
+      "score": 0
+    },
+    {
+      "subreddit": "stocks",
+      "title": "What are your underrated/contrarian bets today?",
+      "published": "2026-05-05T19:01:25+00:00",
+      "positive_hits": 0,
+      "negative_hits": 0,
+      "score": 0
+    },
+    {
+      "subreddit": "stocks",
+      "title": "Canadian energy company (WCP) approaching ATH due to Iran war bump - take profits or hold?",
+      "published": "2026-05-05T18:34:46+00:00",
       "positive_hits": 0,
       "negative_hits": 0,
       "score": 0
     },
     {
       "subreddit": "investing",
-      "title": "Miscalculation in Trade Republic?",
-      "published": "2026-05-04T17:44:35+00:00",
-      "positive_hits": 0,
-      "negative_hits": 0,
-      "score": 0
-    },
-    {
-      "subreddit": "wallstreetbets",
-      "title": "Full port calls",
-      "published": "2026-05-04T17:34:21+00:00",
-      "positive_hits": 0,
-      "negative_hits": 0,
-      "score": 0
-    },
-    {
-      "subreddit": "wallstreetbets",
-      "title": "$46k CAR Gains",
-      "published": "2026-05-04T17:30:04+00:00",
+      "title": "How do you prioritize contributions to taxable brokerage account vs maxing tax deferred accounts?",
+      "published": "2026-05-05T18:17:14+00:00",
       "positive_hits": 0,
       "negative_hits": 0,
       "score": 0
     },
     {
       "subreddit": "stocks",
-      "title": "Is MSTY stock dividend a trap or free part time job?",
-      "published": "2026-05-04T17:22:29+00:00",
+      "title": "Investors, are you worried about the Buffet indicator? What do you expect the overvaluation to lead to? How do you protect your investments?",
+      "published": "2026-05-05T18:16:42+00:00",
       "positive_hits": 0,
       "negative_hits": 0,
       "score": 0
+    },
+    {
+      "subreddit": "investing",
+      "title": "U.S. market long-term investors, are you worried about the Buffet indicator? What would you expect the overvaluation to lead to? How are you protecting your investments?",
+      "published": "2026-05-05T18:16:06+00:00",
+      "positive_hits": 1,
+      "negative_hits": 0,
+      "score": 1
     },
     {
       "subreddit": "stocks",
-      "title": "Feeling lost on AI stocks",
-      "published": "2026-05-04T17:00:34+00:00",
-      "positive_hits": 0,
-      "negative_hits": 0,
-      "score": 0
-    },
-    {
-      "subreddit": "wallstreetbets",
-      "title": "MSTR 11K FD Yolo | 200C 60 Cons @ 1.79 Each",
-      "published": "2026-05-04T16:54:28+00:00",
-      "positive_hits": 0,
-      "negative_hits": 0,
-      "score": 0
-    },
-    {
-      "subreddit": "wallstreetbets",
-      "title": "Ornamental gourds futures EOJ returns to set the record straight",
-      "published": "2026-05-04T16:52:59+00:00",
-      "positive_hits": 0,
-      "negative_hits": 0,
-      "score": 0
-    },
-    {
-      "subreddit": "wallstreetbets",
-      "title": "dih RAM",
-      "published": "2026-05-04T16:35:31+00:00",
-      "positive_hits": 0,
-      "negative_hits": 0,
-      "score": 0
-    },
-    {
-      "subreddit": "wallstreetbets",
-      "title": "Good morning ☕️",
-      "published": "2026-05-04T16:22:37+00:00",
-      "positive_hits": 0,
-      "negative_hits": 0,
-      "score": 0
-    },
-    {
-      "subreddit": "stocks",
-      "title": "GLD down 1.2 percent and USO up 4 percent on the same Monday. The gold oil divergence is telling you something.",
-      "published": "2026-05-04T16:22:24+00:00",
-      "positive_hits": 0,
-      "negative_hits": 0,
-      "score": 0
-    },
-    {
-      "subreddit": "stocks",
-      "title": "Stock Picking : I've big doubts.",
-      "published": "2026-05-04T16:12:37+00:00",
-      "positive_hits": 0,
-      "negative_hits": 0,
-      "score": 0
-    },
-    {
-      "subreddit": "stocks",
-      "title": "Amazon opens up its logistics network to other businesses in growth push",
-      "published": "2026-05-04T16:07:45+00:00",
-      "positive_hits": 0,
-      "negative_hits": 0,
-      "score": 0
-    },
-    {
-      "subreddit": "wallstreetbets",
-      "title": "He doesn't understand your question, CNBC",
-      "published": "2026-05-04T16:07:20+00:00",
+      "title": "SEC is close to ending mandatory quarterly earnings reports.",
+      "published": "2026-05-05T18:01:32+00:00",
       "positive_hits": 0,
       "negative_hits": 0,
       "score": 0
     },
     {
       "subreddit": "options",
-      "title": "Filled orders, is it just me or is Tastytrade bad at execution?",
-      "published": "2026-05-04T16:05:38+00:00",
+      "title": "First PMCC: Underlying Walmart",
+      "published": "2026-05-05T17:32:03+00:00",
+      "positive_hits": 0,
+      "negative_hits": 0,
+      "score": 0
+    },
+    {
+      "subreddit": "stocks",
+      "title": "How does ASML consistently underperform the entire industry",
+      "published": "2026-05-05T17:27:14+00:00",
+      "positive_hits": 0,
+      "negative_hits": 0,
+      "score": 0
+    },
+    {
+      "subreddit": "investing",
+      "title": "Need some info regarding application",
+      "published": "2026-05-05T17:21:57+00:00",
+      "positive_hits": 0,
+      "negative_hits": 0,
+      "score": 0
+    },
+    {
+      "subreddit": "stocks",
+      "title": "US SEC proposes allowing public companies to opt out of quarterly earnings reports",
+      "published": "2026-05-05T17:14:55+00:00",
+      "positive_hits": 0,
+      "negative_hits": 0,
+      "score": 0
+    },
+    {
+      "subreddit": "stocks",
+      "title": "Should I stay in SoundHound AI?",
+      "published": "2026-05-05T17:14:29+00:00",
+      "positive_hits": 0,
+      "negative_hits": 0,
+      "score": 0
+    },
+    {
+      "subreddit": "stocks",
+      "title": "Where to park 600K in cash",
+      "published": "2026-05-05T17:11:37+00:00",
+      "positive_hits": 0,
+      "negative_hits": 0,
+      "score": 0
+    },
+    {
+      "subreddit": "investing",
+      "title": "ESPP price higher than current stock price?",
+      "published": "2026-05-05T16:59:57+00:00",
       "positive_hits": 0,
       "negative_hits": 0,
       "score": 0
     },
     {
       "subreddit": "options",
-      "title": "Options Questions Safe Haven periodic megathread | May 4 2026",
-      "published": "2026-05-04T15:51:20+00:00",
-      "positive_hits": 0,
-      "negative_hits": 0,
-      "score": 0
-    },
-    {
-      "subreddit": "wallstreetbets",
-      "title": "$200k Xerox yolo",
-      "published": "2026-05-04T15:34:35+00:00",
-      "positive_hits": 0,
-      "negative_hits": 0,
-      "score": 0
-    },
-    {
-      "subreddit": "wallstreetbets",
-      "title": "Shipz go brr",
-      "published": "2026-05-04T14:53:23+00:00",
+      "title": "Robinhood not allowing diagonal spreads?",
+      "published": "2026-05-05T16:54:10+00:00",
       "positive_hits": 0,
       "negative_hits": 0,
       "score": 0
     },
     {
       "subreddit": "options",
-      "title": "Time to Make Some Bearish Bets...",
-      "published": "2026-05-04T14:51:37+00:00",
+      "title": "MSFT and META LEAPS",
+      "published": "2026-05-05T16:46:46+00:00",
+      "positive_hits": 0,
+      "negative_hits": 0,
+      "score": 0
+    },
+    {
+      "subreddit": "investing",
+      "title": "OpenAI IPO could shake the market more than people think",
+      "published": "2026-05-05T16:21:40+00:00",
+      "positive_hits": 0,
+      "negative_hits": 0,
+      "score": 0
+    },
+    {
+      "subreddit": "stocks",
+      "title": "$RGTI is down 70% from its yearly high. Looked into it properly. Numbers are weird in both directions.",
+      "published": "2026-05-05T16:12:08+00:00",
+      "positive_hits": 0,
+      "negative_hits": 0,
+      "score": 0
+    },
+    {
+      "subreddit": "stocks",
+      "title": "April CPI drops May 12. 95 percent of the market expects no cuts in June. If this number comes in hot the rate conversation is dead for 2026",
+      "published": "2026-05-05T15:44:26+00:00",
+      "positive_hits": 0,
+      "negative_hits": 0,
+      "score": 0
+    },
+    {
+      "subreddit": "investing",
+      "title": "Edward Jones advisor wants me to invest with him instead of on my own.",
+      "published": "2026-05-05T15:22:38+00:00",
+      "positive_hits": 0,
+      "negative_hits": 0,
+      "score": 0
+    },
+    {
+      "subreddit": "stocks",
+      "title": "27M, starting to invest for the next 20-25 years. Thinking of NBIS and RKLB.",
+      "published": "2026-05-05T15:21:50+00:00",
+      "positive_hits": 0,
+      "negative_hits": 0,
+      "score": 0
+    },
+    {
+      "subreddit": "investing",
+      "title": "Jet Fuel Shortages Incoming - \"A slow motion car crash we're all sleepwalking through.\"",
+      "published": "2026-05-05T15:04:54+00:00",
       "positive_hits": 0,
       "negative_hits": 2,
       "score": -2
     },
     {
       "subreddit": "stocks",
-      "title": "The biggest lie in investing: \"I understand the company.\"",
-      "published": "2026-05-04T14:44:05+00:00",
-      "positive_hits": 0,
+      "title": "Unstable bubble $EWY.... Night night bulls",
+      "published": "2026-05-05T14:57:27+00:00",
+      "positive_hits": 1,
       "negative_hits": 0,
-      "score": 0
+      "score": 1
     },
     {
       "subreddit": "options",
-      "title": "Anyone trade options almost exclusively with ETFs?",
-      "published": "2026-05-04T14:26:45+00:00",
-      "positive_hits": 0,
-      "negative_hits": 0,
-      "score": 0
-    },
-    {
-      "subreddit": "investing",
-      "title": "Why does stand out in this market?",
-      "published": "2026-05-04T14:02:27+00:00",
-      "positive_hits": 0,
-      "negative_hits": 0,
-      "score": 0
-    },
-    {
-      "subreddit": "stocks",
-      "title": "Is there any point to investing in company stock if you’re not going big?",
-      "published": "2026-05-04T13:40:20+00:00",
-      "positive_hits": 0,
-      "negative_hits": 0,
-      "score": 0
-    },
-    {
-      "subreddit": "options",
-      "title": "Lesson for anyone wanting to jump in to options",
-      "published": "2026-05-04T13:07:58+00:00",
-      "positive_hits": 0,
-      "negative_hits": 0,
-      "score": 0
-    },
-    {
-      "subreddit": "investing",
-      "title": "Keeping or selling Meta stock?",
-      "published": "2026-05-04T13:06:36+00:00",
-      "positive_hits": 0,
-      "negative_hits": 1,
-      "score": -1
-    },
-    {
-      "subreddit": "investing",
-      "title": "ETF cons for small investor?",
-      "published": "2026-05-04T13:06:32+00:00",
+      "title": "$VCX straddles have been paying for the last few days.",
+      "published": "2026-05-05T14:54:58+00:00",
       "positive_hits": 0,
       "negative_hits": 0,
       "score": 0
@@ -19047,7 +19047,7 @@
       "series": "Vanda 零售流向 / chatter",
       "latest_value": null,
       "unit": "subscription",
-      "as_of": "2026-05-04",
+      "as_of": "2026-05-05",
       "update_frequency": "daily (official feed) / proxy used in this site",
       "status": "proxy-active",
       "source": "https://www.vandatrack.com/",
@@ -19065,10 +19065,6 @@
     }
   ],
   "us10y_series": [
-    {
-      "date": "2025-04-17",
-      "value": 4.34
-    },
     {
       "date": "2025-04-21",
       "value": 4.42
@@ -20104,6 +20100,10 @@
     {
       "date": "2026-05-01",
       "value": 4.39
+    },
+    {
+      "date": "2026-05-04",
+      "value": 4.45
     }
   ],
   "methodology": [
